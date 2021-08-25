@@ -11,23 +11,10 @@ public class UsernameSetup : MonoBehaviourPunCallbacks
 
     public void Setup()
     {
-        if (string.IsNullOrEmpty(username.text))
-        {
-            PlayerPrefs.SetString("username", "Guest-Player");
-        }
-        else
-        {
-            PlayerPrefs.SetString("username", username.text);
-        }
 
-        Player[] players = PhotonNetwork.PlayerList;
+        PlayerPrefs.SetString("username", username.text);
 
-        for (int i = 0; i < players.Length; i++)
-        {
-           Debug.Log(players[i].ToString());
-        }
-       
-        /// PhotonNetwork.NickName;
+
 
 
     }
