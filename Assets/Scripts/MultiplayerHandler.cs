@@ -48,7 +48,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         Debug.Log("Joined Lobby");
 
         //Fetch the username from database
-        PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
+        PhotonNetwork.NickName = PlayerPrefs.GetString("username");
     }
 
     //Create Room
