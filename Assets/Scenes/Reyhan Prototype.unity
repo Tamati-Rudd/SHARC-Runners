@@ -389,6 +389,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRed
       objectReference: {fileID: 0}
+    - target: {fileID: 1240661553021059978, guid: ecc8746182c8890418444d80d683e729, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240661553021059978, guid: ecc8746182c8890418444d80d683e729, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1240661553021059979, guid: ecc8746182c8890418444d80d683e729, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -440,6 +448,10 @@ PrefabInstance:
     - target: {fileID: 1240661553021059979, guid: ecc8746182c8890418444d80d683e729, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240661553070964679, guid: ecc8746182c8890418444d80d683e729, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.87
       objectReference: {fileID: 0}
     - target: {fileID: 2249854365540579871, guid: ecc8746182c8890418444d80d683e729, type: 3}
       propertyPath: collectableMeter
