@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
         if (!PV.IsMine)
         {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(rb);
         }
 
