@@ -47,7 +47,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("Title");
         Debug.Log("Joined Lobby");
 
-        //Fetch the username from database
+        //Set the name of player
         PhotonNetwork.NickName = PlayerPrefs.GetString("username");
     }
 
