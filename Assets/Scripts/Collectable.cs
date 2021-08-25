@@ -9,13 +9,19 @@ public class Collectable : MonoBehaviour
     private int resetcoin = 0;
     private PlayerController pMovement;
     [SerializeField] private Text Counter;//Access the text 
-  
+
+    void Start()
+    {
+        resetcoin = 0;
+        currentcoin = 0;
+        abilityMeter.SetMaxAbility(8);
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Collectable"))//Run when an object is tagged Collectable 
         {
             Destroy(collision.gameObject);// destroy the object
-            //abilityMeter.SetMaxAbility(maxcoin);
+            
             if (currentcoin < 8)//Run statement if the coins is less then 8
             {
                 Increase();
@@ -47,7 +53,7 @@ public class Collectable : MonoBehaviour
     //This resets the coins meter 
     public void UpdateCoins()
     {
-        abilityMeter.SetMaxAbility(resetcoin);
+        abilityMeter.SetAbility(resetcoin);
         currentcoin = resetcoin;
         Counter.text = currentcoin + "/8";
     }
