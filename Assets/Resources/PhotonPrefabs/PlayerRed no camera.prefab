@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -9058683847430154717}
   - component: {fileID: 5043992024124468930}
   m_Layer: 8
-  m_Name: PlayerRed no camera
+  m_Name: PlayerRed No Camera
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
