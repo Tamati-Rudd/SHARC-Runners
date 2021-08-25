@@ -165,6 +165,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
+  speedTimer: 0
+  activateSpeed: 0
+  collectableMeter: {fileID: 0}
 --- !u!114 &-1334319504687524062
 MonoBehaviour:
   m_ObjectHideFlags: 0
