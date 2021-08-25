@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 4897ab2b57a2e86488b9fb436be959c7
+  - enabled: 1
+    path: Assets/Scenes/TamatiPrototype.unity
+    guid: 1ef9034e11a5ae34b9c729813f9290a6
+  - enabled: 1
+    path: Assets/Scenes/TamatiPostGame.unity
+    guid: e0f889b75752bc94db3aed103cdfb0a7
   m_configObjects: {}
