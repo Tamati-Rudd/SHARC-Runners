@@ -39,9 +39,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     void CreateController()
     {
         Vector2 meterlocation;
-        meterlocation.x = 50;
-        meterlocation.y = 50;
-
+        meterlocation.x = 90;
+        meterlocation.y = 90;
+        
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
 
 
