@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60dfa6b0a9ba7a143aa3a78652e78b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meterScript: {fileID: 6582043690000060584, guid: 90aa4d871bde52f4b80e07cfa4fa3423, type: 3}
+  counter: {fileID: 1169576898048948792, guid: c4d09f804d5001e4bb4991529b45e180, type: 3}
 --- !u!114 &1792917023147722007
 MonoBehaviour:
   m_ObjectHideFlags: 0
