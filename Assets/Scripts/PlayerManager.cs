@@ -49,7 +49,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (selectedCharacter == 0)
         {
             //Spawn the Player
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
+            GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
+
+            MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
+            meter.transform.SetParent(canvas.transform);
+            prefab.GetComponent<Collectable>().abilityMeter = meter;
+
+            Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
+            counterclone.transform.SetParent(canvas.transform);
+            prefab.GetComponent<Collectable>().Counter = counterclone;
 
         }
         if (selectedCharacter == 1)
@@ -68,7 +76,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (selectedCharacter == 2)
         {
             //Spawn the Player
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
+            GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
+
+            MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
+            meter.transform.SetParent(canvas.transform);
+            prefab.GetComponent<Collectable>().abilityMeter = meter;
+
+            Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
+            counterclone.transform.SetParent(canvas.transform);
+            prefab.GetComponent<Collectable>().Counter = counterclone;
 
         }
 
