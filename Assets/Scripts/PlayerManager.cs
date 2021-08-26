@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
     PhotonView PV;
     int selectedCharacter = 0;
-        
+    public MeterScript meterScript;
+    public Text counter;
+
 
     private void Awake()
     {
@@ -43,8 +46,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (selectedCharacter == 1)
         {
             //Spawn the Player
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
-
+            GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
+            prefab.GetComponent<Collectable>().abilityMeter = meterScript;
+            prefab.GetComponent<Collectable>().Counter = counter;
         }
         if (selectedCharacter == 2)
         {
