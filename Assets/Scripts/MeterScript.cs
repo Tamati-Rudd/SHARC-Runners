@@ -14,7 +14,7 @@ public class MeterScript : MonoBehaviour
         slider.maxValue = ability;
         slider.value = ability;
 
-        fill.color = gradient.Evaluate (8f) ;
+        fill.color = gradient.Evaluate (1f) ;
 
     }
 

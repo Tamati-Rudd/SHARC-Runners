@@ -20,11 +20,11 @@ public class Collectable : MonoBehaviour
 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
 
-        MeterScript meter = Instantiate(abilityMeter, meterlocation, Quaternion.identity);
-        meter.transform.SetParent(canvas.transform);
+       // MeterScript meter = Instantiate(abilityMeter, meterlocation, Quaternion.identity);
+       // meter.transform.SetParent(canvas.transform);
 
-        Text counter = Instantiate(Counter, meterlocation, Quaternion.identity);
-        counter.transform.SetParent(canvas.transform);
+        //Text counter = Instantiate(Counter, meterlocation, Quaternion.identity);
+       // counter.transform.SetParent(canvas.transform);
 
 
         resetcoin = 0;
