@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public MeterScript meterScript;
     public Text Counter;
     private Canvas canvas;
-
+    private GameObject container;
 
     private void Awake()
     {
@@ -43,6 +43,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         meterlocation.y = 50;
 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
+
+
 
         if (selectedCharacter == 0)
         {
