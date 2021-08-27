@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     PhotonView PV;
 
+    //ability 
+    public float speedTimer;
+    public bool activateSpeed;
+    public Collectable collectableMeter;//Access the collectable script
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -34,9 +39,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
         if (!PV.IsMine)
         {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(rb);
         }
 
+        movementSpeed = 5;
+        speedTimer = 0;
+        activateSpeed = false;
 
     }
 
@@ -88,6 +97,25 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
         anim.SetBool("isGrounded", isGrounded);
+        
+        //Press the ability button
+        if (Input.GetButtonDown("Fire2"))
+        {
+            activateSpeed = collectableMeter.SetSpeed();//Call set speed to activate boost
+            if (activateSpeed)
+                SpeedAbility();
+        }
+        //If true start the time limit of the ability
+        if (activateSpeed)
+        {
+            speedTimer += Time.deltaTime;
+            if (speedTimer >= 3)
+            {
+                movementSpeed = 5;
+                speedTimer = 0;
+                activateSpeed = false;
+            }
+        }
     }
 
     //Sending Data that needs to be seen by other players across the network
@@ -105,6 +133,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
             sr.flipX = (bool)stream.ReceiveNext();
         }
 
+    }
+
+    //Change the speed of the character
+    public void SpeedAbility()
+    {
+        collectableMeter.UpdateCoins();
+        movementSpeed = 10;
     }
 }
 
