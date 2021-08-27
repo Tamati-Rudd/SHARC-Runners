@@ -88,11 +88,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (rb.velocity.x < 0)
         {
             sr.flipX = true;
+            transform.Rotate(0f, 180f, 0f);
         }
         else if (rb.velocity.x > 0)
         {
             sr.flipX = false;
-
         }
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
