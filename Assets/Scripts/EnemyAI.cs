@@ -43,8 +43,11 @@ public class EnemyAI : MonoBehaviour
        }
        else if(backPlayerFound)
        {
-           this.transform.localScale = new Vector3((transform.localScale.x == 1) ? -1 : 1, 1, 1);
-           TargetPlayer();
+            this.transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z);
+            //this.transform.localScale = new Vector3((transform.localScale.x == 1) ? -1 : 1, 1, 1);
+            TargetPlayer();
        }      
        else
        {
@@ -64,9 +67,20 @@ public class EnemyAI : MonoBehaviour
     {
         obstacleCollision = Physics2D.Linecast (sightStart.position, sightEnd.position, 1 << LayerMask.NameToLayer ("Ground"));
 
+        if (obstacleCollision)
+        {
+            Debug.Log("Flip me");
+        }
+        else
+        {
+            Debug.Log("no need to flip");
+        }
+        
         if(obstacleCollision == needsCollision)
         {
-            this.transform.localScale = new Vector3((transform.localScale.x == 1) ? -1 : 1, 1, 1);
+          this.transform.localScale = new Vector3(transform.localScale.x * -1,
+          transform.localScale.y,
+          transform.localScale.z);
             animator.SetBool("isTurning", true);
         }
 

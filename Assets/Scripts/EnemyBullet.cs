@@ -30,7 +30,7 @@ public class EnemyBullet : MonoBehaviour
     //Method for detecting collision with player and or environment
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") || collision.CompareTag("Environment"))
+        if(collision.CompareTag("Player") || collision.CompareTag("Ground"))
         {
             DestroyProjectile();
         }
