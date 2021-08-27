@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /** 
+** EnemyLife Script
 ** This script contains the life behaviour of the enemy:
 ** Receiving Damage 
 ** Death of enemy

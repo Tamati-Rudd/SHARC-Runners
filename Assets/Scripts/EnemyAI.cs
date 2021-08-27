@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
+** EnemyAI Script
 ** This script carries out the behaviour of the enemy:
 ** Moving forward
 ** Moving towards player
