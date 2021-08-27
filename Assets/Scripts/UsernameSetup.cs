@@ -7,12 +7,13 @@ using Photon.Realtime;
 
 public class UsernameSetup : MonoBehaviourPunCallbacks
 {
-    public TMPro.TMP_InputField username;
-
+    public TMPro.TMP_InputField usernameInput;
+    //public static string username;
     public void Setup()
     {
-
-        PlayerPrefs.SetString("username", username.text);
+        
+        PlayerPrefs.SetString("username", usernameInput.text);
+        PlayerPrefs.Save();
 
 
 
