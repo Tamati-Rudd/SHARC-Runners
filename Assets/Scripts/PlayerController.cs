@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 activateSpeed = false;
             }
         }
+
+
     }
 
     //Sending Data that needs to be seen by other players across the network
