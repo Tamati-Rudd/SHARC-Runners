@@ -44,7 +44,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //Once the lobby is joined
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.NickName = PlayerPrefs.GetString("username");
+     
         MenuManager.Instance.OpenMenu("Title");
         Debug.Log("Joined Lobby");
         
@@ -66,9 +66,6 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.OpenMenu("Room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
-
-        //Set the name of player
-        PhotonNetwork.NickName = PlayerPrefs.GetString("username");
 
         Player[] players = PhotonNetwork.PlayerList;
 
