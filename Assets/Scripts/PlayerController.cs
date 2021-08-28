@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-        movementSpeed = 5;
+        
         speedTimer = 0;
         activateSpeed = false;
 
@@ -111,11 +111,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
             speedTimer += Time.deltaTime;
             if (speedTimer >= 3)
             {
-                movementSpeed = 5;
+                movementSpeed = 12;
                 speedTimer = 0;
                 activateSpeed = false;
             }
         }
+
+
     }
 
     //Sending Data that needs to be seen by other players across the network
@@ -139,7 +141,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public void SpeedAbility()
     {
         collectableMeter.UpdateCoins();
-        movementSpeed = 10;
+        movementSpeed = 15;
     }
 }
 
