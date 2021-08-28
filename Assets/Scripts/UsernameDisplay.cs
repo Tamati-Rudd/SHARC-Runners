@@ -11,6 +11,11 @@ public class UsernameDisplay : MonoBehaviour
 
     void Start()
     {
+        if (playerPV.IsMine)
+        {
+            gameObject.SetActive(false);
+        }
+
         text.text = playerPV.Owner.NickName;
     }
 }
