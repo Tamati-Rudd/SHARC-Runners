@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-        
+       
         speedTimer = 0;
         activateSpeed = false;
 
@@ -109,9 +109,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (activateSpeed)
         {
             speedTimer += Time.deltaTime;
+            //this will reset the speed once speedTimer is 3
             if (speedTimer >= 3)
             {
-                movementSpeed = 12;
+                movementSpeed = 9;
                 speedTimer = 0;
                 activateSpeed = false;
             }
@@ -141,7 +142,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public void SpeedAbility()
     {
         collectableMeter.UpdateCoins();
-        movementSpeed = 15;
+        movementSpeed = 20;
     }
 }
 
