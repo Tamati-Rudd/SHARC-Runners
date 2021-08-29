@@ -39,8 +39,8 @@ public class EnemyAI : MonoBehaviour
        
        if(frontPlayerFound)
        {
-           animator.Play("Target_Player");
-           animator.SetBool("Target_Player", true);
+           //animator.Play("Target_Player");
+           //animator.SetBool("Target_Player", true); *** Animation Needs Fixing
            TargetPlayer();
        }
        else if(backPlayerFound)
@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour
        }      
        else
        { 
-           animator.SetBool("Target_Player", false);
+          // animator.SetBool("Target_Player", false); ***Animation Needs Fixing
            Move();
        }
     }
@@ -61,6 +61,7 @@ public class EnemyAI : MonoBehaviour
     //Method for moving constantly forward 
     private void Move()
     {
+
         GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x, 0) * moveSpeed;
         Flip();
     }
@@ -84,7 +85,7 @@ public class EnemyAI : MonoBehaviour
           this.transform.localScale = new Vector3(transform.localScale.x * -1,
           transform.localScale.y,
           transform.localScale.z);
-            animator.SetBool("isTurning", true);
+          animator.SetBool("isTurning", true);
         }
     }
     
@@ -114,8 +115,8 @@ public class EnemyAI : MonoBehaviour
     {
         if(fireRate <= 0)
         {   
-            animator.SetBool("isAttacking", true);
-            animator.Play("Enemy_Attacking");
+            //animator.SetBool("isAttacking", true);
+            //animator.Play("Enemy_Attacking");
          
             Instantiate(projectile, transform.position, Quaternion.identity);
             fireRate = startingFireRate;
@@ -124,7 +125,7 @@ public class EnemyAI : MonoBehaviour
         {
             fireRate -= Time.deltaTime;
         }
-        animator.SetBool("isAttacking", false);
+        //animator.SetBool("isAttacking", false);
     }
 
 }

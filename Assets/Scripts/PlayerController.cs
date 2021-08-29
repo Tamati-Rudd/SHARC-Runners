@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (rb.velocity.x < 0)
         {
             sr.flipX = true;
-          
         }
         else if (rb.velocity.x > 0)
         {
