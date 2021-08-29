@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public Text Counter;
     private Canvas canvas;
     private GameObject container;
+    public GameObject enemy;
+    public Vector2 SpawnPoint;
 
     private void Awake()
     {
@@ -24,6 +26,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+
+        SpawnPoint.x = (float)21.8;
+        SpawnPoint.y = (float)-1.9;
+
         if (PV.IsMine)
         {
             CreateController();
@@ -43,13 +49,16 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         meterlocation.y = 90;
         
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-
-
+        
 
         if (selectedCharacter == 0)
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
+
+            GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
+          
+            enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
 
             MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
             meter.transform.SetParent(canvas.transform);
@@ -65,6 +74,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
 
+            GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
+
+            enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
+
+
             MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
             meter.transform.SetParent(canvas.transform);
             prefab.GetComponent<Collectable>().abilityMeter = meter;
@@ -77,6 +91,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
+
+            GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
+
+            enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
 
             MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
             meter.transform.SetParent(canvas.transform);
