@@ -15,6 +15,7 @@ public class EnemyLife : MonoBehaviour
     //Materials used for the animation
     private Material matWhite;
     private Material matDefault;
+    
     SpriteRenderer sr;
     public GameObject gemPrefab;
 
@@ -29,27 +30,27 @@ public class EnemyLife : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //When enemy is struck by bullet
-        if(collision.CompareTag("Bullet"))
+        if(collision.CompareTag("PlayerProjectile"))
         {
             HP--; //Health goes down
-            sr.material = matWhite; //Enemy flashes white to indicate hit 
+            //sr.material = matWhite; //Enemy flashes white to indicate hit 
             GenerateGem();
 
             if(HP <= 0)
             {
                 KillSelf();
             }
-            else
+            /*else
             {
-                Invoke("ResetMaterial", 1.5f);
-            }
+                //Invoke("ResetMaterial", 1.5f);
+            }*/
         }
     }
 
-    private void ResetMaterial()
+    /*private void ResetMaterial()
     {
         sr.material = matDefault;
-    }
+    }*/
 
     //Method for enemy dying
     private void KillSelf()

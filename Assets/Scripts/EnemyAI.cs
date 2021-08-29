@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour
        
        if(frontPlayerFound)
        {
+           animator.Play("Target_Player");
+           animator.SetBool("Target_Player", true);
            TargetPlayer();
        }
        else if(backPlayerFound)
@@ -50,7 +52,8 @@ public class EnemyAI : MonoBehaviour
             TargetPlayer();
        }      
        else
-       {
+       { 
+           animator.SetBool("Target_Player", false);
            Move();
        }
     }
@@ -83,14 +86,11 @@ public class EnemyAI : MonoBehaviour
           transform.localScale.z);
             animator.SetBool("isTurning", true);
         }
-
-        animator.SetBool("isTurning", false);
     }
     
     //Method for targeting and moving towards player
     private void TargetPlayer()
     {   
-        animator.SetBool("isMoving", true);
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);;
         if(Vector2.Distance(transform.position, player.position) > stoppingDistance && distanceFromPlayer < aggro)
         {
@@ -105,8 +105,7 @@ public class EnemyAI : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position,player.position, -moveSpeed * Time.deltaTime);
         }
-        
-        animator.SetBool("isMoving", false);
+
         ShootPlayer();
     }
 
