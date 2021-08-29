@@ -7,6 +7,10 @@ TagManager:
   - Collectable
   - Canvas
   - meterContainer
+  - EnemyProjectile
+  - Enemy
+  - PlayerProjectile
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -17,7 +21,7 @@ TagManager:
   - 
   - Ground
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 

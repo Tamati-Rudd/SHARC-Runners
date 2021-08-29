@@ -25,7 +25,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     private void Start()
     {
         Debug.Log("Connected to Master");
-
+        PlayerPrefs.DeleteAll();
         //automatically load scene for all the clients in room when hosts switches scene
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -44,11 +44,10 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //Once the lobby is joined
     public override void OnJoinedLobby()
     {
+     
         MenuManager.Instance.OpenMenu("Title");
         Debug.Log("Joined Lobby");
-
-        //Set the name of player
-        PhotonNetwork.NickName = PlayerPrefs.GetString("username");
+        
     }
 
     //Create Room
@@ -67,7 +66,6 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.OpenMenu("Room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
-
 
         Player[] players = PhotonNetwork.PlayerList;
 

@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-        movementSpeed = 5;
+       
         speedTimer = 0;
         activateSpeed = false;
 
@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         else if (rb.velocity.x > 0)
         {
             sr.flipX = false;
-
         }
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
@@ -109,13 +108,16 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (activateSpeed)
         {
             speedTimer += Time.deltaTime;
+            //this will reset the speed once speedTimer is 3
             if (speedTimer >= 3)
             {
-                movementSpeed = 5;
+                movementSpeed = 9;
                 speedTimer = 0;
                 activateSpeed = false;
             }
         }
+
+
     }
 
     //Sending Data that needs to be seen by other players across the network
@@ -139,7 +141,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public void SpeedAbility()
     {
         collectableMeter.UpdateCoins();
-        movementSpeed = 10;
+        movementSpeed = 20;
     }
 }
 
