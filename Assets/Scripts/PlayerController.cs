@@ -23,11 +23,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
 
+    public bool facingRight = true;
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
     }
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-       
+
         speedTimer = 0;
         activateSpeed = false;
 
@@ -85,18 +87,18 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //flip player facing direction
-        if (rb.velocity.x < 0)
+        if (rb.velocity.x < 0 && facingRight)
         {
-            sr.flipX = true;
+            Flip();
         }
-        else if (rb.velocity.x > 0)
+        else if (rb.velocity.x > 0 && !facingRight)
         {
-            sr.flipX = false;
+            Flip();
         }
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
         anim.SetBool("isGrounded", isGrounded);
-        
+
         //Press the ability button
         if (Input.GetButtonDown("Fire2"))
         {
@@ -142,6 +144,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         collectableMeter.UpdateCoins();
         movementSpeed = 20;
+    }
+    public void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180f, 0);
     }
 }
 
