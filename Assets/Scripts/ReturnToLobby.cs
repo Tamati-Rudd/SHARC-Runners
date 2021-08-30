@@ -17,6 +17,7 @@ public class ReturnToLobby : MonoBehaviour
     
     public void ReturnPlayerToLobby()
     {
+        Destroy(Roommanager.Instance.gameObject);
         SceneManager.LoadScene(0);
     }
 }

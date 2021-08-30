@@ -22,18 +22,40 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     [SerializeField] public GameObject PlayerListItemPrefab;
     [SerializeField] GameObject StartGameBtn;
 
+    private void Awake()
+    {
+       
+        //check to see if another multiplayerhanlder exists
+        if (Instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        //make sure there is only one multiplayerhanlder
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+    }
+
     private void Start()
     {
         Debug.Log("Connected to Master");
+
         PlayerPrefs.DeleteAll();
+
+
         //automatically load scene for all the clients in room when hosts switches scene
         PhotonNetwork.AutomaticallySyncScene = true;
 
         //Establishes Connection set out in the Photon Settings in Resource Folder
         if (!PhotonNetwork.IsConnected)
             PhotonNetwork.ConnectUsingSettings();
+       
         else //When the player is returning to the menu scene from the post game scene
         {
+            
+            //MenuManager.Instance.OpenMenu("Room");
+            
+            PhotonNetwork.ConnectUsingSettings();
             Debug.Log("Returned to Menu Scene");
             //WIP: Currently produces Operation setProperties 252 error
             //PhotonNetwork.LeaveRoom();
@@ -50,7 +72,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //Once the lobby is joined
     public override void OnJoinedLobby()
     {
-     
+        
         MenuManager.Instance.OpenMenu("Title");
         Debug.Log("Joined Lobby");
         
@@ -110,6 +132,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        MenuManager.Instance.Closemenu("Room");
         //all players in lobby load into the level
         PhotonNetwork.LoadLevel(1);
     }
