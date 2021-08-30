@@ -30,8 +30,14 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
 
         //Establishes Connection set out in the Photon Settings in Resource Folder
-        PhotonNetwork.ConnectUsingSettings();
-
+        if (!PhotonNetwork.IsConnected)
+            PhotonNetwork.ConnectUsingSettings();
+        else //When the player is returning to the menu scene from the post game scene
+        {
+            Debug.Log("Returned to Menu Scene");
+            //WIP: Currently produces Operation setProperties 252 error
+            //PhotonNetwork.LeaveRoom();
+        }
     }
 
     //Once connected to the master server
