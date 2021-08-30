@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 2061801633533399186}
   - component: {fileID: 4057052322036663123}
   - component: {fileID: 81495848247990332}
+  - component: {fileID: -6988208735672540147}
   m_Layer: 8
   m_Name: PlayerRed
   m_TagString: Player
@@ -542,3 +543,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
   Counter: {fileID: 0}
+--- !u!114 &-6988208735672540147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8376035211638466849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a7f66dfa35a48cc9b8ae1067b2f5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
