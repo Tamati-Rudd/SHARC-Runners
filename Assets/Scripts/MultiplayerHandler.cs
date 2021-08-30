@@ -73,6 +73,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //if create room was successful, OnJoinedRoom will be called
     public override void OnJoinedRoom()
     {
+        Debug.Log("Joined room!");
         MenuManager.Instance.OpenMenu("Room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 
