@@ -23,7 +23,6 @@ public class Roommanager : MonoBehaviourPunCallbacks
             Destroy(gameObject);
             return;
         }
-        
         //make sure there is only one RoomManager
         DontDestroyOnLoad(gameObject);
         Instance = this;
@@ -48,7 +47,6 @@ public class Roommanager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector2.zero, Quaternion.identity);
         }
-
     }
 
     // Update is called once per frame
