@@ -52,4 +52,17 @@ public class MenuManager : MonoBehaviour
         menu.Close();
     }
 
+    //takes a string to close a menu
+    public void CloseMenu(string menuName)
+    {
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if (menus[i].menuName == menuName)
+            {
+                menus[i].Close();
+            }
+
+        }
+    }
+
 }
