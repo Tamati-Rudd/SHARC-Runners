@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 4897ab2b57a2e86488b9fb436be959c7
   - enabled: 1
-    path: Assets/Scenes/TamatiPostGame.unity
+    path: Assets/Scenes/PostGame.unity
     guid: e0f889b75752bc94db3aed103cdfb0a7
   - enabled: 1
     path: Assets/Scenes/Reyhan Prototype.unity
