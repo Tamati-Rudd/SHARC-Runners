@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 206670902}
   m_Layer: 5
   m_Name: MenuBackdrop
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -858,7 +858,6 @@ GameObject:
   m_Component:
   - component: {fileID: 273033078}
   - component: {fileID: 273033079}
-  - component: {fileID: 273033080}
   m_Layer: 5
   m_Name: UsernameMenu
   m_TagString: Untagged
@@ -902,19 +901,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuName: Username
   open: 0
---- !u!114 &273033080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273033077}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d7862296f875b543ad6b9bad69a5c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameInput: {fileID: 1230633425}
 --- !u!1 &320067240
 GameObject:
   m_ObjectHideFlags: 0
