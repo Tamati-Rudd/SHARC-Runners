@@ -621,6 +621,7 @@ MonoBehaviour:
   facingRight: 1
   bulletpoint: {fileID: 2288476823771728730}
   isDisabled: 1
+  username: {fileID: 7085930365446390220}
   groundCheck: {fileID: 3136680056077188820}
   whatIsGround:
     serializedVersion: 2
@@ -647,6 +648,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 4035436343610420825}
   - {fileID: 242825092638460133}
   - {fileID: 2850714915050298148}
   sceneViewId: 0
