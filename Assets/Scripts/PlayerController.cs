@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
+    public bool facingRight = true;
     public GameObject bulletpoint;
 
     private bool isGrounded;
@@ -23,8 +24,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
-
-    public bool facingRight = true;
     private bool hasBulletFlipped = false;
 
     private void Awake()
