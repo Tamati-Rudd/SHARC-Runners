@@ -149,6 +149,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
         this.transform.localScale = new Vector3(transform.localScale.x * -1,
             transform.localScale.y,
             transform.localScale.z);
+
+        username.transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z);
+
         bulletpoint.transform.Rotate(0f, 180f, 0);
 
         //username.transform.Rotate(0f, 180f, 0);
