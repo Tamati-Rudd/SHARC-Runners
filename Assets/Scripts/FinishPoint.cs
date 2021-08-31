@@ -12,6 +12,11 @@ public class FinishPoint : MonoBehaviour
     PhotonView winnerPV;
     public static string winnerName;
 
+    private void Start()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") { //If the colliding object has the Player tag
             //Record the winner's name

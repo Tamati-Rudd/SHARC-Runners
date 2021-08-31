@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
+
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
-
+    public bool facingRight = true;
+    public GameObject bulletpoint;
+    public bool isDisabled = true;
+    public TMP_Text username;
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -17,45 +22,40 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private SpriteRenderer sr;
 
     PhotonView PV;
-
+    Camera cam;
     //ability 
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
+    private bool hasBulletFlipped = false;
 
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
     }
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
-        AddObservable();
-
+        
+        //destroy other player's rigidbody
         if (!PV.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(rb);
         }
 
-       
+
         speedTimer = 0;
         activateSpeed = false;
 
     }
 
-    private void AddObservable()
-    {
-        if (!PV.ObservedComponents.Contains(this))
-        {
-            PV.ObservedComponents.Add(this);
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -69,14 +69,20 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //move spawned character
 
         //Movement left & right
-        var moveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
+        
+        if (isDisabled == false)
+        {
+            var moveInput = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
+        }
+       
 
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
+        
         //jumping
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isDisabled == false)
         {
             if (isGrounded)
             {
@@ -85,18 +91,26 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //flip player facing direction
-        if (rb.velocity.x < 0)
+        if (rb.velocity.x < 0 && facingRight && isDisabled == false)
         {
-            sr.flipX = true;
+
+            Flip();
+
+           // sr.flipX = true;
+          //  facingRight = false;
+            
         }
-        else if (rb.velocity.x > 0)
+        else if (rb.velocity.x > 0 && !facingRight && isDisabled == false)
         {
-            sr.flipX = false;
+             Flip();
+          // sr.flipX = false;
+          //  facingRight = true;
+
         }
         //check for animation 
-        anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
-        
+
         //Press the ability button
         if (Input.GetButtonDown("Fire2"))
         {
@@ -120,28 +134,55 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Sending Data that needs to be seen by other players across the network
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //if data needs to be sent
-        if (stream.IsWriting)
-        {
-            //sending flipping information across the network
-            stream.SendNext(sr.flipX);
-        }
-        //if data needs to be received
-        else
-        {
-            sr.flipX = (bool)stream.ReceiveNext();
-        }
-
-    }
-
+    
     //Change the speed of the character
     public void SpeedAbility()
     {
         collectableMeter.UpdateCoins();
         movementSpeed = 20;
+    }
+    public void Flip()
+    {
+
+        facingRight = !facingRight;
+
+        this.transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z);
+
+        // username.transform.localScale = new Vector3(transform.localScale.x * -1,
+        //  transform.localScale.y,
+        //transform.localScale.z);
+
+        //username.transform.Rotate(0f, 180f, 0);
+
+        PV.RPC("FlipRPC", RpcTarget.All);
+
+        bulletpoint.transform.Rotate(0f, 180f, 0);
+
+        //username.transform.Rotate(0f, 180f, 0);
+        //sr.flipX = true;
+        //cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+
+    }
+
+
+    [PunRPC]
+    void FlipRPC()
+    {
+        if (!PV.IsMine)
+        {
+            //username.transform.Rotate(0f, 180f, 0);
+            username.transform.localScale = new Vector3(transform.localScale.x * -1,
+              transform.localScale.y,
+           transform.localScale.z);
+        }
+
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+
     }
 }
 

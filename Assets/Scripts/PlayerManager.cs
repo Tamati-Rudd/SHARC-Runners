@@ -14,7 +14,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     private Canvas canvas;
     private GameObject container;
     public GameObject enemy;
+    public GameObject gem;
     public Vector2 SpawnPoint;
+    public GameObject HUDContainer;
 
     private void Awake()
     {
@@ -44,9 +46,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void CreateController()
     {
-        Vector2 meterlocation;
-        meterlocation.x = 90;
-        meterlocation.y = 90;
+
         
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
         
@@ -56,17 +56,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
 
-            GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
-          
-            enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
+            CreateEnemy(prefab, SpawnPoint);
 
-            MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
-            meter.transform.SetParent(canvas.transform);
-            prefab.GetComponent<Collectable>().abilityMeter = meter;
+            GameObject HUD = Instantiate(HUDContainer, canvas.transform);                  
+            HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
 
-            Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
-            counterclone.transform.SetParent(canvas.transform);
-            prefab.GetComponent<Collectable>().Counter = counterclone;
+            CreateMeter(prefab);
 
         }
         if (selectedCharacter == 1)
@@ -74,38 +69,52 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
 
-            GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
+            CreateEnemy(prefab, SpawnPoint);
 
-            enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
+            GameObject HUD = Instantiate(HUDContainer, canvas.transform);
+            HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
+
+            CreateMeter(prefab);
 
 
-            MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
-            meter.transform.SetParent(canvas.transform);
-            prefab.GetComponent<Collectable>().abilityMeter = meter;
-
-            Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
-            counterclone.transform.SetParent(canvas.transform);            
-            prefab.GetComponent<Collectable>().Counter = counterclone;
         }
         if (selectedCharacter == 2)
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
 
-            GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
+            CreateEnemy(prefab, SpawnPoint);
 
-            enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
+            GameObject HUD = Instantiate(HUDContainer, canvas.transform);
+            HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
 
-            MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
-            meter.transform.SetParent(canvas.transform);
-            prefab.GetComponent<Collectable>().abilityMeter = meter;
-
-            Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
-            counterclone.transform.SetParent(canvas.transform);
-            prefab.GetComponent<Collectable>().Counter = counterclone;
+            CreateMeter(prefab);
 
         }
 
 
+    }
+
+    void CreateMeter(GameObject prefab)
+    {
+        Vector2 meterlocation;
+        meterlocation.x = 90;
+        meterlocation.y = 90;
+               
+        MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
+        meter.transform.SetParent(canvas.transform);
+        prefab.GetComponent<Collectable>().abilityMeter = meter;
+
+        Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
+        counterclone.transform.SetParent(canvas.transform);
+        prefab.GetComponent<Collectable>().Counter = counterclone;
+        
+    }
+
+    void CreateEnemy(GameObject prefab, Vector2 SpawnPoint)
+    {
+        GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
+        enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
+        enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
     }
 }

@@ -20,7 +20,6 @@ public class RoomListItem : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRoom(info.Name);
         MenuManager.Instance.OpenMenu("Loading");
-
     }
 
     public void SetRoomInfo(RoomInfo info)
