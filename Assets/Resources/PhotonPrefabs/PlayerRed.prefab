@@ -168,6 +168,7 @@ MonoBehaviour:
   jumpForce: 15
   facingRight: 1
   bulletpoint: {fileID: 7977532090399569070}
+  isDisabled: 1
   groundCheck: {fileID: 6552763042300625184}
   whatIsGround:
     serializedVersion: 2
