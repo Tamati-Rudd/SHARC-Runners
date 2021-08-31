@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerController : MonoBehaviour, IPunObservable
+public class PlayerController : MonoBehaviour
 {
+
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
     public bool facingRight = true;
     public GameObject bulletpoint;
+    public bool isDisabled = true;
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         anim = GetComponent<Animator>();
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
-        AddObservable();
+        
 
         if (!PV.IsMine)
         {
@@ -53,26 +55,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    private void AddObservable()
-    {
-        if (!PV.ObservedComponents.Contains(this))
-        {
-            PV.ObservedComponents.Add(this);
-        }
-    }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!facingRight)
-        {                       
-           
-        }
-        else
-        {
-
-        }
 
         if (!PV.IsMine)
         {
@@ -82,15 +68,20 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //move spawned character
 
         //Movement left & right
-        var moveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
+        
+        if (isDisabled == false)
+        {
+            var moveInput = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
+        }
+       
 
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
         
         //jumping
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isDisabled == false)
         {
             if (isGrounded)
             {
@@ -99,7 +90,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //flip player facing direction
-        if (rb.velocity.x < 0 && facingRight)
+        if (rb.velocity.x < 0 && facingRight && isDisabled == false)
         {
 
             Flip();
@@ -108,7 +99,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
           //  facingRight = false;
             
         }
-        else if (rb.velocity.x > 0 && !facingRight)
+        else if (rb.velocity.x > 0 && !facingRight && isDisabled == false)
         {
              Flip();
           // sr.flipX = false;
@@ -142,23 +133,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Sending Data that needs to be seen by other players across the network
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //if data needs to be sent
-        if (stream.IsWriting)
-        {
-            //sending flipping information across the network
-            stream.SendNext(sr.flipX);
-        }
-        //if data needs to be received
-        else
-        {
-            sr.flipX = (bool)stream.ReceiveNext();
-        }
-
-    }
-
+    
     //Change the speed of the character
     public void SpeedAbility()
     {
