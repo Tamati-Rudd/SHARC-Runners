@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
+    public bool facingRight = true;
+    public GameObject bulletpoint;
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -17,23 +19,25 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private SpriteRenderer sr;
 
     PhotonView PV;
-
+    Camera cam;
     //ability 
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
+    private bool hasBulletFlipped = false;
 
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
     }
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         AddObservable();
 
@@ -43,7 +47,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-       
+
         speedTimer = 0;
         activateSpeed = false;
 
@@ -61,6 +65,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void Update()
     {
 
+        if (!facingRight)
+        {                       
+           
+        }
+        else
+        {
+
+        }
+
         if (!PV.IsMine)
         {
             return;
@@ -75,6 +88,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
+        
         //jumping
         if (Input.GetButtonDown("Jump"))
         {
@@ -85,18 +99,26 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //flip player facing direction
-        if (rb.velocity.x < 0)
+        if (rb.velocity.x < 0 && facingRight)
         {
-            sr.flipX = true;
+
+            Flip();
+
+           // sr.flipX = true;
+          //  facingRight = false;
+            
         }
-        else if (rb.velocity.x > 0)
+        else if (rb.velocity.x > 0 && !facingRight)
         {
-            sr.flipX = false;
+             Flip();
+          // sr.flipX = false;
+          //  facingRight = true;
+
         }
         //check for animation 
-        anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
-        
+
         //Press the ability button
         if (Input.GetButtonDown("Fire2"))
         {
@@ -142,6 +164,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         collectableMeter.UpdateCoins();
         movementSpeed = 20;
+    }
+    public void Flip()
+    {
+
+        facingRight = !facingRight;
+        this.transform.Rotate(0f, 180f, 0);
+        //sr.flipX = true;
+        cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+
     }
 }
 

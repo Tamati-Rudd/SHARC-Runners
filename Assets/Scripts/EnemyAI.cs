@@ -39,12 +39,12 @@ public class EnemyAI : MonoBehaviour
        
        if(frontPlayerFound)
        {
-           //animator.Play("Target_Player");
-           //animator.SetBool("Target_Player", true); *** Animation Needs Fixing
+           animator.SetBool("isFollowing", true); 
            TargetPlayer();
        }
        else if(backPlayerFound)
        {
+           animator.SetBool("isFollowing", true); 
             this.transform.localScale = new Vector3(transform.localScale.x * -1,
             transform.localScale.y,
             transform.localScale.z);
@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour
        }      
        else
        { 
-          // animator.SetBool("Target_Player", false); ***Animation Needs Fixing
+          animator.SetBool("isFollowing", false); 
            Move();
        }
     }
@@ -85,7 +85,7 @@ public class EnemyAI : MonoBehaviour
           this.transform.localScale = new Vector3(transform.localScale.x * -1,
           transform.localScale.y,
           transform.localScale.z);
-          animator.SetBool("isTurning", true);
+          //animator.SetBool("isTurning", true);
         }
     }
     
