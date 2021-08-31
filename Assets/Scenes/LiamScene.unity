@@ -602,7 +602,7 @@ Transform:
   m_LocalScale: {x: 0.9760859, y: 0.98951125, z: 1}
   m_Children: []
   m_Father: {fileID: 2136833934}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &754277093
 MonoBehaviour:
@@ -880,7 +880,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2136833934}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437790578
 GameObject:
@@ -1380,6 +1380,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2865118887618934318, guid: d6dda7eec3624e04f92fadf7f53fe256, type: 3}
+      propertyPath: bulletpoint
+      value: 
+      objectReference: {fileID: 1403907233}
     - target: {fileID: 5714658809347247029, guid: d6dda7eec3624e04f92fadf7f53fe256, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1432,7 +1436,8 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6988208735672540147, guid: d6dda7eec3624e04f92fadf7f53fe256, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6dda7eec3624e04f92fadf7f53fe256, type: 3}
 --- !u!1 &2136833933 stripped
 GameObject:

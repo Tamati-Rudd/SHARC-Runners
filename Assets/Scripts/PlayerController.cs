@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
+    public GameObject bulletpoint;
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Collectable collectableMeter;//Access the collectable script
 
     public bool facingRight = true;
+    private bool hasBulletFlipped = false;
 
     private void Awake()
     {
@@ -64,6 +66,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void Update()
     {
 
+        if (!facingRight)
+        {                       
+           
+        }
+        else
+        {
+
+        }
+
         if (!PV.IsMine)
         {
             return;
@@ -78,6 +89,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
+        
         //jumping
         if (Input.GetButtonDown("Jump"))
         {
@@ -90,17 +102,18 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //flip player facing direction
         if (rb.velocity.x < 0 && facingRight)
         {
-            
 
             Flip();
 
+           // sr.flipX = true;
+          //  facingRight = false;
+            
         }
         else if (rb.velocity.x > 0 && !facingRight)
         {
-            
-            Flip();
-
-
+             Flip();
+          // sr.flipX = false;
+          //  facingRight = true;
 
         }
         //check for animation 
@@ -155,9 +168,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
     }
     public void Flip()
     {
-        facingRight = !facingRight;
 
-        transform.Rotate(0f, 180f, 0);
+        facingRight = !facingRight;
+        this.transform.Rotate(0f, 180f, 0);
+        //sr.flipX = true;
+        cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
 
     }
 }
