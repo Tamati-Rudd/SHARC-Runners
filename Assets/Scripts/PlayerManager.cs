@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     private Canvas canvas;
     private GameObject container;
     public GameObject enemy;
+    public GameObject gem;
     public Vector2 SpawnPoint;
 
     private void Awake()
@@ -57,7 +58,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
 
             GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
-          
+            enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
             enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
 
             MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
@@ -75,7 +76,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
 
             GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
-
+            enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
             enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
 
 
@@ -91,9 +92,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
-
+           
             GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
-
+            enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
             enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
 
             MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
