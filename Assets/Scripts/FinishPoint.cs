@@ -12,11 +12,19 @@ public class FinishPoint : MonoBehaviour
     PhotonView winnerPV;
     public static string winnerName;
 
+    private void Start()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") { //If the colliding object has the Player tag
+            //Record the winner's name
             winnerPV = collision.GetComponent<PhotonView>(); 
-            winnerName = winnerPV.Owner.NickName; //Record the winner's name
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); //Load the next built scene (will be the post game scene)
+            winnerName = winnerPV.Owner.NickName;
+
+            //Load the post game screen for all players   
+            PhotonNetwork.LoadLevel(2); 
         }
     }
 }
