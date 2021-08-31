@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 /** 
 ** EnemyLife Script
 ** This script contains the life behaviour of the enemy:
@@ -8,7 +9,7 @@ using UnityEngine;
 ** Death of enemy
 ** Generating gems
 **/
-public class EnemyLife : MonoBehaviour
+public class EnemyLife : MonoBehaviourPunCallbacks
 {
     private int HP = 10; //Health Point of Enemy
 
@@ -57,6 +58,7 @@ public class EnemyLife : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 
     //Method for generating gems
     private void GenerateGem()

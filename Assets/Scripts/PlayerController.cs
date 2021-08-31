@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         
-
+        //destroy other player's rigidbody
         if (!PV.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
@@ -150,15 +150,33 @@ public class PlayerController : MonoBehaviour, IPunObservable
             transform.localScale.y,
             transform.localScale.z);
 
-        username.transform.localScale = new Vector3(transform.localScale.x * -1,
-            transform.localScale.y,
-            transform.localScale.z);
+        // username.transform.localScale = new Vector3(transform.localScale.x * -1,
+        //  transform.localScale.y,
+        //transform.localScale.z);
+
+        //username.transform.Rotate(0f, 180f, 0);
+
+        PV.RPC("FlipRPC", RpcTarget.All);
 
         bulletpoint.transform.Rotate(0f, 180f, 0);
 
         //username.transform.Rotate(0f, 180f, 0);
         //sr.flipX = true;
         //cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+
+    }
+
+
+    [PunRPC]
+    void FlipRPC()
+    {
+        if (!PV.IsMine)
+        {
+            //username.transform.Rotate(0f, 180f, 0);
+            username.transform.localScale = new Vector3(transform.localScale.x * -1,
+              transform.localScale.y,
+           transform.localScale.z);
+        }
 
     }
 
