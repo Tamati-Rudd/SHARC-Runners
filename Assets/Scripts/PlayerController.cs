@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private SpriteRenderer sr;
 
     PhotonView PV;
-
+    Camera cam;
     //ability 
     public float speedTimer;
     public bool activateSpeed;
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         AddObservable();
 
@@ -89,14 +90,21 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //flip player facing direction
         if (rb.velocity.x < 0 && facingRight)
         {
+            
+
             Flip();
+
         }
         else if (rb.velocity.x > 0 && !facingRight)
         {
+            
             Flip();
+
+
+
         }
         //check for animation 
-        anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
 
         //Press the ability button
@@ -148,7 +156,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public void Flip()
     {
         facingRight = !facingRight;
+
         transform.Rotate(0f, 180f, 0);
+
     }
 }
 
