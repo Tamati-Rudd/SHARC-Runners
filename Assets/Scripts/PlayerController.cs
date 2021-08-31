@@ -24,9 +24,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
-    Camera cam;
-
-    public bool facingRight = true;
     private bool hasBulletFlipped = false;
 
     private void Awake()
@@ -104,11 +101,19 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //flip player facing direction
         if (rb.velocity.x < 0 && facingRight)
         {
+
             Flip();
+
+           // sr.flipX = true;
+          //  facingRight = false;
+            
         }
         else if (rb.velocity.x > 0 && !facingRight)
         {
-            Flip();
+             Flip();
+          // sr.flipX = false;
+          //  facingRight = true;
+
         }
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
@@ -160,13 +165,14 @@ public class PlayerController : MonoBehaviour, IPunObservable
         collectableMeter.UpdateCoins();
         movementSpeed = 20;
     }
-
     public void Flip()
     {
+
         facingRight = !facingRight;
-        transform.Rotate(0f, 180, 0f);
+        this.transform.Rotate(0f, 180f, 0);
+        //sr.flipX = true;
         cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
-       
+
     }
 }
 
