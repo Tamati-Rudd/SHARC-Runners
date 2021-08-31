@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPunObservable
 {
 
     public float movementSpeed;
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public bool facingRight = true;
     public GameObject bulletpoint;
     public bool isDisabled = true;
-
+    public TMP_Text username;
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -144,9 +145,25 @@ public class PlayerController : MonoBehaviour
     {
 
         facingRight = !facingRight;
-        this.transform.Rotate(0f, 180f, 0);
+
+        this.transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z);
+
+        username.transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z);
+
+        bulletpoint.transform.Rotate(0f, 180f, 0);
+
+        //username.transform.Rotate(0f, 180f, 0);
         //sr.flipX = true;
-        cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+        //cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
 
     }
 }

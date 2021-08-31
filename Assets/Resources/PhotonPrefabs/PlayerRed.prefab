@@ -168,6 +168,8 @@ MonoBehaviour:
   jumpForce: 15
   facingRight: 1
   bulletpoint: {fileID: 7977532090399569070}
+  isDisabled: 1
+  username: {fileID: 1378636670621810232}
   groundCheck: {fileID: 6552763042300625184}
   whatIsGround:
     serializedVersion: 2
@@ -214,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
 --- !u!114 &6266874039060423888
 MonoBehaviour:
