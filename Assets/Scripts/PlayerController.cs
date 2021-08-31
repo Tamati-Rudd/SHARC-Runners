@@ -145,10 +145,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
 
         facingRight = !facingRight;
-        this.transform.Rotate(0f, 180f, 0);
-        username.transform.Rotate(0f, 180f, 0);
+
+        this.transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z);
+        bulletpoint.transform.Rotate(0f, 180f, 0);
+
+        //username.transform.Rotate(0f, 180f, 0);
         //sr.flipX = true;
-        cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+        //cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
 
     }
 
