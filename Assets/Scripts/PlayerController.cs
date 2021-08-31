@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
+    public bool facingRight = true;
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
+    Camera cam;
 
     private void Awake()
     {
@@ -85,13 +87,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //flip player facing direction
-        if (rb.velocity.x < 0)
+        if (rb.velocity.x < 0 && facingRight)
         {
-            sr.flipX = true;
+            Flip();
         }
-        else if (rb.velocity.x > 0)
+        else if (rb.velocity.x > 0 && !facingRight)
         {
-            sr.flipX = false;
+            Flip();
         }
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
@@ -142,6 +144,14 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         collectableMeter.UpdateCoins();
         movementSpeed = 20;
+    }
+
+    public void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180, 0f);
+        cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+       
     }
 }
 
