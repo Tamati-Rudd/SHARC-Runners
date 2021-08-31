@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private Rigidbody2D rb;
     public float jumpForce;
     public bool facingRight = true;
+    public GameObject bulletpoint;
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -18,24 +19,28 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private SpriteRenderer sr;
 
     PhotonView PV;
-
+    Camera cam;
     //ability 
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
     Camera cam;
 
+    public bool facingRight = true;
+    private bool hasBulletFlipped = false;
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
     }
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         AddObservable();
 
@@ -45,7 +50,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-       
+
         speedTimer = 0;
         activateSpeed = false;
 
@@ -63,6 +68,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void Update()
     {
 
+        if (!facingRight)
+        {                       
+           
+        }
+        else
+        {
+
+        }
+
         if (!PV.IsMine)
         {
             return;
@@ -77,6 +91,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
+        
         //jumping
         if (Input.GetButtonDown("Jump"))
         {
@@ -96,9 +111,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Flip();
         }
         //check for animation 
-        anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
-        
+
         //Press the ability button
         if (Input.GetButtonDown("Fire2"))
         {
