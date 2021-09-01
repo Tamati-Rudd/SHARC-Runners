@@ -10,18 +10,15 @@ using Photon.Pun;
 public class DeclareWinner : MonoBehaviour
 {
     TextMeshProUGUI WinnerText;
-    PhotonView canvasPV;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        //GameObject canvas = PhotonNetwork.Instantiate("Canvas", new Vector3(0,0,0), Quaternion.identity, 0);
 
-    [PunRPC]
-    void StateWinner(string winnerName)
-    {
-        Debug.Log("Stating Winner: " + winnerName);
+        WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
+        string winnerName = win.winnerName;
+        Debug.Log("Winner: " + winnerName);
         //Get reference to the TextMeshProUGUI component
         Transform child = transform.Find("WinnerText");
         WinnerText = child.GetComponent<TextMeshProUGUI>();
