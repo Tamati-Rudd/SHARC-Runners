@@ -34,28 +34,28 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {   
-       frontPlayerFound = Physics2D.Linecast(sightStart.position, frontLineOfSite.position, 1 << LayerMask.NameToLayer ("Player"));
-       backPlayerFound = Physics2D.Linecast(sightStart.position, backLineOfSite.position, 1 << LayerMask.NameToLayer ("Player"));
+     //  frontPlayerFound = Physics2D.Linecast(sightStart.position, frontLineOfSite.position, 1 << LayerMask.NameToLayer ("Player"));
+     //  backPlayerFound = Physics2D.Linecast(sightStart.position, backLineOfSite.position, 1 << LayerMask.NameToLayer ("Player"));
        
-       if(frontPlayerFound)
-       {
-           animator.SetBool("isFollowing", true); 
-           TargetPlayer();
-       }
-       else if(backPlayerFound)
-       {
-           animator.SetBool("isFollowing", true); 
-            this.transform.localScale = new Vector3(transform.localScale.x * -1,
-            transform.localScale.y,
-            transform.localScale.z);
+     //  if(frontPlayerFound)
+       //{
+         //  animator.SetBool("isFollowing", true); 
+           //TargetPlayer();
+       //}
+       //else if(backPlayerFound)
+       //{
+         //  animator.SetBool("isFollowing", true); 
+           // this.transform.localScale = new Vector3(transform.localScale.x * -1,
+            //transform.localScale.y,
+            //transform.localScale.z);
             //this.transform.localScale = new Vector3((transform.localScale.x == 1) ? -1 : 1, 1, 1);
-            TargetPlayer();
-       }      
-       else
-       { 
+            //TargetPlayer();
+       //}      
+       //else
+       //{ 
           animator.SetBool("isFollowing", false); 
            Move();
-       }
+       //}
     }
 
     //Method for moving constantly forward 
@@ -71,15 +71,6 @@ public class EnemyAI : MonoBehaviour
     {
         obstacleCollision = Physics2D.Linecast (sightStart.position, sightEnd.position, 1 << LayerMask.NameToLayer ("Ground"));
 
-        if (obstacleCollision)
-        {
-            Debug.Log("Flip me");
-        }
-        else
-        {
-            Debug.Log("no need to flip");
-        }
-        
         if(obstacleCollision == needsCollision)
         {
           this.transform.localScale = new Vector3(transform.localScale.x * -1,
@@ -90,43 +81,43 @@ public class EnemyAI : MonoBehaviour
     }
     
     //Method for targeting and moving towards player
-    private void TargetPlayer()
-    {   
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);;
-        if(Vector2.Distance(transform.position, player.position) > stoppingDistance && distanceFromPlayer < aggro)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        }
-        else if(Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
-        {
-            transform.position = this.transform.position;
+   // private void TargetPlayer()
+   // {   
+   //     float distanceFromPlayer = Vector2.Distance(player.position, transform.position);;
+    //    if(Vector2.Distance(transform.position, player.position) > stoppingDistance && distanceFromPlayer < aggro)
+    //    {
+   //         transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+   //     }
+    //    else if(Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
+    //    {
+    //        transform.position = this.transform.position;
 
-        }
-        else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position,player.position, -moveSpeed * Time.deltaTime);
-        }
+   //     }
+   //     else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
+    //    {
+   //         transform.position = Vector2.MoveTowards(transform.position,player.position, -moveSpeed * Time.deltaTime);
+   //     }
 
-        ShootPlayer();
-    }
+  //      ShootPlayer();
+ //   }
 
     //Method for shooting at player
-    private void ShootPlayer()
-    {
-        if(fireRate <= 0)
-        {   
+  //  private void ShootPlayer()
+  //  {
+   //     if(fireRate <= 0)
+   //     {   
             //animator.SetBool("isAttacking", true);
             //animator.Play("Enemy_Attacking");
          
-            Instantiate(projectile, transform.position, Quaternion.identity);
-            fireRate = startingFireRate;
-        }
-        else
-        {
-            fireRate -= Time.deltaTime;
-        }
+   //         Instantiate(projectile, transform.position, Quaternion.identity);
+   //         fireRate = startingFireRate;
+   //     }
+   //     else
+   //     {
+   //         fireRate -= Time.deltaTime;
+   //     }
         //animator.SetBool("isAttacking", false);
-    }
+ //   }
 
 }
 

@@ -13,29 +13,31 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public Text Counter;
     private Canvas canvas;
     private GameObject container;
-    public GameObject enemy;
-    public GameObject gem;
-    public Vector2 SpawnPoint;
+
+    
     public GameObject HUDContainer;
+    public bool isCreated = false;
 
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
         selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
 
+
+
+       
     }
 
     // Start is called before the first frame update
     void Start()
     {
 
-        SpawnPoint.x = (float)21.8;
-        SpawnPoint.y = (float)-1.9;
-
         if (PV.IsMine)
         {
             CreateController();
         }
+       
+
     }
 
     // Update is called once per frame
@@ -46,7 +48,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void CreateController()
     {
-
         
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
         
@@ -55,8 +56,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
-
-            CreateEnemy(prefab, SpawnPoint);
 
             GameObject HUD = Instantiate(HUDContainer, canvas.transform);                  
             HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
@@ -69,21 +68,20 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
 
-            CreateEnemy(prefab, SpawnPoint);
+           // CreateEnemy(prefab, SpawnPoint);
 
             GameObject HUD = Instantiate(HUDContainer, canvas.transform);
             HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
 
             CreateMeter(prefab);
-
-
+            
         }
         if (selectedCharacter == 2)
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
 
-            CreateEnemy(prefab, SpawnPoint);
+          // CreateEnemy(prefab, SpawnPoint);
 
             GameObject HUD = Instantiate(HUDContainer, canvas.transform);
             HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
@@ -111,10 +109,5 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         
     }
 
-    void CreateEnemy(GameObject prefab, Vector2 SpawnPoint)
-    {
-        GameObject enemyclone = Instantiate(enemy, SpawnPoint, Quaternion.identity);
-        enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
-        enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
-    }
+
 }

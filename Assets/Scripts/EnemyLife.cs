@@ -16,9 +16,15 @@ public class EnemyLife : MonoBehaviourPunCallbacks
     //Materials used for the animation
     private Material matWhite;
     private Material matDefault;
+    public PhotonView PV;
     
     SpriteRenderer sr;
     public GameObject gemPrefab;
+
+    public void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     void Start()
     {
@@ -56,13 +62,17 @@ public class EnemyLife : MonoBehaviourPunCallbacks
     //Method for enemy dying
     private void KillSelf()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
 
     //Method for generating gems
     private void GenerateGem()
     {
+
         Instantiate(gemPrefab, transform.position, gemPrefab.transform.rotation);
+           
+        
+        
     }
 }
