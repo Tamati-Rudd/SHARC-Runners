@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
@@ -178,6 +179,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
            transform.localScale.z);
         }
 
+    }
+
+    //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
+    [PunRPC]
+    void EndRaceRPC(string winnerName)
+    {
+        WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
+        win.updateWinnerName(winnerName);
+        SceneManager.LoadScene("PostGame");
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
