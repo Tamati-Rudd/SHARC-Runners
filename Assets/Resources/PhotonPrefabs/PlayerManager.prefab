@@ -47,10 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meterScript: {fileID: 3524122810042169586, guid: 90aa4d871bde52f4b80e07cfa4fa3423, type: 3}
   Counter: {fileID: 4945971843407569622, guid: 361996a714ebffc45ac675d6f6e9d560, type: 3}
-  enemy: {fileID: 3776138673847951371, guid: 57e8c5c21aed8472dbe3968ed51087dc, type: 3}
-  gem: {fileID: 3867825547203237803, guid: 48e2b806ec5a4654e9f8a7f98bda4a56, type: 3}
-  SpawnPoint: {x: 0, y: 0}
   HUDContainer: {fileID: 3758938846840948098, guid: 7f60de24fdd050e4994c6c49833a33f7, type: 3}
+  isCreated: 0
 --- !u!114 &1792917023147722007
 MonoBehaviour:
   m_ObjectHideFlags: 0
