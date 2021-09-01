@@ -180,6 +180,22 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
+    [PunRPC]
+    void EndRaceRPC(string winnerName)
+    {
+        Debug.Log(winnerName + " has won");
+
+        WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
+       
+        //GameObject winnerRecord = GameObject.Find("WinnerRecord");
+        //var Script recWin = winnerRecord.GetComponent<>(Winner);
+        win.updateWinnerName(winnerName);
+        PhotonNetwork.LoadLevel(2);
+        
+
+
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
 
