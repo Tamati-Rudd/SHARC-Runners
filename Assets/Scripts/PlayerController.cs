@@ -30,6 +30,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Collectable collectableMeter;//Access the collectable script
     private bool hasBulletFlipped = false;
 
+    private bool canDoubleJump;
+    public float wallJumpTime = 0.2f;
+    public float wallSlideSpeed = 0.3f;
+    public float wallDistance = 0.5f;
+    bool isWallSliding = false;
+    RaycastHit2D wallCheckhit;
+    float jumpTime;
+    bool isOnWall;
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -81,13 +90,26 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
-        
+
         //jumping
+        //Check if player can do double jump
+        if (isGrounded)
+        {
+            canDoubleJump = true;
+        }
         if (Input.GetButtonDown("Jump") && isDisabled == false)
         {
-            if (isGrounded)
+            if (isGrounded || isWallSliding)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+            else
+            {
+                if (canDoubleJump)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    canDoubleJump = false;
+                }
             }
         }
 
@@ -108,6 +130,37 @@ public class PlayerController : MonoBehaviour, IPunObservable
           //  facingRight = true;
 
         }
+
+        //Wall Jump
+
+        if (facingRight)
+        {
+            wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, whatIsGround);
+        }
+        else
+        {
+            wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, whatIsGround);
+        }
+
+
+
+        if (wallCheckhit && !isGrounded && Input.GetAxisRaw("Horizontal") != 0 && isOnWall)
+        {
+            isWallSliding = true;
+            jumpTime = Time.time + wallJumpTime;
+            isOnWall = false;
+        }
+        else if (jumpTime < Time.time)
+        {
+            isWallSliding = false;
+            isOnWall = false;
+        }
+
+        if (isWallSliding)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, wallSlideSpeed, float.MaxValue));
+        }
+
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
@@ -193,6 +246,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
 
+    }
+
+    //Check for player COllision
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            isOnWall = true;
+        }
     }
 }
 

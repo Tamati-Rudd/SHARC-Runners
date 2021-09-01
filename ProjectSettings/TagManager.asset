@@ -12,6 +12,7 @@ TagManager:
   - PlayerProjectile
   - Ground
   - WinRecord
+  - Wall
   layers:
   - Default
   - TransparentFX
