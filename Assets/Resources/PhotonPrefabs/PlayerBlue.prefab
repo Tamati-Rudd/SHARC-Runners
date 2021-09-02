@@ -711,6 +711,9 @@ MonoBehaviour:
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 2225839799702241355}
+  wallJumpTime: 0.2
+  wallSlideSpeed: 0.3
+  wallDistance: 0.5
 --- !u!114 &6924062975845040977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,6 +760,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: isGrounded
+  - Type: 9
+    SynchronizeType: 0
+    Name: isShooting
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -789,6 +795,7 @@ MonoBehaviour:
   firePoint: {fileID: 2288476823771728729}
   bulletPrefab: {fileID: 1491362137737887937, guid: 3bb5769ff7fed4ade99126798f351870, type: 3}
   PV: {fileID: 0}
+  anim: {fileID: 4246581665420000371}
 --- !u!114 &3576095509422718367
 MonoBehaviour:
   m_ObjectHideFlags: 0

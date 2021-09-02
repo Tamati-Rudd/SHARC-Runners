@@ -11,6 +11,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
    public Transform firePoint;
    public GameObject bulletPrefab;
     public PhotonView PV;
+    public Animator anim;
 
     private void Awake()
     {
@@ -37,7 +38,8 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
 
     [PunRPC]
     void ShootRPC()
-    {        
+    {
+        anim.SetTrigger("isShooting");
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
