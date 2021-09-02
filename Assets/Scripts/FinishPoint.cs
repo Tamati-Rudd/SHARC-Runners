@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
-
-//NOTE: For this scene to function correctly, the next built scene after the game scene MUST be the game ended scene
-
+//Runs when the first player collides with the finish point
 public class FinishPoint : MonoBehaviour
 {
     PhotonView winnerPV;

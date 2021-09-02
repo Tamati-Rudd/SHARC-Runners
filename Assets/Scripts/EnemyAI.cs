@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 /*
 ** EnemyAI Script
 ** This script carries out the behaviour of the enemy:
@@ -8,6 +9,7 @@ using UnityEngine;
 ** Moving towards player
 ** Turning around
 ** Shooting at player
+** And collision with player
 */
 
 public class EnemyAI : MonoBehaviour
@@ -79,45 +81,55 @@ public class EnemyAI : MonoBehaviour
           //animator.SetBool("isTurning", true);
         }
     }
-    
+
     //Method for targeting and moving towards player
-   // private void TargetPlayer()
-   // {   
-   //     float distanceFromPlayer = Vector2.Distance(player.position, transform.position);;
+    // private void TargetPlayer()
+    // {   
+    //     float distanceFromPlayer = Vector2.Distance(player.position, transform.position);;
     //    if(Vector2.Distance(transform.position, player.position) > stoppingDistance && distanceFromPlayer < aggro)
     //    {
-   //         transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-   //     }
+    //         transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+    //     }
     //    else if(Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
     //    {
     //        transform.position = this.transform.position;
 
-   //     }
-   //     else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
+    //     }
+    //     else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
     //    {
-   //         transform.position = Vector2.MoveTowards(transform.position,player.position, -moveSpeed * Time.deltaTime);
-   //     }
+    //         transform.position = Vector2.MoveTowards(transform.position,player.position, -moveSpeed * Time.deltaTime);
+    //     }
 
-  //      ShootPlayer();
- //   }
+    //      ShootPlayer();
+    //   }
 
     //Method for shooting at player
-  //  private void ShootPlayer()
-  //  {
-   //     if(fireRate <= 0)
-   //     {   
-            //animator.SetBool("isAttacking", true);
-            //animator.Play("Enemy_Attacking");
-         
-   //         Instantiate(projectile, transform.position, Quaternion.identity);
-   //         fireRate = startingFireRate;
-   //     }
-   //     else
-   //     {
-   //         fireRate -= Time.deltaTime;
-   //     }
-        //animator.SetBool("isAttacking", false);
- //   }
+    //  private void ShootPlayer()
+    //  {
+    //     if(fireRate <= 0)
+    //     {   
+    //animator.SetBool("isAttacking", true);
+    //animator.Play("Enemy_Attacking");
 
+    //         Instantiate(projectile, transform.position, Quaternion.identity);
+    //         fireRate = startingFireRate;
+    //     }
+    //     else
+    //     {
+    //         fireRate -= Time.deltaTime;
+    //     }
+    //animator.SetBool("isAttacking", false);
+    //   }
+
+
+    //Enemy collision with player
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        { //If the colliding object has the Player tag
+            PhotonView playerPV = collision.GetComponent<PhotonView>();
+            playerPV.RPC("killPlayerRPC", RpcTarget.All);
+        }
+    }
 }
 
