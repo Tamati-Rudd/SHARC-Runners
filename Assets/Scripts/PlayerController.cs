@@ -234,18 +234,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Runs whenever the player has died (e.g. on collision with enemy)
-    [PunRPC]
-    void killPlayerRPC()
-    {
-        Debug.Log("Player has died!");
-        //Get respawn point (this can be changed later to have checkpoints should we decide to use them)
-        Transform respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-
-        //Move player back to the respawn point
-        PV.transform.position = respawnPoint.transform.position;
-    }
-
     //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
     [PunRPC]
     void EndRaceRPC(string winnerName)
@@ -254,8 +242,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         win.updateWinnerName(winnerName);
         SceneManager.LoadScene("PostGame");
     }
-
-
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
