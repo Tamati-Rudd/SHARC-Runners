@@ -177,6 +177,9 @@ MonoBehaviour:
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 8040169026405973951}
+  wallJumpTime: 0.2
+  wallSlideSpeed: 0.3
+  wallDistance: 0.5
 --- !u!114 &1252168062166564005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
   Counter: {fileID: 0}
+  PV: {fileID: 0}
 --- !u!114 &7977532090062940032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +275,7 @@ MonoBehaviour:
   firePoint: {fileID: 7977532090399569069}
   bulletPrefab: {fileID: 3389515824999700825, guid: 02c3e1ab72dff408ab774e29c4fb05ce, type: 3}
   PV: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &2627961597269755500
 GameObject:
   m_ObjectHideFlags: 0
