@@ -708,6 +708,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
+  respawnPoint: {fileID: 0}
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 2225839799702241355}
