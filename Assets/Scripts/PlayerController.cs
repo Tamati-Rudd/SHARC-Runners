@@ -220,7 +220,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-
     [PunRPC]
     void FlipRPC()
     {
@@ -232,6 +231,17 @@ public class PlayerController : MonoBehaviour, IPunObservable
            transform.localScale.z);
         }
 
+    }
+
+    //Runs whenever the player has died (e.g. on collision with enemy)
+    [PunRPC]
+    void killPlayerRPC()
+    {
+        //Get respawn point (this can be changed later to have checkpoints should we decide to use them)
+        Transform respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+
+        //Move player back to the respawn point
+        PV.transform.position = respawnPoint.transform.position;
     }
 
     //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
@@ -248,12 +258,18 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Check for player COllision
+    //Check for player Collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Check if target object is a wall
         if (collision.gameObject.tag == "Wall")
         {
             isOnWall = true;
+        }
+        //Check if the target object is an enemy
+        else if (collision.gameObject.tag == "Enemy") 
+        {
+            PV.RPC("killPlayerRPC", RpcTarget.All);
         }
     }
 }
