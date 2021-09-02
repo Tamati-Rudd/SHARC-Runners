@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 /** 
 ** EnemyLife Script
 ** This script contains the life behaviour of the enemy:
@@ -45,7 +46,12 @@ public class EnemyLife : MonoBehaviourPunCallbacks
 
             if(HP <= 0)
             {
-                KillSelf();
+
+                int viewID = this.GetComponent<PhotonView>().ViewID;
+
+                PV.RPC("Kill", RpcTarget.MasterClient, viewID);
+
+               // KillSelf();
             }
             /*else
             {
@@ -59,20 +65,26 @@ public class EnemyLife : MonoBehaviourPunCallbacks
         sr.material = matDefault;
     }*/
 
-    //Method for enemy dying
-    private void KillSelf()
-    {
-        PhotonNetwork.Destroy(gameObject);
-    }
+
 
 
     //Method for generating gems
     private void GenerateGem()
     {
+        PhotonNetwork.InstantiateRoomObject((Path.Combine("PhotonPrefabs", "Square")), transform.position, transform.rotation);
 
-        Instantiate(gemPrefab, transform.position, gemPrefab.transform.rotation);
-           
-        
-        
+       // Instantiate(gemPrefab, transform.position, gemPrefab.transform.rotation);              
+       
+    }
+
+    [PunRPC]
+    public void Kill(int viewID)
+    {
+
+        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+
+
+
+
     }
 }
