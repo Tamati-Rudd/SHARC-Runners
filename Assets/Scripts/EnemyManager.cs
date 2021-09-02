@@ -9,7 +9,13 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemy;
     public GameObject gem;
     public Vector2 SpawnPoint;
-    private bool isCreated = false;
+    public PhotonView PV;
+
+
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +23,14 @@ public class EnemyManager : MonoBehaviour
         SpawnPoint.x = (float)21.8;
         SpawnPoint.y = (float)-1.9;
 
-        if (!isCreated)
-        {
+
+        if (PV.Owner.IsMasterClient)
+        {            
             CreateEnemy(SpawnPoint);
-            isCreated = true;
         }
+
+        
+
         
 
 
@@ -34,9 +43,9 @@ public class EnemyManager : MonoBehaviour
     }
 
     void CreateEnemy(Vector2 SpawnPoint)
-    {
+    {              
 
-        GameObject enemyclone = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Enemy"), SpawnPoint, Quaternion.identity);
+        GameObject enemyclone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Enemy"), SpawnPoint, Quaternion.identity);
         enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
         //enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
     }

@@ -780,6 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
   Counter: {fileID: 0}
+  PV: {fileID: 0}
 --- !u!114 &2288476824102000756
 MonoBehaviour:
   m_ObjectHideFlags: 0
