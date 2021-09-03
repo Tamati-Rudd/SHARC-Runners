@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,25 +10,33 @@ public class GrapplingHook : MonoBehaviour
     private Vector3 GrapplePoint;
     public Transform Player;
     public Transform HookHolder;
-
+    public PhotonView PV;
+    
     private void Awake()
     {
         lineCreator = GetComponent<LineRenderer>();
         Hook = transform.gameObject.AddComponent<SpringJoint2D>();
         Hook.enabled = false;
+        PV = GetComponent<PhotonView>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            StartGrapple();
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-            StopGrapple();
+        if (PV.IsMine) { 
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                StartGrapple();
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                lineCreator.positionCount = 0;
+                PV.RPC("DestroyLine", RpcTarget.All);
+                StopGrapple();
+            }
+
         }
     }
 
@@ -75,25 +84,61 @@ public class GrapplingHook : MonoBehaviour
     private void LateUpdate()
     {
         Draw();
+
     }
+
+    
 
     public void StopGrapple()
     {
         Hook.enabled = false;
         lineCreator.forceRenderingOff = true;
     }
-
+        
     public void Draw()
     {
-        if (Hook.isActiveAndEnabled)
-        {
-            if(lineCreator.positionCount> 0)
+        if(Hook != null)
+        {        
+            if (Hook.isActiveAndEnabled)
             {
-                lineCreator.SetWidth(0.1f, 0.1f);
-                lineCreator.startColor = Color.white;
-                lineCreator.SetPosition(0, transform.position);
-                lineCreator.SetPosition(1, GrapplePoint);
+                if (lineCreator.positionCount > 0)
+                {
+                    lineCreator.SetWidth(0.1f, 0.1f);
+                    lineCreator.startColor = Color.white;
+                    lineCreator.SetPosition(0, transform.position);
+                    lineCreator.SetPosition(1, GrapplePoint);
+
+                    if (PV.IsMine)
+                    {
+                        PV.RPC("DrawRPC", RpcTarget.All, GrapplePoint);
+                    }
+                }
             }
+
         }
     }
+
+    [PunRPC]
+    public void DrawRPC(Vector3 hookpoint)
+    {
+        lineCreator.positionCount = 2;
+        if (lineCreator.positionCount > 0)
+        {
+            lineCreator.SetWidth(0.1f, 0.1f);
+            lineCreator.startColor = Color.white;
+            lineCreator.SetPosition(0, Player.position);
+            lineCreator.SetPosition(1, hookpoint);
+        }
+    }
+
+    [PunRPC]
+    public void DestroyLine()
+    {
+        if (!PV.IsMine)
+        {
+            lineCreator.positionCount = 0;
+        }
+    }
+
+
 }
