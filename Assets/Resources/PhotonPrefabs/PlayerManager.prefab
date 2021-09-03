@@ -48,6 +48,7 @@ MonoBehaviour:
   meterScript: {fileID: 3524122810042169586, guid: 90aa4d871bde52f4b80e07cfa4fa3423, type: 3}
   Counter: {fileID: 4945971843407569622, guid: 361996a714ebffc45ac675d6f6e9d560, type: 3}
   HUDContainer: {fileID: 3758938846840948098, guid: 7f60de24fdd050e4994c6c49833a33f7, type: 3}
+  Timer: {fileID: -8243344178819407271, guid: 9e040d058a0f4ea4289cb5206e99bea2, type: 3}
   isCreated: 0
 --- !u!114 &1792917023147722007
 MonoBehaviour:
