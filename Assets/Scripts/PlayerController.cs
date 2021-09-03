@@ -165,6 +165,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //check for animation 
         anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isOnWall", isWallSliding);
+        //Set player wall jump animation
+        if (facingRight)
+        {
+            anim.SetBool("facingRight", facingRight);
+        }else if (!facingRight)
+        {
+            anim.SetBool("facingLeft", !facingRight);
+        }
 
         //Press the ability button
         if (Input.GetButtonDown("Fire2"))
