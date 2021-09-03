@@ -10,8 +10,8 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
 {
    public Transform firePoint;
    public GameObject bulletPrefab;
-    public PhotonView PV;
-    public Animator anim;
+   public PhotonView PV;
+   public Animator anim;
 
     private void Awake()
     {

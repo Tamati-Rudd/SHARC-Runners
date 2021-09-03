@@ -6,14 +6,16 @@ using System;
 
 public class Stopwatch : MonoBehaviour
 {
-    bool stopWatchActive;
+    public static Stopwatch Instance;
+
+    bool stopWatchActive = false;
     private float currentTime;
     public Text currentTimeText;
 
     void Start()
     {
         currentTime = 0;
-        StartStopwatch();
+        //StartStopwatch();
     }
 
     // Update is called once per frame

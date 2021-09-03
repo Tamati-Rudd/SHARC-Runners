@@ -9,6 +9,7 @@ public class CountdownController : MonoBehaviour
     public int countdownTime;
     public TMP_Text countdownDisplay;
     public PlayerController player;
+    public Stopwatch timer;
 
     private void Start()
     {
@@ -28,7 +29,9 @@ public class CountdownController : MonoBehaviour
 
         countdownDisplay.text = "GO!";
         player.isDisabled = false;
-        
+
+        timer.StartStopwatch();
+
         yield return new WaitForSeconds(1f);
 
         countdownDisplay.gameObject.SetActive(false);
