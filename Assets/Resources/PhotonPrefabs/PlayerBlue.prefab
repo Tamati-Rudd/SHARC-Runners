@@ -764,15 +764,6 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: isShooting
-  - Type: 4
-    SynchronizeType: 2
-    Name: isOnWall
-  - Type: 4
-    SynchronizeType: 2
-    Name: facingRight
-  - Type: 4
-    SynchronizeType: 2
-    Name: facingLeft
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
