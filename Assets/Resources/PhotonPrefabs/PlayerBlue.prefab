@@ -698,7 +698,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01, y: 0}
-  m_Size: {x: 0.75, y: 1.98}
+  m_Size: {x: 0.54, y: 1.98}
   m_Direction: 0
 --- !u!95 &4246581665420000371
 Animator:
@@ -795,7 +795,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: isGrounded
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isShooting
   m_SynchronizeLayers:
   - SynchronizeType: 1
