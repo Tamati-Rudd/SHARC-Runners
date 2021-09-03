@@ -13,9 +13,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public Text Counter;
     private Canvas canvas;
     private GameObject container;
-
     
     public GameObject HUDContainer;
+    public Stopwatch Timer;
     public bool isCreated = false;
 
     private void Awake()
@@ -56,10 +56,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
-
-            GameObject HUD = Instantiate(HUDContainer, canvas.transform);                  
-            HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
-
+            
+            CreateCountdown(prefab);
             CreateMeter(prefab);
 
         }
@@ -68,11 +66,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
 
-           // CreateEnemy(prefab, SpawnPoint);
-
-            GameObject HUD = Instantiate(HUDContainer, canvas.transform);
-            HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
-
+            CreateCountdown(prefab);
+            CreateMeter(prefab);
             CreateMeter(prefab);
             
         }
@@ -81,11 +76,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
 
-          // CreateEnemy(prefab, SpawnPoint);
-
-            GameObject HUD = Instantiate(HUDContainer, canvas.transform);
-            HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
-
+            CreateCountdown(prefab);
+            CreateMeter(prefab);
             CreateMeter(prefab);
 
         }
@@ -95,19 +87,26 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void CreateMeter(GameObject prefab)
     {
-        Vector2 meterlocation;
-        meterlocation.x = 90;
-        meterlocation.y = 90;
-               
-        MeterScript meter = Instantiate(meterScript, meterlocation, Quaternion.identity);
-        meter.transform.SetParent(canvas.transform);
+        MeterScript meter = Instantiate(meterScript, canvas.transform);        
         prefab.GetComponent<Collectable>().abilityMeter = meter;
 
-        Text counterclone = Instantiate(Counter, meterlocation, Quaternion.identity);
-        counterclone.transform.SetParent(canvas.transform);
+        Text counterclone = Instantiate(Counter, canvas.transform);
         prefab.GetComponent<Collectable>().Counter = counterclone;
         
     }
+
+    void CreateCountdown(GameObject prefab)
+    {
+        //instantiating the countdown
+        GameObject HUD = Instantiate(HUDContainer, canvas.transform);
+        HUD.GetComponent<CountdownController>().player = prefab.GetComponent<PlayerController>();
+
+        //instantiating the timer
+        Stopwatch Timerclone = Instantiate(Timer, canvas.transform);
+        HUD.GetComponent<CountdownController>().timer = Timerclone;
+    }
+
+    
 
 
 }
