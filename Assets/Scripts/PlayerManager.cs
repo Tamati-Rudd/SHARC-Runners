@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-            CreateMeter(prefab);
+         
             
         }
         if (selectedCharacter == 2)
@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-            CreateMeter(prefab);
+            
 
         }
 
