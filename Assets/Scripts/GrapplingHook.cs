@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,37 +9,49 @@ public class GrapplingHook : MonoBehaviour
     public LineRenderer lineCreator;
     private Vector3 GrapplePoint;
     public Transform Player;
-
+    public Transform HookHolder;
+    public PhotonView PV;
+    
     private void Awake()
     {
         lineCreator = GetComponent<LineRenderer>();
         Hook = transform.gameObject.AddComponent<SpringJoint2D>();
         Hook.enabled = false;
+        PV = GetComponent<PhotonView>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            StartGrapple();
-        }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            StopGrapple();
+        if (PV.IsMine) { 
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                StartGrapple();
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                lineCreator.positionCount = 0;
+                PV.RPC("DestroyLine", RpcTarget.All);
+                StopGrapple();
+            }
+
         }
     }
 
     public void StartGrapple()
     {
         lineCreator.forceRenderingOff = false;
-        Vector3 playerposition = Player.position;
-        GrapplePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 p1 = Player.position;
+        Vector3 p2 = HookHolder.position;
+            
+        //Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         RaycastHit2D[] allHits;
 
-        allHits = Physics2D.LinecastAll(playerposition, GrapplePoint);
+        allHits = Physics2D.LinecastAll(p1, p2);
 
         foreach (var hit in allHits)
         {
@@ -49,13 +62,12 @@ public class GrapplingHook : MonoBehaviour
             {
                 if(hit.collider.tag == "Hook")
                 {
+                    GrapplePoint = hit.transform.position;
                     Hook.connectedAnchor = GrapplePoint;
                     Hook.autoConfigureConnectedAnchor = false;
-                    // float DistanceBetween = Vector3.Distance(playerposition, GrapplePoint);
+                    Hook.enableCollision = true;
 
-                    // Hook.distance = DistanceBetween;
-                    //Hook.dampingRatio = 4f;
-                    //Hook.frequency = 2;
+                    
                     Hook.enabled = true;
                     lineCreator.positionCount = 2;
                 }
@@ -72,25 +84,61 @@ public class GrapplingHook : MonoBehaviour
     private void LateUpdate()
     {
         Draw();
+
     }
+
+    
 
     public void StopGrapple()
     {
         Hook.enabled = false;
         lineCreator.forceRenderingOff = true;
     }
-
+        
     public void Draw()
     {
-        if (Hook.isActiveAndEnabled)
-        {
-            if(lineCreator.positionCount> 0)
+        if(Hook != null)
+        {        
+            if (Hook.isActiveAndEnabled)
             {
-                lineCreator.SetWidth(0.1f, 0.1f);
-                lineCreator.startColor = Color.white;
-                lineCreator.SetPosition(0, transform.position);
-                lineCreator.SetPosition(1, GrapplePoint);
+                if (lineCreator.positionCount > 0)
+                {
+                    lineCreator.SetWidth(0.1f, 0.1f);
+                    lineCreator.startColor = Color.white;
+                    lineCreator.SetPosition(0, transform.position);
+                    lineCreator.SetPosition(1, GrapplePoint);
+
+                    if (PV.IsMine)
+                    {
+                        PV.RPC("DrawRPC", RpcTarget.All, GrapplePoint);
+                    }
+                }
             }
+
         }
     }
+
+    [PunRPC]
+    public void DrawRPC(Vector3 hookpoint)
+    {
+        lineCreator.positionCount = 2;
+        if (lineCreator.positionCount > 0)
+        {
+            lineCreator.SetWidth(0.1f, 0.1f);
+            lineCreator.startColor = Color.white;
+            lineCreator.SetPosition(0, Player.position);
+            lineCreator.SetPosition(1, hookpoint);
+        }
+    }
+
+    [PunRPC]
+    public void DestroyLine()
+    {
+        if (!PV.IsMine)
+        {
+            lineCreator.positionCount = 0;
+        }
+    }
+
+
 }

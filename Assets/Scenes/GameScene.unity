@@ -8449,6 +8449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform_9 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 7963240486154717260, guid: cbc80db6e3d4fb64ebe552181e3e5ef0, type: 3}
+      propertyPath: m_TagString
+      value: Hook
+      objectReference: {fileID: 0}
     - target: {fileID: 7963240486154717262, guid: cbc80db6e3d4fb64ebe552181e3e5ef0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9488,6 +9492,14 @@ PrefabInstance:
     - target: {fileID: 4330286822389475479, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
       propertyPath: m_Name
       value: Wall (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330286822389475479, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330286822389475479, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4662154516194898448, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
       propertyPath: m_RootOrder
@@ -23584,6 +23596,14 @@ PrefabInstance:
     - target: {fileID: 4330286822389475479, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
       propertyPath: m_Name
       value: Wall (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330286822389475479, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330286822389475479, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4662154516194898448, guid: 778ed5d1caeb1cc478ebd9556c0679a6, type: 3}
       propertyPath: m_RootOrder

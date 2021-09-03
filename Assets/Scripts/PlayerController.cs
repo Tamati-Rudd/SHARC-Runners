@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     private Animator anim;
     private SpriteRenderer sr;
+    private SpringJoint2D sj;
 
     PhotonView PV;
     Camera cam;
@@ -53,11 +54,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
         anim = GetComponent<Animator>();
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
+        sj = GetComponent<SpringJoint2D>();
         
         //destroy other player's rigidbody
         if (!PV.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(sj);
             Destroy(rb);
         }
 
