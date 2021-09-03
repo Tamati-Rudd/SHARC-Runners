@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 public class Collectable : MonoBehaviour
 {
     public MeterScript abilityMeter;
@@ -10,6 +11,12 @@ public class Collectable : MonoBehaviour
     private PlayerController pMovement;
     public Text Counter;//Access the text 
     private Canvas canvas;
+    public PhotonView PV;
+
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     void Start()
     {
@@ -36,7 +43,11 @@ public class Collectable : MonoBehaviour
     {
         if (collision.tag == "Collectable")
         {
-            Destroy(collision.gameObject);// destroy the object
+            int viewID = collision.GetComponent<PhotonView>().ViewID;
+           
+            PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);
+
+            //Destroy(collision.gameObject);// destroy the object
 
             if (currentcoin < 8)//Run statement if the coins is less then 8
             {
@@ -77,5 +88,16 @@ public class Collectable : MonoBehaviour
     public void Increase()
     {
         currentcoin++; //increases the variable's value by 10
+    }
+
+    [PunRPC]
+    public void DestroyCrystal(int viewID)
+    {
+
+            PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+            
+
+       
+        
     }
 }
