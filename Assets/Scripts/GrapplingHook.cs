@@ -62,7 +62,7 @@ public class GrapplingHook : MonoBehaviour
             {
                 if(hit.collider.tag == "Hook")
                 {
-                    GrapplePoint = hit.transform.position;
+                    GrapplePoint = hit.point;
                     Hook.connectedAnchor = GrapplePoint;
                     Hook.autoConfigureConnectedAnchor = false;
                     Hook.enableCollision = true;
