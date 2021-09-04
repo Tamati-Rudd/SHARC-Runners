@@ -116,7 +116,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.CloseMenu("Room");        
         //all players in lobby load into the level
-        PhotonNetwork.LoadLevel(3);
+        PhotonNetwork.LoadLevel(1);
     }
 
 
