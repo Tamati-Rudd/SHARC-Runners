@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             //this will reset the speed once speedTimer is 3
             if (speedTimer >= 3)
             {
-                movementSpeed = 9;
+                movementSpeed = 12;
                 speedTimer = 0;
                 activateSpeed = false;
             }
