@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Reyhan Prototype.unity
     guid: b58c5832b21598041b006c4b09b95d1f
+  - enabled: 1
+    path: Assets/Scenes/ShairylGameScene.unity
+    guid: 243c53638d131f64f8962a353d64671d
   m_configObjects: {}
