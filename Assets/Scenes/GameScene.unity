@@ -576,8 +576,8 @@ Transform:
   m_Children:
   - {fileID: 1924948087}
   - {fileID: 1974487704}
-  - {fileID: 1429543868}
   - {fileID: 100672075}
+  - {fileID: 1429543868}
   - {fileID: 750259854}
   - {fileID: 2008281281}
   - {fileID: 2105018869}
@@ -7646,9 +7646,9 @@ Transform:
   - {fileID: 1310291170}
   - {fileID: 605609244}
   - {fileID: 567562697}
-  - {fileID: 1063500228}
   - {fileID: 824633261}
   - {fileID: 294882618}
+  - {fileID: 1063500228}
   - {fileID: 63252161}
   m_Father: {fileID: 210898966}
   m_RootOrder: 1
@@ -20327,7 +20327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1797634121
 MonoBehaviour:
   m_ObjectHideFlags: 0
