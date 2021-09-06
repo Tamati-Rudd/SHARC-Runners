@@ -11,7 +11,7 @@ public class FinishPoint : MonoBehaviour
 {
     PhotonView winnerPV;
     public string winnerName;
-   
+    public Stopwatch timer;
 
     private void Start()
     {
@@ -24,13 +24,16 @@ public class FinishPoint : MonoBehaviour
         
         if (collision.tag == "Player")
         { //If the colliding object has the Player tag
+            //Get the winner's time
+            timer.StopStopwatch();
+            string time = timer.getTime();
+
             //Record the winner's name
             winnerPV = collision.GetComponent<PhotonView>();
             winnerName = winnerPV.Owner.NickName;
 
             //Load the post game screen for all players  
-            winnerPV.RPC("EndRaceRPC", RpcTarget.AllBuffered, winnerName);
-
+            winnerPV.RPC("EndRaceRPC", RpcTarget.AllBuffered, winnerName, time);
         }
     }
 }

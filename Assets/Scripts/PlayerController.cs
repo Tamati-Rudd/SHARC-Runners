@@ -255,10 +255,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
     [PunRPC]
-    void EndRaceRPC(string winnerName)
+    void EndRaceRPC(string winnerName, string winnerTime)
     {
         WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
         win.updateWinnerName(winnerName);
+        win.updateWinnerTime(winnerTime);
         SceneManager.LoadScene("PostGame");
     }
 
@@ -280,6 +281,12 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             //Move player back to the respawn point
             PV.transform.position = respawnPoint.transform.position;
+        }
+        else if (collision.gameObject.tag == "Sabotage")
+        {
+            PhotonView source = PV;
+            //Test this code line has been entered
+            //Run sabotage
         }
     }
 }

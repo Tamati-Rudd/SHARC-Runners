@@ -40,4 +40,9 @@ public class Stopwatch : MonoBehaviour
         stopWatchActive = false;
     }
 
+    public string getTime()
+    {
+        return currentTimeText.text;
+    }
+
 }

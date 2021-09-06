@@ -10,20 +10,25 @@ using Photon.Pun;
 public class DeclareWinner : MonoBehaviour
 {
     TextMeshProUGUI WinnerText;
+    TextMeshProUGUI TimerText;
 
     // Start is called before the first frame update
     void Start()
     {
-        //GameObject canvas = PhotonNetwork.Instantiate("Canvas", new Vector3(0,0,0), Quaternion.identity, 0);
-
+        //Get winner data
         WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
         string winnerName = win.winnerName;
-        Debug.Log("Winner: " + winnerName);
-        //Get reference to the TextMeshProUGUI component
-        Transform child = transform.Find("WinnerText");
-        WinnerText = child.GetComponent<TextMeshProUGUI>();
+        string timeTaken = win.winnerTime;
+        Debug.Log(winnerName + " won in "+timeTaken);
 
-        //Update the text to declare the winner of the race
+        //Get reference to the TextMeshProUGUI components
+        Transform winnerChild = transform.Find("WinnerText");
+        WinnerText = winnerChild.GetComponent<TextMeshProUGUI>();
+        Transform timeChild = transform.Find("TimeTaken");
+        TimerText = winnerChild.GetComponent<TextMeshProUGUI>();
+
+        //Update the text to declare the winner of the race and state their time
         WinnerText.text = winnerName + " Wins!";
+        TimerText.text = "Time Taken: " + timeTaken;
     }
 }
