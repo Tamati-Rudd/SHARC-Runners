@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13ab28093743d94fb8ad77076b65ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 9
+  movementSpeed: 12
   jumpForce: 15
   facingRight: 1
   bulletpoint: {fileID: 2288476823771728730}
@@ -797,6 +797,15 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: isShooting
+  - Type: 4
+    SynchronizeType: 0
+    Name: isOnWall
+  - Type: 4
+    SynchronizeType: 0
+    Name: facingRight
+  - Type: 4
+    SynchronizeType: 0
+    Name: facingLeft
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
