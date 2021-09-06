@@ -50,6 +50,7 @@ MonoBehaviour:
   HUDContainer: {fileID: 3758938846840948098, guid: 7f60de24fdd050e4994c6c49833a33f7, type: 3}
   Timer: {fileID: -8243344178819407271, guid: 9e040d058a0f4ea4289cb5206e99bea2, type: 3}
   isCreated: 0
+  finish: {fileID: 2723551962054570150, guid: 0a040ed18b67da147a973fee0b517bed, type: 3}
 --- !u!114 &1792917023147722007
 MonoBehaviour:
   m_ObjectHideFlags: 0

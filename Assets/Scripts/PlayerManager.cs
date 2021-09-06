@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public Stopwatch Timer;
     public bool isCreated = false;
 
+    public FinishPoint finish;
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -68,8 +70,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-         
-            
+
         }
         if (selectedCharacter == 2)
         {
@@ -78,7 +79,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-            
 
         }
 
@@ -104,9 +104,13 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         //instantiating the timer
         Stopwatch Timerclone = Instantiate(Timer, canvas.transform);
         HUD.GetComponent<CountdownController>().timer = Timerclone;
+        CreateFinishPoint(Timerclone);
     }
 
-    
-
-
+    //Create the finish point
+    void CreateFinishPoint(Stopwatch Timerclone)
+    {
+        FinishPoint FinishPointClone = Instantiate(finish, Vector2.zero, Quaternion.identity);
+        FinishPointClone.GetComponent<FinishPoint>().timer = Timerclone;
+    }
 }
