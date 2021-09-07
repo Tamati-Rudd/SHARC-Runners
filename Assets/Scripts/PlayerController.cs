@@ -282,11 +282,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
             //Move player back to the respawn point
             PV.transform.position = respawnPoint.transform.position;
         }
-        else if (collision.gameObject.tag == "Sabotage")
-        {
-            //PhotonView source = PV;
-            //Run sabotage
-        }
     }
 }
 

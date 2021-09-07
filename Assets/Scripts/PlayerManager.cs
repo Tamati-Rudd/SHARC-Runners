@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public Stopwatch Timer;
     public bool isCreated = false;
 
+    public SabotageController sabotageController;
+
     public FinishPoint finish;
 
     private void Awake()
@@ -25,7 +27,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         PV = GetComponent<PhotonView>();
         selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
 
-
+        
 
        
     }
@@ -33,13 +35,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        //Instansiate the SabotageController
 
         if (PV.IsMine)
         {
             CreateController();
         }
-       
-
     }
 
     // Update is called once per frame
@@ -58,7 +59,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
-            
+            //TO DO: get the PlayerController and give it to the SabotageController
+
             CreateCountdown(prefab);
             CreateMeter(prefab);
 
@@ -67,6 +69,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerRed"), Vector2.zero, Quaternion.identity);
+            //TO DO: get the PlayerController and give it to the SabotageController
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
@@ -76,6 +79,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
+            //TO DO: get the PlayerController and give it to the SabotageController
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
@@ -110,7 +114,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     //Create the finish point
     void CreateFinishPoint(Stopwatch Timerclone)
     {
-        FinishPoint FinishPointClone = Instantiate(finish, Vector2.zero, Quaternion.identity);
+        Vector2 finishPointLocation;
+        finishPointLocation.x = (float)137.5;
+        finishPointLocation.y = (float)-12.35;
+        FinishPoint FinishPointClone = Instantiate(finish, finishPointLocation, Quaternion.identity);
         FinishPointClone.GetComponent<FinishPoint>().timer = Timerclone;
     }
 }
