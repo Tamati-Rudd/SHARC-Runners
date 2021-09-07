@@ -284,8 +284,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
         else if (collision.gameObject.tag == "Sabotage")
         {
-            PhotonView source = PV;
-            //Test this code line has been entered
+            //PhotonView source = PV;
             //Run sabotage
         }
     }

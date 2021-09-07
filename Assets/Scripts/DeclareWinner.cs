@@ -25,7 +25,7 @@ public class DeclareWinner : MonoBehaviour
         Transform winnerChild = transform.Find("WinnerText");
         WinnerText = winnerChild.GetComponent<TextMeshProUGUI>();
         Transform timeChild = transform.Find("TimeTaken");
-        TimerText = winnerChild.GetComponent<TextMeshProUGUI>();
+        TimerText = timeChild.GetComponent<TextMeshProUGUI>();
 
         //Update the text to declare the winner of the race and state their time
         WinnerText.text = winnerName + " Wins!";
