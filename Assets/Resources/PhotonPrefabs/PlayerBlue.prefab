@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 6924062975845040977}
   - component: {fileID: 2850714915050298148}
   - component: {fileID: 2225839799702241355}
+  - component: {fileID: -2359611623288429853}
   - component: {fileID: 2288476824102000756}
   - component: {fileID: 3576095509422718367}
   - component: {fileID: 4099078126158936964}
@@ -823,6 +824,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
   Counter: {fileID: 0}
+  PV: {fileID: 0}
+--- !u!114 &-2359611623288429853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782196166129594710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd7be8cd29f1504badc36f18a0b034c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   PV: {fileID: 0}
 --- !u!114 &2288476824102000756
 MonoBehaviour:
