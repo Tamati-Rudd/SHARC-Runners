@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
-
     public float movementSpeed;
     private Rigidbody2D rb;
     public float jumpForce;
