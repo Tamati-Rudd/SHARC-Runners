@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+//This class manages player collision with sabotage crates
 public class Sabotagable : MonoBehaviour
 {
-    public PhotonView PV; //The photon view of the crate
+    public PhotonView PV; 
 
     void Awake()
     {
@@ -18,11 +19,18 @@ public class Sabotagable : MonoBehaviour
         {
             Debug.Log("Sabotage pickup collected!");
 
-            int viewID = collision.GetComponent<PhotonView>().ViewID;
+            //Remove the sabotage crate
+            int viewID = collision.GetComponent<PhotonView>().ViewID; //Get crates viewID
             PV.RPC("DestroySabotageCrate", RpcTarget.AllBuffered, viewID);
+
+            //Select and apply the sabotage
+            SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
+            PlayerController sourceController = GetComponent<PlayerController>();
+            sabController.sabotage(sourceController);
         }
     }
 
+    //Destroy a sabotage crate
     [PunRPC]
     public void DestroySabotageCrate(int viewID)
     {
