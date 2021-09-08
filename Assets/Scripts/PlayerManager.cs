@@ -25,17 +25,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
-        selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
-
-        
-
-       
+        selectedCharacter = PlayerPrefs.GetInt("selectedCharacter"); 
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //Instansiate the SabotageController
+        GameObject sabControl = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "SabotageController"), Vector2.zero, Quaternion.identity);
+        sabotageController = sabControl.GetComponent<SabotageController>();
 
         if (PV.IsMine)
         {
@@ -59,11 +57,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
-            //TO DO: get the PlayerController and give it to the SabotageController
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-
+            addControllerToSabController(prefab);
         }
         if (selectedCharacter == 1)
         {
@@ -73,7 +70,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-
+            addControllerToSabController(prefab);
         }
         if (selectedCharacter == 2)
         {
@@ -83,7 +80,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
-
+            addControllerToSabController(prefab);
         }
 
 
@@ -119,5 +116,13 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         finishPointLocation.y = (float)-12.35;
         FinishPoint FinishPointClone = Instantiate(finish, finishPointLocation, Quaternion.identity);
         FinishPointClone.GetComponent<FinishPoint>().timer = Timerclone;
+    }
+
+    //Adds the players PlayerController to the SabotageController array
+    void addControllerToSabController(GameObject player)
+    {
+        //Get the PlayerController and give it to the SabotageController
+        PlayerController controller = player.GetComponent<PlayerController>();
+        sabotageController.addPlayerController(controller);
     }
 }

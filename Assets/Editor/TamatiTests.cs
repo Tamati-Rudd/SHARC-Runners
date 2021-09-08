@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEditor;
 
 public class TamatiTests
 {
@@ -16,6 +17,7 @@ public class TamatiTests
         var sabotage = new SabotageController();
 
         //Get the actual test result
+
         var actual = sabotage.addPlayerController(controller);
 
         //Verify the controller has been added to the array
@@ -35,7 +37,7 @@ public class TamatiTests
         var actual = sabotage.sabotage(controller);
         var expected = 1; //1 represents StasisTrap
 
-        //Verify the stasis trap sabotage has been chosen
+        //Verify the stasis trap sabotage has been applied correctly
         Assert.AreEqual(expected, actual);
     }
 
