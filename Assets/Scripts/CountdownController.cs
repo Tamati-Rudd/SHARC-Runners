@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
 public class CountdownController : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class CountdownController : MonoBehaviour
         }
 
         countdownDisplay.text = "GO!";
-        player.isDisabled = false;
+        //player.isDisabled = false;
+        player.PV.RPC("EnablePlayerRPC", RpcTarget.All);
 
         timer.StartStopwatch();
 

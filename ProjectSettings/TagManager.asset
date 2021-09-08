@@ -16,6 +16,7 @@ TagManager:
   - Hook
   - Sabotage
   - SabotageController
+  - HUD
   layers:
   - Default
   - TransparentFX
