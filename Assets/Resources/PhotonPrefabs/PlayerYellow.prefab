@@ -551,8 +551,10 @@ GameObject:
   - component: {fileID: 8392752548022692361}
   - component: {fileID: 3738545633249931900}
   - component: {fileID: 760537620314188051}
+  - component: {fileID: -730564532973804443}
   - component: {fileID: 841171360944779564}
   - component: {fileID: 2724372684493984967}
+  - component: {fileID: -6344937530628846749}
   m_Layer: 8
   m_Name: PlayerYellow
   m_TagString: Player
@@ -709,6 +711,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   respawnPoint: {fileID: 0}
+  PV: {fileID: 0}
+  sabotageIndicator: {fileID: -6344937530628846749}
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 760537620314188051}
@@ -764,6 +768,15 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: isShooting
+  - Type: 4
+    SynchronizeType: 0
+    Name: isOnWall
+  - Type: 4
+    SynchronizeType: 0
+    Name: facingRight
+  - Type: 4
+    SynchronizeType: 0
+    Name: facingLeft
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -781,6 +794,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
   Counter: {fileID: 0}
+  PV: {fileID: 0}
+--- !u!114 &-730564532973804443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192364988403521550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd7be8cd29f1504badc36f18a0b034c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   PV: {fileID: 0}
 --- !u!114 &841171360944779564
 MonoBehaviour:
@@ -814,3 +840,57 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &-6344937530628846749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192364988403521550}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0.9254902, g: 0.10980392, b: 0.10980392, a: 1}
+  m_Intensity: 10
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 0000000005da8d0599154808618ce842
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_Vertices:
+  - position: {x: 0, y: 0, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  m_Triangles: 0000
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 3
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}

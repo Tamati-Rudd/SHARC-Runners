@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 5969135474070642516}
   - component: {fileID: 1535254260600489761}
   - component: {fileID: 3180194447328123982}
+  - component: {fileID: -2470169430851995792}
   - component: {fileID: 3243675896624972913}
   - component: {fileID: 243546679327252890}
   - component: {fileID: -9029082970908440121}
@@ -577,6 +578,7 @@ MonoBehaviour:
     m_Bits: 128
   respawnPoint: {fileID: 0}
   PV: {fileID: 0}
+  sabotageIndicator: {fileID: -9029082970908440121}
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 3180194447328123982}
@@ -659,6 +661,19 @@ MonoBehaviour:
   abilityMeter: {fileID: 0}
   Counter: {fileID: 0}
   PV: {fileID: 0}
+--- !u!114 &-2470169430851995792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430715509696359763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd7be8cd29f1504badc36f18a0b034c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PV: {fileID: 0}
 --- !u!114 &3243675896624972913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +726,7 @@ MonoBehaviour:
   m_Intensity: 10
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 0000000005da8d0599154808618ce842
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
