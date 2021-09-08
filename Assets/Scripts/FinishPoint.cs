@@ -16,12 +16,10 @@ public class FinishPoint : MonoBehaviour
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
-        
+    {  
         if (collision.tag == "Player")
         { //If the colliding object has the Player tag
             //Get the winner's time

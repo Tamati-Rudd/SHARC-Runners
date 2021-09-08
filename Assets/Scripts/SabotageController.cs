@@ -9,7 +9,10 @@ public class SabotageController : MonoBehaviour
     PhotonView PV;
     PlayerController[] controllers = new PlayerController[20]; //Array size 20 as our maximum CCU is 20
     int numControllers = 0;
+    System.Random rand = new System.Random();
+    
     StasisTrap stasisSabotage;
+    
 
     void Awake()
     {
@@ -37,11 +40,16 @@ public class SabotageController : MonoBehaviour
 
     
     //This method randomly selects a sabotage and calls that sabotages applySabotage method
-    //[PunRPC] may or may not need to be an RPC, unsure yet
+    //The selectedSabotage is returned for unit testing purposes
     public int sabotage(PlayerController sourcePlayer)
     {
-        int selectedSabotage = 0;
-        //TO DO: Select and apply a sabotage
+        int selectedSabotage = rand.Next(1, 2); //Range: minimum to maximum-1
+
+        if (selectedSabotage == 1) //Stasis Trap
+        {
+            Debug.Log("Apply Stasis Trap Sabotage"); 
+            //stasisSabotage.applySabotage(sourcePlayer, controllers);
+        }
         return selectedSabotage;
     }
 }
