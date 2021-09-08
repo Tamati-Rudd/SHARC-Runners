@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal; 
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
@@ -23,8 +24,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private SpriteRenderer sr;
     private SpringJoint2D sj;
 
-    PhotonView PV;
+    public PhotonView PV;
     Camera cam;
+    public Light2D sabotageIndicator;
+
     //ability 
     public float speedTimer;
     public bool activateSpeed;
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+        SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
+        sabController.addPlayerController(this);
     }
 
 
@@ -54,7 +59,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         sj = GetComponent<SpringJoint2D>();
-        
+        if (sabotageIndicator != null)
+            Debug.Log("Have the light");
+
         //destroy other player's rigidbody
         if (!PV.IsMine)
         {
@@ -232,6 +239,26 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
+    //Disables the player, preventing all movement
+    [PunRPC]
+    void DisablePlayerRPC()
+    {
+        isDisabled = true;
+        movementSpeed = 0;
+        jumpForce = 0;
+        sabotageIndicator.enabled = true;
+    }
+
+    //Re-enables the player, once again allowing all movement
+    [PunRPC]
+    void EnablePlayerRPC()
+    {
+        isDisabled = false;
+        movementSpeed = 12;
+        jumpForce = 15;
+        sabotageIndicator.enabled = false;
+    }
+
     [PunRPC]
     void FlipRPC()
     {
@@ -244,13 +271,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
     }
-
-    ////Runs whenever the player has died (e.g. on collision with enemy)
-    //[PunRPC]
-    //void killPlayerRPC(Transform respawnPoint)
-    //{
-    //    PV.transform.position = respawnPoint.transform.position;
-    //}
 
     //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
     [PunRPC]

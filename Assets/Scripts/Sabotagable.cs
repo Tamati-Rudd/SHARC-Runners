@@ -26,7 +26,7 @@ public class Sabotagable : MonoBehaviour
             //Select and apply the sabotage
             SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
             PlayerController sourceController = GetComponent<PlayerController>();
-            sabController.sabotage(sourceController);
+            sabController.sabotage(sourceController, 0);
         }
     }
 

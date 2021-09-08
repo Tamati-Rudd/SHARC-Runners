@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEditor;
 
 public class TamatiTests
 {
+    private GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/PhotonPrefabs/PlayerBlue.prefab");
+    private GameObject sabControllerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/PhotonPrefabs/SabotageController.prefab");
+
     //Verify a PlayerController is added to the controllers array
     //Needed so that a sabotage can be targeted at players
     [Test]
     public void TestAddController()
     {
         //Set up test variables
-        var controller = new PlayerController();
-        var sabotage = new SabotageController();
+        var player = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
+        var controller = player.GetComponent<PlayerController>();
+        var sabController = Object.Instantiate(sabControllerPrefab, Vector2.zero, Quaternion.identity);
+        var sabotage = sabController.GetComponent<SabotageController>();
 
         //Get the actual test result
-
         var actual = sabotage.addPlayerController(controller);
 
         //Verify the controller has been added to the array
@@ -29,11 +34,13 @@ public class TamatiTests
     public void TestSabotage()
     {
         //Set up test variables
-        var controller = new PlayerController();
-        var sabotage = new SabotageController();
+        var player = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
+        var controller = player.GetComponent<PlayerController>();
+        var sabController = Object.Instantiate(sabControllerPrefab, Vector2.zero, Quaternion.identity);
+        var sabotage = sabController.GetComponent<SabotageController>();
 
         //Get the expected and actual test results
-        var actual = sabotage.sabotage(controller);
+        var actual = sabotage.sabotage(controller, 1);
         var expected = 1; //1 represents StasisTrap
 
         //Verify the stasis trap sabotage has been applied correctly
@@ -46,11 +53,20 @@ public class TamatiTests
     public void TestStasisTrap()
     {
         //Set up test variables
-        var source = new PlayerController();
-        var target = new PlayerController();
-        var sabotage = new SabotageController();
+        var player1 = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
+        var source = player1.GetComponent<PlayerController>();
+        var player2 = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
+        var target = player2.GetComponent<PlayerController>();
+        var sabController = Object.Instantiate(sabControllerPrefab, Vector2.zero, Quaternion.identity);
+        var sabotage = sabController.GetComponent<SabotageController>();
         var targetArray = sabotage.addPlayerController(target);
-        var stasisTrap = new StasisTrap();
+        GameObject stasisChild = sabotage.transform.GetChild(0).gameObject;
+        var stasisTrap = stasisChild.GetComponent<StasisTrap>();
+        stasisTrap.unitTesting = true;
+
+        //Enable the players to mimic the race start
+        source.isDisabled = false; 
+        target.isDisabled = false;
 
         //Get the expected and actual test results
         var actual = stasisTrap.applySabotage(source, targetArray);
