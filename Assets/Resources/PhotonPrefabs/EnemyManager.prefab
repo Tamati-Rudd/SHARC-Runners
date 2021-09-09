@@ -47,6 +47,9 @@ MonoBehaviour:
   enemy: {fileID: 3776138673847951371, guid: 57e8c5c21aed8472dbe3968ed51087dc, type: 3}
   gem: {fileID: 3867825547203237803, guid: 48e2b806ec5a4654e9f8a7f98bda4a56, type: 3}
   SpawnPoint: {x: 0, y: 0}
+  SpawnPoint1: {x: 0, y: 0}
+  SpawnPoint2: {x: 0, y: 0}
+  SpawnPoint3: {x: 0, y: 0}
   PV: {fileID: 0}
 --- !u!114 &3903409439805898119
 MonoBehaviour:
