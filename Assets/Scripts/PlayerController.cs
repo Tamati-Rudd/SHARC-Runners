@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Collectable collectableMeter;//Access the collectable script
     private bool hasBulletFlipped = false;
 
+    //wall jump
     private bool canDoubleJump;
     public float wallJumpTime = 0.2f;
     public float wallSlideSpeed = 0.3f;
@@ -197,7 +198,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             //this will reset the speed once speedTimer is 3
             if (speedTimer >= 3)
             {
-                movementSpeed = 12;
+                movementSpeed = 13.5f;
                 speedTimer = 0;
                 activateSpeed = false;
             }
@@ -253,7 +254,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void EnablePlayerRPC()
     {
         isDisabled = false;
-        movementSpeed = 12;
+        movementSpeed = 13.5f;
         jumpForce = 15;
         sabotageIndicator.enabled = false;
     }

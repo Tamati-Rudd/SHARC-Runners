@@ -9,6 +9,7 @@ public class GrapplingHook : MonoBehaviour
     public LineRenderer lineCreator;
     private Vector3 GrapplePoint;
     public Transform Player;
+    public Rigidbody2D Playerrb;
     public Transform HookHolder;
     public PhotonView PV;
     
@@ -61,13 +62,13 @@ public class GrapplingHook : MonoBehaviour
             if (hit.collider.tag != "Player")
             {
                 if(hit.collider.tag == "Hook")
-                {
+                {                    
                     GrapplePoint = hit.point;
                     Hook.connectedAnchor = GrapplePoint;
                     Hook.autoConfigureConnectedAnchor = false;
                     Hook.enableCollision = true;
-
-                    
+                    Hook.frequency = 50;
+                    Hook.dampingRatio = 0.1f;    
                     Hook.enabled = true;
                     lineCreator.positionCount = 2;
                 }
