@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public Transform respawnPoint;
+    public Transform playerPosition;
+    public Transform stasisPosition;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -59,8 +61,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         sj = GetComponent<SpringJoint2D>();
-        if (sabotageIndicator != null)
-            Debug.Log("Have the light");
+        stasisPosition = null;
 
         //destroy other player's rigidbody
         if (!PV.IsMine)
@@ -244,7 +245,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void DisablePlayerRPC()
     {
         isDisabled = true;
-        rb.velocity = new Vector2(0, 0);
+        stasisPosition = playerPosition;
         movementSpeed = 0;
         jumpForce = 0;
         sabotageIndicator.enabled = true;

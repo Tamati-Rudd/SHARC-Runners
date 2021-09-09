@@ -56,6 +56,11 @@ public class StasisTrap : MonoBehaviour
         int waitTime = duration;
         while (waitTime > 0)
         {
+            if (target.playerPosition.position != target.stasisPosition.position)
+            {
+                Debug.Log("Undo Sliding");
+                target.playerPosition.position = target.stasisPosition.position;
+            }
             yield return new WaitForSeconds(1f);
             waitTime--;
         }
