@@ -744,10 +744,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   respawnPoint: {fileID: 0}
-  playerPosition: {fileID: 5804232148930220994}
-  stasisPosition: {fileID: 0}
   PV: {fileID: 0}
   sabotageIndicator: {fileID: -7021847356454927674}
+  stasisTimer: 0
+  startedRace: 0
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 2225839799702241355}
@@ -858,6 +858,7 @@ MonoBehaviour:
   firePoint: {fileID: 2288476823771728729}
   bulletPrefab: {fileID: 1491362137737887937, guid: 3bb5769ff7fed4ade99126798f351870, type: 3}
   PV: {fileID: 0}
+  controller: {fileID: 0}
   anim: {fileID: 4246581665420000371}
 --- !u!114 &3576095509422718367
 MonoBehaviour:

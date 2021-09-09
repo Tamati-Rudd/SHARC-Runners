@@ -29,8 +29,9 @@ public class CountdownController : MonoBehaviour
         }
 
         countdownDisplay.text = "GO!";
-        //player.isDisabled = false;
-        player.PV.RPC("EnablePlayerRPC", RpcTarget.All);
+        player.isDisabled = false;
+        player.startedRace = true;
+        //player.PV.RPC("EnablePlayerRPC", RpcTarget.All);
 
         timer.StartStopwatch();
 
