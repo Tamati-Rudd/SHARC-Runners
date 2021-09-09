@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public LayerMask whatIsGround;
     public Transform respawnPoint;
     public Transform playerPosition;
-    public Transform stasisPosition;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -61,7 +60,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         sj = GetComponent<SpringJoint2D>();
-        stasisPosition = null;
 
         //destroy other player's rigidbody
         if (!PV.IsMine)
