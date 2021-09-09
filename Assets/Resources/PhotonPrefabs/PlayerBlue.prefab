@@ -744,7 +744,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   respawnPoint: {fileID: 0}
-  position: {fileID: 5804232148930220994}
+  playerPosition: {fileID: 5804232148930220994}
+  stasisPosition: {fileID: 0}
   PV: {fileID: 0}
   sabotageIndicator: {fileID: -7021847356454927674}
   speedTimer: 0
