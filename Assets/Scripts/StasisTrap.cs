@@ -26,13 +26,13 @@ public class StasisTrap : MonoBehaviour
                 {
                     Debug.Log("Stasis Trap Activated");
                     //Disable the target
-                    target.stasisPosition = target.playerPosition;
-                    Debug.Log(target.playerPosition.position);
-                    Debug.Log(target.stasisPosition.position);
+                    Transform stasisPosition = target.playerPosition;
+                    Debug.Log("Target Pos: " + target.playerPosition.position);
+                    Debug.Log("Stasis Pos: " + stasisPosition.position);
                     target.PV.RPC("DisablePlayerRPC", RpcTarget.All);
 
                     //Wait the duration of the disable
-                    StartCoroutine(WaitDuration(target));
+                    StartCoroutine(WaitDuration(target, stasisPosition));
                 }
                 else if (target != source && unitTesting) 
                 {
@@ -54,13 +54,15 @@ public class StasisTrap : MonoBehaviour
     }
 
     //Hold the target as disabled until the duration elapses
-    IEnumerator WaitDuration(PlayerController target)
+    IEnumerator WaitDuration(PlayerController target, Transform stasisPosition)
     {
         int waitTime = duration;
         while (waitTime > 0)
         {
             Debug.Log("Waiting...");
-            target.playerPosition.position = target.stasisPosition.position;
+            target.playerPosition.position = stasisPosition.position;
+            Debug.Log("Target Pos: "+target.playerPosition.position);
+            Debug.Log("Stasis Pos: "+stasisPosition.position);
             yield return new WaitForSeconds(1f);
             waitTime--;
         }
