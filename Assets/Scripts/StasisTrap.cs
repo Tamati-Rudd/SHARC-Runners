@@ -26,6 +26,9 @@ public class StasisTrap : MonoBehaviour
                 {
                     Debug.Log("Stasis Trap Activated");
                     //Disable the target
+                    target.stasisPosition = target.playerPosition;
+                    Debug.Log(target.playerPosition.position);
+                    Debug.Log(target.stasisPosition.position);
                     target.PV.RPC("DisablePlayerRPC", RpcTarget.All);
 
                     //Wait the duration of the disable
@@ -56,6 +59,7 @@ public class StasisTrap : MonoBehaviour
         int waitTime = duration;
         while (waitTime > 0)
         {
+            Debug.Log("Waiting...");
             if (target.playerPosition.position != target.stasisPosition.position)
             {
                 Debug.Log("Undo Sliding");
