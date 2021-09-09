@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13ab28093743d94fb8ad77076b65ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 12
+  movementSpeed: 9
   jumpForce: 15
   facingRight: 1
   bulletpoint: {fileID: 3243675897351673695}
@@ -577,10 +577,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   respawnPoint: {fileID: 0}
+  playerPosition: {fileID: 7083407820152311751}
+  stasisPosition: {fileID: 0}
   PV: {fileID: 0}
   sabotageIndicator: {fileID: -9029082970908440121}
-  stasisTimer: 0
-  startedRace: 0
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 3180194447328123982}
@@ -691,7 +691,6 @@ MonoBehaviour:
   firePoint: {fileID: 3243675897351673692}
   bulletPrefab: {fileID: 3389515824999700825, guid: 02c3e1ab72dff408ab774e29c4fb05ce, type: 3}
   PV: {fileID: 0}
-  controller: {fileID: 0}
   anim: {fileID: 589817651175350390}
 --- !u!114 &243546679327252890
 MonoBehaviour:

@@ -7,6 +7,7 @@ using Photon.Pun;
 //This class describes and runs a stasis trap sabotage - which freezes players in place for a few seconds
 public class StasisTrap : MonoBehaviour
 {
+    public int duration = 3; //The duration of the stasis trap
     //PunRPCs cannot be run in the Unity Test Framework,
     //So must use this to instead test with code lines that would mimic the disable RPC for the target
     public bool unitTesting = false; 
@@ -23,14 +24,23 @@ public class StasisTrap : MonoBehaviour
             {
                 if (target != source && !(unitTesting))
                 {
-                    //Run the sabotage by disabling the target
+                    Debug.Log("Stasis Trap Activated");
+                    //Disable the target
+                    Transform stasisPosition = target.playerPosition;
+                    Debug.Log("Target Pos: " + target.playerPosition.position);
+                    Debug.Log("Stasis Pos: " + stasisPosition.position);
                     target.PV.RPC("DisablePlayerRPC", RpcTarget.All);
+
+                    //Wait the duration of the disable
+                    StartCoroutine(WaitDuration(target, stasisPosition));
                 }
                 else if (target != source && unitTesting) 
                 {
                     Debug.Log("Unit Testing Stasis Trap");
                     //Mimic disable RPC functionality for unit testing purposes
                     target.isDisabled = true;
+                    target.movementSpeed = 0;
+                    target.jumpForce = 0;
 
                     Debug.Log("target disabled: " + target.isDisabled);
                     Debug.Log("source disabled: " + source.isDisabled);
@@ -42,4 +52,24 @@ public class StasisTrap : MonoBehaviour
         }
         return success;
     }
+
+    //Hold the target as disabled until the duration elapses
+    IEnumerator WaitDuration(PlayerController target, Transform stasisPosition)
+    {
+        int waitTime = duration;
+        while (waitTime > 0)
+        {
+            Debug.Log("Waiting...");
+            target.playerPosition.position = stasisPosition.position;
+            Debug.Log("Target Pos: "+target.playerPosition.position);
+            Debug.Log("Stasis Pos: "+stasisPosition.position);
+            yield return new WaitForSeconds(1f);
+            waitTime--;
+        }
+
+        //Re-enable the player
+        target.PV.RPC("EnablePlayerRPC", RpcTarget.All);
+    }
+
+
 }

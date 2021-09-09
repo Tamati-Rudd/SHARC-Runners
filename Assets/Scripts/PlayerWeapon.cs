@@ -11,13 +11,11 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
    public Transform firePoint;
    public GameObject bulletPrefab;
    public PhotonView PV;
-   public PlayerController controller;
    public Animator anim;
 
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
-        controller = PV.GetComponent<PlayerController>();
     }
 
     void Update()
@@ -33,9 +31,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
         //only fire for the local player
         if (PV.IsMine)
         {
-            //Only shoot if the local player isn't disabled
-            if (!(controller.isDisabled)) 
-                PV.RPC("ShootRPC", RpcTarget.All);
+            PV.RPC("ShootRPC", RpcTarget.All);
         }
         
    }

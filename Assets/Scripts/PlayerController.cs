@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public Transform respawnPoint;
+    public Transform playerPosition;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -26,10 +27,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     public PhotonView PV;
     Camera cam;
-
     public Light2D sabotageIndicator;
-    public float stasisTimer = 0;
-    public bool startedRace = false;
 
     //ability 
     public float speedTimer;
@@ -86,37 +84,25 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             return;
         }
-        else if (isDisabled && startedRace) //if the player is disabled on this frame update
-        {
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-            stasisTimer += Time.deltaTime;
-            if (stasisTimer >= 3) //enable the player and allow the rest of update to happen
-            {
-                PV.RPC("EnablePlayerRPC", RpcTarget.All);
-                rb.constraints = RigidbodyConstraints2D.None;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                stasisTimer = 0;
-            }
-            else //return, disallowing the update
-                return;
-        }
 
         //move spawned character
 
         //Movement left & right
-
+        
         if (isDisabled == false)
         {
             var moveInput = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
         }
+       
 
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
 
+
         //jumping
         //Check if player can do double jump
-        if (isGrounded && isDisabled == false)
+        if (isGrounded)
         {
             canDoubleJump = true;
         }
@@ -252,31 +238,23 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    public void SetPosition(Transform newPosition)
-    {
-        //Debug.Log("Input Position: "+newPosition.position);
-        PV.transform.position = newPosition.transform.position;
-        //Debug.Log("Set To Position: " + PV.transform.position);
-    }
-
-    public void disable()
-    {
-        isDisabled = true;
-    }
-
-    //Disables the player and enables the sabotageIndicator
+    //Disables the player, preventing all movement
     [PunRPC]
     void DisablePlayerRPC()
     {
         isDisabled = true;
+        movementSpeed = 0;
+        jumpForce = 0;
         sabotageIndicator.enabled = true;
     }
 
-    //Re-enables the player and disables the sabotageIndicator
+    //Re-enables the player, once again allowing all movement
     [PunRPC]
     void EnablePlayerRPC()
     {
         isDisabled = false;
+        movementSpeed = 12;
+        jumpForce = 15;
         sabotageIndicator.enabled = false;
     }
 
