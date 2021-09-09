@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     //sabotage
     public Light2D sabotageIndicator;
-    public float disableTimer;
+    public float disableTimer = 0;
     public bool raceStarted = false;
 
     //ability 
@@ -72,22 +72,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(sj);
             Destroy(rb);
         }
-        else if (isDisabled && raceStarted)
-        {
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-            disableTimer += Time.deltaTime;
-            if (disableTimer >= 3) //enable the player and allow the rest of update to happen
-            {
-                PV.RPC("EnablePlayerRPC", RpcTarget.All);
-                rb.constraints = RigidbodyConstraints2D.None;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                disableTimer = 0;
-            }
-            else //return, disallowing the update
-                return;
-        }
 
-        disableTimer = 0;
         speedTimer = 0;
         activateSpeed = false;
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
@@ -102,11 +87,26 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             return;
         }
+        else if (isDisabled && raceStarted)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            disableTimer += Time.deltaTime;
+            if (disableTimer >= 3) //enable the player and allow the rest of update to happen
+            {
+                PV.RPC("EnablePlayerRPC", RpcTarget.All);
+                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                //rb.constraints = RigidbodyConstraints2D.None;
+                //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                disableTimer = 0;
+            }
+            else //return, disallowing the update
+                return;
+        }
 
         //move spawned character
 
         //Movement left & right
-        
+
         if (isDisabled == false)
         {
             var moveInput = Input.GetAxisRaw("Horizontal");
