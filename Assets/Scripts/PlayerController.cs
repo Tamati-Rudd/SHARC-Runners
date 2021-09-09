@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public Transform respawnPoint;
-    public Transform playerPosition;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -27,7 +26,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     public PhotonView PV;
     Camera cam;
+
+    //sabotage
     public Light2D sabotageIndicator;
+    public float disableTimer;
+    public bool raceStarted = false;
 
     //ability 
     public float speedTimer;
@@ -69,8 +72,12 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(sj);
             Destroy(rb);
         }
+        else if (isDisabled)
+        {
 
+        }
 
+        disableTimer = 0;
         speedTimer = 0;
         activateSpeed = false;
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
@@ -244,8 +251,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void DisablePlayerRPC()
     {
         isDisabled = true;
-        movementSpeed = 0;
-        jumpForce = 0;
         sabotageIndicator.enabled = true;
     }
 
@@ -254,8 +259,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void EnablePlayerRPC()
     {
         isDisabled = false;
-        movementSpeed = 13.5f;
-        jumpForce = 15;
         sabotageIndicator.enabled = false;
     }
 
