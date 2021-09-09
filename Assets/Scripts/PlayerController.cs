@@ -72,9 +72,19 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(sj);
             Destroy(rb);
         }
-        else if (isDisabled)
+        else if (isDisabled && raceStarted)
         {
-
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            disableTimer += Time.deltaTime;
+            if (disableTimer >= 3) //enable the player and allow the rest of update to happen
+            {
+                PV.RPC("EnablePlayerRPC", RpcTarget.All);
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                disableTimer = 0;
+            }
+            else //return, disallowing the update
+                return;
         }
 
         disableTimer = 0;
