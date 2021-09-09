@@ -256,7 +256,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Disables the player, preventing all movement
+    //Disables the player
     [PunRPC]
     void DisablePlayerRPC()
     {
@@ -264,7 +264,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         sabotageIndicator.enabled = true;
     }
 
-    //Re-enables the player, once again allowing all movement
+    //Re-enables the player
     [PunRPC]
     void EnablePlayerRPC()
     {
