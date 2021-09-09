@@ -245,7 +245,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void DisablePlayerRPC()
     {
         isDisabled = true;
-        stasisPosition = playerPosition;
         movementSpeed = 0;
         jumpForce = 0;
         sabotageIndicator.enabled = true;
