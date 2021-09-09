@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public Transform respawnPoint;
-    public Transform playerPosition;
 
     private Animator anim;
     private SpriteRenderer sr;
@@ -27,7 +26,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     public PhotonView PV;
     Camera cam;
+
+    //sabotage
     public Light2D sabotageIndicator;
+    public float disableTimer = 0;
+    public bool raceStarted = false;
 
     //ability 
     public float speedTimer;
@@ -70,7 +73,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-
         speedTimer = 0;
         activateSpeed = false;
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
@@ -85,11 +87,34 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             return;
         }
+        else if (isDisabled && raceStarted)
+        {
+            
+            disableTimer += Time.deltaTime;
+            if (disableTimer >= 3) //enable the player and allow the rest of update to happen
+            {
+                PV.RPC("EnablePlayerRPC", RpcTarget.All);
+                rb.constraints = RigidbodyConstraints2D.None;
+                PV.transform.rotation = Quaternion.identity;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                disableTimer = 0;
+            }
+            else //return, disallowing the update
+            {
+                rb.constraints = RigidbodyConstraints2D.None;
+                PV.transform.rotation = Quaternion.identity;
+                rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                //rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                return;
+            } 
+            
+                
+        }
 
         //move spawned character
 
         //Movement left & right
-        
+
         if (isDisabled == false)
         {
             var moveInput = Input.GetAxisRaw("Horizontal");
@@ -239,23 +264,19 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Disables the player, preventing all movement
+    //Disables the player
     [PunRPC]
     void DisablePlayerRPC()
     {
         isDisabled = true;
-        movementSpeed = 0;
-        jumpForce = 0;
         sabotageIndicator.enabled = true;
     }
 
-    //Re-enables the player, once again allowing all movement
+    //Re-enables the player
     [PunRPC]
     void EnablePlayerRPC()
     {
         isDisabled = false;
-        movementSpeed = 13.5f;
-        jumpForce = 15;
         sabotageIndicator.enabled = false;
     }
 
