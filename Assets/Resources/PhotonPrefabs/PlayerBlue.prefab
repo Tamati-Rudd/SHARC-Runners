@@ -893,6 +893,9 @@ MonoBehaviour:
   Playerrb: {fileID: 161130262100387915}
   HookHolder: {fileID: 3292832902090630048}
   PV: {fileID: 0}
+  HookButton: {fileID: 0}
+  buttonPressed: 0
+  oneTime: 0
 --- !u!120 &3813553944947868549
 LineRenderer:
   m_ObjectHideFlags: 0
