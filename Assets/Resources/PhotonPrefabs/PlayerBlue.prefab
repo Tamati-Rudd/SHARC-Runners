@@ -684,7 +684,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: af8f31d9785396a489fedcf0b8d40a84, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &6295531190474142528
 CapsuleCollider2D:
@@ -804,13 +804,13 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: isShooting
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isOnWall
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: facingRight
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: facingLeft
   m_SynchronizeLayers:
   - SynchronizeType: 1
