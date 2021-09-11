@@ -8,11 +8,11 @@ using Photon.Pun;
 **/
 public class PlayerWeapon : MonoBehaviourPunCallbacks
 {
-   public Transform firePoint;
-   public GameObject bulletPrefab;
-   public PhotonView PV;
-   public PlayerController controller;
-   public Animator anim;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public PhotonView PV;
+    public PlayerController controller;
+    public Animator anim;
 
     private void Awake()
     {
@@ -21,12 +21,16 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
     }
 
     void Update()
-   {
-    
-   }
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
 
-   public void Shoot()
-   {
+    }
+
+    public void Shoot()
+    {
         //only fire for the local player
         if (PV.IsMine)
         {
@@ -34,8 +38,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
             if (!(controller.isDisabled))
                 PV.RPC("ShootRPC", RpcTarget.All);
         }
-        
-   }
+    }
 
     [PunRPC]
     void ShootRPC()
@@ -44,4 +47,3 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
-

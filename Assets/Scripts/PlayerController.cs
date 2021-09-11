@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.Experimental.Rendering.Universal; 
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float disableTimer = 0;
     public bool raceStarted = false;
 
-    //ability 
+    //ability
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -78,7 +77,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
     }
 
-
     // Update is called once per frame
     void Update()
     {
@@ -89,7 +87,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
         else if (isDisabled && raceStarted)
         {
-            
             disableTimer += Time.deltaTime;
             if (disableTimer >= 3) //enable the player and allow the rest of update to happen
             {
@@ -106,9 +103,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 rb.constraints = RigidbodyConstraints2D.FreezeAll;
                 //rb.constraints = RigidbodyConstraints2D.FreezePosition;
                 return;
-            } 
-            
-                
+            }
+
         }
 
         //move spawned character
@@ -120,11 +116,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
             var moveInput = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
         }
-       
 
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
-
 
         //jumping
         //Check if player can do double jump
@@ -154,15 +148,14 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
             Flip();
 
-           // sr.flipX = true;
-          //  facingRight = false;
-            
+            // sr.flipX = true;
+            // facingRight = false;
         }
         else if (rb.velocity.x > 0 && !facingRight && isDisabled == false)
         {
-             Flip();
-          // sr.flipX = false;
-          //  facingRight = true;
+            Flip();
+            // sr.flipX = false;
+            // facingRight = true;
 
         }
 
@@ -176,7 +169,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, whatIsGround);
         }
-
 
 
         if (wallCheckhit && !isGrounded && Input.GetAxisRaw("Horizontal") != 0 && isOnWall)
@@ -196,7 +188,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, wallSlideSpeed, float.MaxValue));
         }
 
-        //check for animation 
+        //check for animation
         anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isOnWall", isWallSliding);
@@ -204,7 +196,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (facingRight)
         {
             anim.SetBool("facingRight", facingRight);
-        }else if (!facingRight)
+        }
+        else if (!facingRight)
         {
             anim.SetBool("facingLeft", !facingRight);
         }
@@ -216,15 +209,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
             if (activateSpeed)
                 SpeedAbility();
         }
-   
-    }
-    //Reset the ability 
-    public void ResetSpeed(bool changeSpeed)
-    {
-        //Change the activiateSpeed variable
-        activateSpeed = changeSpeed;
-        
-        //if true run this if statement
+        //If true start the time limit of the ability
         if (activateSpeed)
         {
             speedTimer += Time.deltaTime;
@@ -236,6 +221,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 activateSpeed = false;
             }
         }
+
     }
 
     //Change the speed of the character
@@ -250,11 +236,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
         facingRight = !facingRight;
 
         this.transform.localScale = new Vector3(transform.localScale.x * -1,
-            transform.localScale.y,
-            transform.localScale.z);
+       transform.localScale.y,
+       transform.localScale.z);
 
         // username.transform.localScale = new Vector3(transform.localScale.x * -1,
-        //  transform.localScale.y,
+        // transform.localScale.y,
         //transform.localScale.z);
 
         //username.transform.Rotate(0f, 180f, 0);
@@ -292,8 +278,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             //username.transform.Rotate(0f, 180f, 0);
             username.transform.localScale = new Vector3(transform.localScale.x * -1,
-              transform.localScale.y,
-           transform.localScale.z);
+            transform.localScale.y,
+            transform.localScale.z);
         }
 
     }
@@ -322,11 +308,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
             isOnWall = true;
         }
         //Check if the target object is an enemy
-        else if (collision.gameObject.tag == "Enemy") 
+        else if (collision.gameObject.tag == "Enemy")
         {
             //Move player back to the respawn point
             PV.transform.position = respawnPoint.transform.position;
         }
     }
 }
-

@@ -16,7 +16,7 @@ public class GrapplingHook : MonoBehaviour
     public PhotonView PV;
     public Button HookButton;
     public bool buttonPressed;
-    public bool oneTime = false;
+
 
     private void Awake()
     {
@@ -27,19 +27,6 @@ public class GrapplingHook : MonoBehaviour
         HookButton = GetComponent<Button>();
     }
 
-    private void Start()
-    {
-        //Find Hook Button in Scene
-        HookButton = GameObject.Find("Hook").GetComponent<Button>();
-        
-    }
-
-    private void FixedUpdate()
-    {
-        //Find if the hook button was pressed
-        buttonPressed = HookButton.GetComponent<HookBtn>().buttonPressed;
-    }
-
          
     // Update is called once per frame
     void Update()
@@ -47,15 +34,15 @@ public class GrapplingHook : MonoBehaviour
         if (PV.IsMine) { 
 
             //check if hook button was tapped
-            if (buttonPressed && !oneTime)
+            if (Input.GetMouseButtonDown(1))
             {
                 StartGrapple();
-                oneTime = true;
+                
             }
             //if the hook button was released
-            else if (!buttonPressed)
+            else if (Input.GetMouseButtonUp(1))
             {
-                oneTime = false;
+               
                 lineCreator.positionCount = 0;
                 //Destory the line for all multiplayer targets
                 PV.RPC("DestroyLine", RpcTarget.All);
