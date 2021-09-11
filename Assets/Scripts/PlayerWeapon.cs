@@ -22,10 +22,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
 
     void Update()
    {
-        if(Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
+    
    }
 
    void Shoot()
@@ -45,6 +42,14 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
     {
         anim.SetTrigger("isShooting");
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
+    public void ShootButton()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
     }
 }
 
