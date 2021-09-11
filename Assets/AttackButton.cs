@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class AttackButton : MonoBehaviour
+//Script for attack button
+public class AttackButton : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerWeapon weapon; //access methods of PlayerWeapon Script
+    public PhotonView PV;
+
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+        weapon = PV.GetComponent<PlayerWeapon>();
+    }
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    //Detect Button being pressed
+    public void ShootButton()
     {
-        
+        if(Input.GetButtonDown("Fire1"))
+        {
+            weapon.Shoot();
+        }
     }
 }
