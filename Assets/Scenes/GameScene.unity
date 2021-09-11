@@ -16324,6 +16324,7 @@ GameObject:
   - component: {fileID: 1327393383}
   - component: {fileID: 1327393382}
   - component: {fileID: 1327393381}
+  - component: {fileID: 1327393384}
   m_Layer: 5
   m_Name: Shoot
   m_TagString: Untagged
@@ -16395,32 +16396,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 841171360944779564, guid: 9268cb9ecc075d7489325c3bb24b6984, type: 3}
-        m_TargetAssemblyTypeName: PlayerWeapon, Assembly-CSharp
-        m_MethodName: ShootButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2288476824102000756, guid: 05ccde9020ef42647bbd6afc5b7663a5, type: 3}
-        m_TargetAssemblyTypeName: PlayerWeapon, Assembly-CSharp
-        m_MethodName: ShootButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3243675896624972913, guid: 48c4b672abb489940b7a22d82c2a1cb4, type: 3}
-        m_TargetAssemblyTypeName: PlayerWeapon, Assembly-CSharp
+      - m_Target: {fileID: 1327393384}
+        m_TargetAssemblyTypeName: AttackButton, Assembly-CSharp
         m_MethodName: ShootButton
         m_Mode: 1
         m_Arguments:
@@ -16469,6 +16446,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327393379}
   m_CullTransparentMesh: 1
+--- !u!114 &1327393384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327393379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e033574dd9e6b45eca86d4c7cab8f99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  PV: {fileID: 0}
 --- !u!1001 &1327933944
 PrefabInstance:
   m_ObjectHideFlags: 0
