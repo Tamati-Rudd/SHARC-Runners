@@ -216,7 +216,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
             if (activateSpeed)
                 SpeedAbility();
         }
-        //If true start the time limit of the ability
+   
+    }
+    //Reset the ability 
+    public void ResetSpeed(bool changeSpeed)
+    {
+        //Change the activiateSpeed variable
+        activateSpeed = changeSpeed;
+        
+        //if true run this if statement
         if (activateSpeed)
         {
             speedTimer += Time.deltaTime;
@@ -228,11 +236,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 activateSpeed = false;
             }
         }
-
-
     }
 
-    
     //Change the speed of the character
     public void SpeedAbility()
     {
