@@ -25,7 +25,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
     
    }
 
-   void Shoot()
+   public void Shoot()
    {
         //only fire for the local player
         if (PV.IsMine)
@@ -42,14 +42,6 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
     {
         anim.SetTrigger("isShooting");
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-    }
-
-    public void ShootButton()
-    {
-        if(Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
     }
 }
 
