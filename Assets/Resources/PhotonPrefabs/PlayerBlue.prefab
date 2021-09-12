@@ -895,7 +895,6 @@ MonoBehaviour:
   PV: {fileID: 0}
   HookButton: {fileID: 0}
   buttonPressed: 0
-  oneTime: 0
 --- !u!120 &3813553944947868549
 LineRenderer:
   m_ObjectHideFlags: 0

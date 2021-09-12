@@ -21,7 +21,7 @@ public class Sabotagable : MonoBehaviour
 
             //Remove the sabotage crate
             int viewID = collision.GetComponent<PhotonView>().ViewID; //Get crates viewID
-            PV.RPC("DestroySabotageCrate", RpcTarget.AllBuffered, viewID);
+            PV.RPC("DestroySabotageCrate", RpcTarget.MasterClient, viewID);
 
             //Select and apply the sabotage
             SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();

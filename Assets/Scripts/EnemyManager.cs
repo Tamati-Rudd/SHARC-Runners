@@ -43,17 +43,15 @@ public class EnemyManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     void CreateEnemy(Vector2 SpawnPoint)
     {              
 
         GameObject enemyclone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Enemy"), SpawnPoint, Quaternion.identity);
-        enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
+        if(enemyclone != null)
+        {
+            enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
+        }
+        
         //enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
     }
 }

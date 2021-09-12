@@ -20,7 +20,7 @@ public class FinishPoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {  
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && timer != null)
         { //If the colliding object has the Player tag
             //Get the winner's time
             timer.StopStopwatch();

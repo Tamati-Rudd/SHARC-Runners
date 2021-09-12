@@ -77,6 +77,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         MeterScript meter = Instantiate(meterScript, canvas.transform);        
         prefab.GetComponent<Collectable>().abilityMeter = meter;
+        prefab.GetComponent<Collectable>().abilityMeter.SetMaxAbility(8);
+        prefab.GetComponent<Collectable>().abilityMeter.SetAbility(0);
 
         Text counterclone = Instantiate(Counter, canvas.transform);
         prefab.GetComponent<Collectable>().Counter = counterclone;
@@ -92,6 +94,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         //instantiating the timer
         Stopwatch Timerclone = Instantiate(Timer, canvas.transform);
         HUD.GetComponent<CountdownController>().timer = Timerclone;
+
+        //start the timer
+        HUD.GetComponent<CountdownController>().StartCoroutine(HUD.GetComponent<CountdownController>().CountdownStart());
         CreateFinishPoint(Timerclone);
     }
 

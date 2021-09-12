@@ -8,17 +8,15 @@ using Photon.Pun;
 public class CountdownController : MonoBehaviour
 {
     public int countdownTime;
-    public TMP_Text countdownDisplay;
+    [HideInInspector]public TMP_Text countdownDisplay;
     public PlayerController player;
     public Stopwatch timer;
 
-    private void Start()
-    {
-        StartCoroutine(CountdownStart());
-    }
 
-    IEnumerator CountdownStart()
+
+    public IEnumerator CountdownStart()
     {
+        
         while (countdownTime > 0)
         {
             countdownDisplay.text = countdownTime.ToString();

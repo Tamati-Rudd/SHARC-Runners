@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4375c20e2396f9b47b3485da282263d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnPoint: {x: 0, y: 0}
+  SpawnPoint1: {x: 0, y: 0}
+  SpawnPoint2: {x: 0, y: 0}
+  SpawnPoint3: {x: 0, y: 0}
 --- !u!114 &-7053072549302156369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4682cb839a06a40abaf28cd99f3dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitTesting: 0
 --- !u!114 &2682192472372904034
 MonoBehaviour:
   m_ObjectHideFlags: 0
