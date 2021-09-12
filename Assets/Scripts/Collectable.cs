@@ -36,8 +36,7 @@ public class Collectable : MonoBehaviour
 
         resetcoin = 0;
         currentcoin = 0;
-        abilityMeter.SetMaxAbility(8);//set the max limit
-        abilityMeter.SetAbility(0);//Reset the meter
+
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -94,8 +93,7 @@ public class Collectable : MonoBehaviour
     public void DestroyCrystal(int viewID)
     {
 
-            PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
-            
+            PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);     
 
        
         
