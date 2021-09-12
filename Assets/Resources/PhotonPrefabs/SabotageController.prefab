@@ -49,6 +49,9 @@ MonoBehaviour:
   SpawnPoint1: {x: 0, y: 0}
   SpawnPoint2: {x: 0, y: 0}
   SpawnPoint3: {x: 0, y: 0}
+  SpawnPoint4: {x: 0, y: 0}
+  SpawnPoint5: {x: 0, y: 0}
+  SpawnPoint6: {x: 0, y: 0}
 --- !u!114 &-7053072549302156369
 MonoBehaviour:
   m_ObjectHideFlags: 0
