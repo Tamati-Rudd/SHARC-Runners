@@ -7,8 +7,8 @@ public class Collectable : MonoBehaviour
 {
     public MeterScript abilityMeter;
     private int currentcoin;
-    private int resetcoin = 0;
-    private PlayerController pMovement;
+    private int resetcoin;
+    private PlayerController pMovement;//Access player movement
     public Text Counter;//Access the text 
     private Canvas canvas;
     public PhotonView PV;
@@ -20,19 +20,12 @@ public class Collectable : MonoBehaviour
 
     void Start()
     {
-
+        //Change the meter location
         Vector2 meterlocation;
         meterlocation.x = 50;
         meterlocation.y = 50;
 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-
-       // MeterScript meter = Instantiate(abilityMeter, meterlocation, Quaternion.identity);
-       // meter.transform.SetParent(canvas.transform);
-
-        //Text counter = Instantiate(Counter, meterlocation, Quaternion.identity);
-       // counter.transform.SetParent(canvas.transform);
-
 
         resetcoin = 0;
         currentcoin = 0;
@@ -40,13 +33,13 @@ public class Collectable : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        //Run if the plaayer collides with the collectable
         if (collision.tag == "Collectable")
         {
             int viewID = collision.GetComponent<PhotonView>().ViewID;
            
-            PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);
+            PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);// destroy the object
 
-            //Destroy(collision.gameObject);// destroy the object
 
             if (currentcoin < 8)//Run statement if the coins is less then 8
             {
@@ -56,7 +49,7 @@ public class Collectable : MonoBehaviour
                 if (currentcoin <= 7)//Run statement if the coins is less then 8
                     Counter.text = currentcoin + "/8";//Print this text
                 else
-                    SetSpeed();
+                    SetSpeed();//change speed
             }
 
         }
@@ -64,6 +57,7 @@ public class Collectable : MonoBehaviour
 
     public bool SetSpeed()
     {
+        //If player has collected less or equal to 8
         if (currentcoin >= 8)
         {
             Counter.text = " ";//print nothing
@@ -92,10 +86,6 @@ public class Collectable : MonoBehaviour
     [PunRPC]
     public void DestroyCrystal(int viewID)
     {
-
-            PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);     
-
-       
-        
+            PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
     }
 }
