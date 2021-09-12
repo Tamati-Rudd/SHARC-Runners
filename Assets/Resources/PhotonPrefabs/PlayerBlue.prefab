@@ -754,6 +754,7 @@ MonoBehaviour:
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
   wallDistance: 0.5
+  SmoothingDelay: 5
 --- !u!114 &6924062975845040977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,10 +873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 1
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &4099078126158936964
 MonoBehaviour:
   m_ObjectHideFlags: 0

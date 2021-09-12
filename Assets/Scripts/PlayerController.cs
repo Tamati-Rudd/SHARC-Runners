@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
 
+
 public class PlayerController : MonoBehaviour, IPunObservable
 {
     public float movementSpeed;
@@ -48,11 +49,24 @@ public class PlayerController : MonoBehaviour, IPunObservable
     float jumpTime;
     bool isOnWall;
 
+    public float SmoothingDelay = 5;
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
+
+        bool observed = false;
+        foreach (Component observedComponent in this.PV.ObservedComponents)
+        {
+            if (observedComponent == this)
+            {
+                observed = true;
+                break;
+            }
+        }
+
     }
 
     // Start is called before the first frame update
@@ -83,6 +97,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
         if (!PV.IsMine)
         {
+            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * this.SmoothingDelay);
+            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * this.SmoothingDelay);
             return;
         }
         else if (isDisabled && raceStarted)
@@ -294,8 +310,25 @@ public class PlayerController : MonoBehaviour, IPunObservable
         SceneManager.LoadScene("PostGame");
     }
 
+    private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
+    private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+
+        if (stream.IsWriting)
+        {
+            //We own this player: send the others our data
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            
+        }
+        else
+        {
+            //Network player, receive data
+            correctPlayerPos = (Vector3)stream.ReceiveNext();
+            correctPlayerRot = (Quaternion)stream.ReceiveNext();
+        }
 
     }
 
