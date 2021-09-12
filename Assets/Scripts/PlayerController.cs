@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     float jumpTime;
     bool isOnWall;
 
-    public float SmoothingDelay = 5;
+    public float SmoothingDelay = 0.5f;
+    bool observed = false;
 
     private void Awake()
     {
@@ -57,7 +58,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
 
-        bool observed = false;
+        
+
+        //For observing the player's movement and sending it across the photon network
         foreach (Component observedComponent in this.PV.ObservedComponents)
         {
             if (observedComponent == this)
