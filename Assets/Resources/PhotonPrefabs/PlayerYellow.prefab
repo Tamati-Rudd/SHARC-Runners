@@ -722,7 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4083739625719364882}
-  bulletPrefab: {fileID: 1491362137737887937, guid: 3bb5769ff7fed4ade99126798f351870, type: 3}
+  bulletPrefab: {fileID: 5657830110353925128, guid: b30cdd9d1042e4afb98997d36518e45e, type: 3}
   PV: {fileID: 0}
   controller: {fileID: 0}
   anim: {fileID: 2125968955072514616}
