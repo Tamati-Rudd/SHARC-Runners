@@ -13,22 +13,30 @@ public class SabotageController : MonoBehaviour
     int numControllers = 0;
     System.Random rand = new System.Random();
     StasisTrap stasisSabotage;
-    public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3;
+    public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4, SpawnPoint5, SpawnPoint6;
 
     private void Start()
     {
-        SpawnPoint.x = (float)56.822;
-        SpawnPoint.y = (float)-9.087;
+        SpawnPoint.x = (float)66.82;
+        SpawnPoint.y = (float)8.89;
 
-        SpawnPoint1.x = (float)55.155;
-        SpawnPoint1.y = (float)11.623;
+        SpawnPoint1.x = (float)69.58;
+        SpawnPoint1.y = (float)-2.87;
 
-        SpawnPoint2.x = (float)78.119;
-        SpawnPoint2.y = (float)35.352;
+        SpawnPoint2.x = (float)82.35;
+        SpawnPoint2.y = (float)21.38;
 
-        SpawnPoint3.x = (float)60.512;
-        SpawnPoint3.y = (float)50.6927;
+        SpawnPoint3.x = (float)32.21;
+        SpawnPoint3.y = (float)26.25;
 
+        SpawnPoint4.x = (float)94.66;
+        SpawnPoint4.y = (float)41.31;
+
+        SpawnPoint5.x = (float)92.8;
+        SpawnPoint5.y = (float)66.1;
+
+        SpawnPoint6.x = (float)159.2;
+        SpawnPoint6.y = (float)12.4;
 
         if (PV.Owner.IsMasterClient)
         {
@@ -36,6 +44,10 @@ public class SabotageController : MonoBehaviour
             CreateSabotage(SpawnPoint1);
             CreateSabotage(SpawnPoint2);
             CreateSabotage(SpawnPoint3);
+            CreateSabotage(SpawnPoint4);
+            CreateSabotage(SpawnPoint5);
+            CreateSabotage(SpawnPoint6);
+
         }
     }
 
