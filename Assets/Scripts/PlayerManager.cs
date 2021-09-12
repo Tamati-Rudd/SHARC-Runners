@@ -92,6 +92,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         //instantiating the timer
         Stopwatch Timerclone = Instantiate(Timer, canvas.transform);
         HUD.GetComponent<CountdownController>().timer = Timerclone;
+
+        //start the timer
+        HUD.GetComponent<CountdownController>().StartCoroutine(HUD.GetComponent<CountdownController>().CountdownStart());
         CreateFinishPoint(Timerclone);
     }
 

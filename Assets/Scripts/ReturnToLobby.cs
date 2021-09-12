@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
-public class ReturnToLobby : MonoBehaviour
+public class ReturnToLobby : MonoBehaviourPunCallbacks
 {
     public Button button;
 
@@ -18,7 +18,19 @@ public class ReturnToLobby : MonoBehaviour
     public void ReturnPlayerToLobby()
     {
        Destroy(Roommanager.Instance.gameObject);
-       PhotonNetwork.Disconnect();
-       SceneManager.LoadScene(0);
+       LeaveRoom();
+       //SceneManager.LoadScene(0);
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
+
+        base.OnLeftRoom();
     }
 }
