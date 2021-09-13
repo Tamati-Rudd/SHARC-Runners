@@ -42,23 +42,25 @@ public class Collectable : MonoBehaviour
     {
         if (collision.tag == "Collectable")
         {
-            int viewID = collision.GetComponent<PhotonView>().ViewID;
-           
-            PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);
+            
+                int viewID = collision.GetComponent<PhotonView>().ViewID;
 
-            //Destroy(collision.gameObject);// destroy the object
+                PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);
 
-            if (currentcoin < 8)//Run statement if the coins is less then 8
-            {
-                Increase();
-                abilityMeter.SetAbility(currentcoin);//updates the meter bar
+                //Destroy(collision.gameObject);// destroy the object
 
-                if (currentcoin <= 7)//Run statement if the coins is less then 8
-                    Counter.text = currentcoin + "/8";//Print this text
-                else
-                    SetSpeed();
-            }
+                if (currentcoin < 8)//Run statement if the coins is less then 8
+                {
+                    Increase();
+                    abilityMeter.SetAbility(currentcoin);//updates the meter bar
 
+                    if (currentcoin <= 7)//Run statement if the coins is less then 8
+                        Counter.text = currentcoin + "/8";//Print this text
+                    else
+                        SetSpeed();
+                }
+
+            
         }
     }
 
@@ -92,10 +94,11 @@ public class Collectable : MonoBehaviour
     [PunRPC]
     public void DestroyCrystal(int viewID)
     {
-
-            PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);     
-
-       
+        while (PhotonView.Find(viewID) != null)
+        {
+            PhotonNetwork.Destroy(PhotonView.Find(viewID));
+        }
+                    
         
     }
 }

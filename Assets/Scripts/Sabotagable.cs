@@ -34,6 +34,10 @@ public class Sabotagable : MonoBehaviour
     [PunRPC]
     public void DestroySabotageCrate(int viewID)
     {
-        PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
+        while (PhotonView.Find(viewID) != null)
+        {
+            PhotonNetwork.Destroy(PhotonView.Find(viewID));
+        }
+
     }
 }
