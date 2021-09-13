@@ -11,17 +11,17 @@ public class MeterScript : MonoBehaviour
 
     public void SetMaxAbility(float ability)
     {
-        slider.maxValue = ability;
-        slider.value = ability;
+        slider.maxValue = ability;//initiate a max value for slider
+        slider.value = ability;//initiate a max slider value
 
-        fill.color = gradient.Evaluate (1f) ;
+        fill.color = gradient.Evaluate (1f) ;//when the bar increases the colour gets brighter
 
     }
 
     public void SetAbility(float ability)
     {
-        slider.value = ability;
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        slider.value = ability;//change the slider value
+        fill.color = gradient.Evaluate(slider.normalizedValue);//change the colour of the meter
 
     }
 }

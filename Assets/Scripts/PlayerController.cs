@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (activateSpeed)
         {
             speedTimer += Time.deltaTime;
+
             //this will reset the speed once speedTimer is 3
             if (speedTimer >= 3)
             {
