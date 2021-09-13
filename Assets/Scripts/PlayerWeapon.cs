@@ -8,11 +8,11 @@ using Photon.Pun;
 **/
 public class PlayerWeapon : MonoBehaviourPunCallbacks
 {
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-    public PhotonView PV;
-    public PlayerController controller;
-    public Animator anim;
+    public Transform firePoint; //firepoint poisition
+    public GameObject bulletPrefab; //for bullet prefab 
+    public PhotonView PV; //access multiplayer server
+    public PlayerController controller; //access the player controller
+    public Animator anim; //animation for bullet
 
     private void Awake()
     {
@@ -28,7 +28,8 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
         }
 
     }
-
+    
+    //method for player being able to shoot
     public void Shoot()
     {
         //only fire for the local player
@@ -40,6 +41,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
         }
     }
 
+    //method for server so players can shoot on multiplayer
     [PunRPC]
     void ShootRPC()
     {

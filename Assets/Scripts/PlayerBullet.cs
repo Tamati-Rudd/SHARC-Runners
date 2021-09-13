@@ -7,7 +7,7 @@ using UnityEngine;
 **/
 public class PlayerBullet : MonoBehaviour
 {
-   public float speed = 20f;
+   public float speed = 20f; // speed of bullet
    public Rigidbody2D rb;
     
 
@@ -16,6 +16,7 @@ public class PlayerBullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    //Collision method for the bullet colliding with other game objects
     private void OnTriggerEnter2D(Collider2D hitInfo) 
     {
         if(hitInfo.gameObject.CompareTag("Ground") || hitInfo.gameObject.CompareTag("Enemy"))
@@ -23,7 +24,8 @@ public class PlayerBullet : MonoBehaviour
             DestroySelf();
         }
     }
-
+    
+    //Destroys itself once bullet touches another game object.
     public void DestroySelf()
     {
         Destroy(gameObject);
