@@ -9,8 +9,8 @@ using Photon.Pun;
 
 public class DeclareWinner : MonoBehaviour
 {
-    TextMeshProUGUI WinnerText;
-    TextMeshProUGUI TimerText;
+    TextMeshProUGUI winnerText;
+    TextMeshProUGUI timerText;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +23,12 @@ public class DeclareWinner : MonoBehaviour
 
         //Get reference to the TextMeshProUGUI components
         Transform winnerChild = transform.Find("WinnerText");
-        WinnerText = winnerChild.GetComponent<TextMeshProUGUI>();
+        winnerText = winnerChild.GetComponent<TextMeshProUGUI>();
         Transform timeChild = transform.Find("TimeTaken");
-        TimerText = timeChild.GetComponent<TextMeshProUGUI>();
+        timerText = timeChild.GetComponent<TextMeshProUGUI>();
 
         //Update the text to declare the winner of the race and state their time
-        WinnerText.text = winnerName + " Wins!";
-        TimerText.text = "Time Taken: " + timeTaken;
+        winnerText.text = winnerName + " Wins!";
+        timerText.text = "Time Taken: " + timeTaken;
     }
 }

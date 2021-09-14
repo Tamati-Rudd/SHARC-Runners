@@ -8,22 +8,22 @@ public class Sabotagable : MonoBehaviour
 {
     public PhotonView PV; 
 
+    //Get the Photon View of the Player this script is attached to
     void Awake()
     {
         PV = GetComponent<PhotonView>();
     }
 
+    //Handle player collision with a Sabotage crate
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Sabotage")
         {
-            Debug.Log("Sabotage pickup collected!");
-
             //Remove the sabotage crate
             int viewID = collision.GetComponent<PhotonView>().ViewID; //Get crates viewID
             PV.RPC("DestroySabotageCrate", RpcTarget.MasterClient, viewID);
 
-            //Select and apply the sabotage
+            //Signal the SabotageController to apply a Sabotage
             SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
             PlayerController sourceController = GetComponent<PlayerController>();
             sabController.sabotage(sourceController, 0);
@@ -38,6 +38,5 @@ public class Sabotagable : MonoBehaviour
         {
             PhotonNetwork.Destroy(PhotonView.Find(viewID));
         }
-
     }
 }
