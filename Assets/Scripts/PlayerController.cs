@@ -9,37 +9,33 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
+    public PhotonView PV;
+    public float SmoothingDelay = 0.5f;
+    bool observed = false;
+
+    [Header("Player Movement")]
     public float movementSpeed;
-    private Rigidbody2D rb;
     public float jumpForce;
-    public bool facingRight = true;
-    public GameObject bulletpoint;
-    public bool isDisabled = true;
-    public TMP_Text username;
     private bool isGrounded;
     public Transform groundCheck;
+    public bool facingRight = true;
     public LayerMask whatIsGround;
+    public bool isDisabled = true;
+    public TMP_Text username;
     public Transform respawnPoint;
 
-    private Animator anim;
-    private SpriteRenderer sr;
-    private SpringJoint2D sj;
-
-    public PhotonView PV;
-    Camera cam;
-
-    //sabotage
+    [Header("Sabotage")]
     public Light2D sabotageIndicator;
     public float disableTimer = 0;
     public bool raceStarted = false;
 
-    //ability
+    [Header("Ability")]
     public float speedTimer;
     public bool activateSpeed;
     public Collectable collectableMeter;//Access the collectable script
     private bool hasBulletFlipped = false;
 
-    //wall jump
+    [Header("Double Jump & Wall Jump")]
     private bool canDoubleJump;
     public float wallJumpTime = 0.2f;
     public float wallSlideSpeed = 0.3f;
@@ -49,16 +45,19 @@ public class PlayerController : MonoBehaviour, IPunObservable
     float jumpTime;
     bool isOnWall;
 
-    public float SmoothingDelay = 0.5f;
-    bool observed = false;
+    [Header("Gameobject")]
+    private Animator anim;
+    private SpriteRenderer sr;
+    private SpringJoint2D sj;
+    Camera cam;
+    private Rigidbody2D rb;
+    public GameObject bulletpoint;
 
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
-
-        
 
         //For observing the player's movement and sending it across the photon network
         foreach (Component observedComponent in this.PV.ObservedComponents)
@@ -127,11 +126,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //move spawned character
-
-        //Movement left & right
-
         if (isDisabled == false)
         {
+            //Movement left & right
             var moveInput = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
         }
@@ -145,7 +142,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         {
             canDoubleJump = true;
         }
-        if (Input.GetButtonDown("Jump") && isDisabled == false)
+        if (Input.GetButtonDown("Jump") && isDisabled == false) //check if the jump button is pressed and player can move
         {
             if (isGrounded || isWallSliding)
             {
@@ -162,24 +159,16 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
         //flip player facing direction
-        if (rb.velocity.x < 0 && facingRight && isDisabled == false)
+        if (rb.velocity.x < 0 && facingRight && isDisabled == false) //flip to the right
         {
-
             Flip();
-
-            // sr.flipX = true;
-            // facingRight = false;
         }
-        else if (rb.velocity.x > 0 && !facingRight && isDisabled == false)
+        else if (rb.velocity.x > 0 && !facingRight && isDisabled == false) //flip to the left
         {
             Flip();
-            // sr.flipX = false;
-            // facingRight = true;
-
         }
 
         //Wall Jump
-
         if (facingRight)
         {
             wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, whatIsGround);
@@ -190,7 +179,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
 
 
-        if (wallCheckhit && !isGrounded && Input.GetAxisRaw("Horizontal") != 0 && isOnWall)
+        if (wallCheckhit && !isGrounded && Input.GetAxisRaw("Horizontal") != 0 && isOnWall) //if player is on the wall they cannot continously jump
         {
             isWallSliding = true;
             jumpTime = Time.time + wallJumpTime;
@@ -202,15 +191,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
             isOnWall = false;
         }
 
-        if (isWallSliding)
+        if (isWallSliding) //wall slide
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, wallSlideSpeed, float.MaxValue));
         }
 
         //check for animation
-        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));//rb.velocity.x)//);
-        anim.SetBool("isGrounded", isGrounded);
-        anim.SetBool("isOnWall", isWallSliding);
+        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal"))); //Running animation
+        anim.SetBool("isGrounded", isGrounded); //jumping animation
+        anim.SetBool("isOnWall", isWallSliding); //wall jumping animation
         //Set player wall jump animation
         if (facingRight)
         {
@@ -254,24 +243,14 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
 
         facingRight = !facingRight;
-
-        this.transform.localScale = new Vector3(transform.localScale.x * -1,
+        //flip the player localscale by multiplying -1
+        this.transform.localScale = new Vector3(transform.localScale.x * -1, 
        transform.localScale.y,
        transform.localScale.z);
 
-        // username.transform.localScale = new Vector3(transform.localScale.x * -1,
-        // transform.localScale.y,
-        //transform.localScale.z);
-
-        //username.transform.Rotate(0f, 180f, 0);
-
         PV.RPC("FlipRPC", RpcTarget.All);
 
-        bulletpoint.transform.Rotate(0f, 180f, 0);
-
-        //username.transform.Rotate(0f, 180f, 0);
-        //sr.flipX = true;
-        //cam.projectionMatrix = cam.projectionMatrix * Matrix4x4.Scale(new Vector3(-1, 1, 1));
+        bulletpoint.transform.Rotate(0f, 180f, 0); //flip the bullet point whne the player flip
 
     }
 
