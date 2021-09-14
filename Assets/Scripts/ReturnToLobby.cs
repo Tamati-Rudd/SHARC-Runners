@@ -17,6 +17,8 @@ public class ReturnToLobby : MonoBehaviourPunCallbacks
     
     public void ReturnPlayerToLobby()
     {
+       GameObject winnerRecord = GameObject.FindGameObjectWithTag("WinRecord");
+       Destroy(winnerRecord);
        Destroy(Roommanager.Instance.gameObject);
        LeaveRoom();
        //SceneManager.LoadScene(0);

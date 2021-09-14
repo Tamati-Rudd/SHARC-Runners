@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 
-//This class controls sabotages - negative effects that are applied to all other players when a player collects a sabotage pickup
+//This class controls Sabotages - negative effects that are applied to all other players when a player collects a Sabotage pickup
 public class SabotageController : MonoBehaviour
 {
     public static SabotageController Instance;
@@ -15,6 +15,7 @@ public class SabotageController : MonoBehaviour
     StasisTrap stasisSabotage;
     public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4, SpawnPoint5, SpawnPoint6;
 
+    //Determine Sabotage crate spawn positions and spawn them
     private void Start()
     {
         SpawnPoint.x = (float)66.82;
@@ -47,16 +48,16 @@ public class SabotageController : MonoBehaviour
             CreateSabotage(SpawnPoint4);
             CreateSabotage(SpawnPoint5);
             CreateSabotage(SpawnPoint6);
-
         }
     }
 
+    //Spawn a Sabotage Crate
     void CreateSabotage(Vector2 SpawnPoint)
     {
         GameObject SabotageClone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "SabotageCrate"), SpawnPoint, Quaternion.identity);
-
     }
 
+    //Get reference to all Sabotage scripts (for sprint 1, this is only the StasisTrap)
     void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -82,13 +83,13 @@ public class SabotageController : MonoBehaviour
     //The selectedSabotage is returned for unit testing purposes 
     public int sabotage(PlayerController sourcePlayer, int unitTesting)
     {
-        int selectedSabotage = rand.Next(1, 2); //Range: minimum to maximum-1
+        int selectedSabotage = rand.Next(1, 2); //Range: 1 to 1 (based on the number of possible sabotages)
 
-        if (selectedSabotage == 1 && unitTesting == 0) //Stasis Trap
+        //Run the selected Sabotage
+        if (selectedSabotage == 1 && unitTesting == 0) 
         { //When unit testing, do not run a sabotage with this test (there is a separate test for this)
             stasisSabotage.applySabotage(sourcePlayer, controllers);
         }
-        //In the future, add more if statements for additonal sabotages
 
         return selectedSabotage;
     }

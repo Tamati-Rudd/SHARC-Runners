@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+//This script spawns enemies on the scene
 public class EnemyManager : MonoBehaviour
 {
     public GameObject enemy;
@@ -20,6 +21,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //spawnpoints for the enemy
         SpawnPoint.x = (float)56.822;
         SpawnPoint.y = (float)-9.087;
 
@@ -32,7 +34,7 @@ public class EnemyManager : MonoBehaviour
         SpawnPoint3.x = (float)60.512;
         SpawnPoint3.y = (float)50.6927;
 
-
+        //only the masterclient can spawn enemies for everyone
         if (PV.Owner.IsMasterClient)
         {            
             CreateEnemy(SpawnPoint);
@@ -43,15 +45,17 @@ public class EnemyManager : MonoBehaviour
 
     }
 
+    //This function creates the enemy in the scene
     void CreateEnemy(Vector2 SpawnPoint)
     {              
-
+        //instantiating the enemy
         GameObject enemyclone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Enemy"), SpawnPoint, Quaternion.identity);
-        if(enemyclone != null)
+
+        if (enemyclone != null)
         {
+            //Assiging the crystal so it can be dropped
             enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
         }
         
-        //enemyclone.GetComponent<EnemyAI>().player = prefab.GetComponent<Transform>();
     }
 }

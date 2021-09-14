@@ -5,16 +5,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+//This class instantiates controllers into the game which are necessary. This script manages
+//the game
 public class Roommanager : MonoBehaviourPunCallbacks
 {
     public static Roommanager Instance;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+    
     private void Awake()
     {
         //check to see if another RoomManager exists
@@ -45,6 +41,7 @@ public class Roommanager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1)//we are in the game scene
         {
+            //instantiate controllers/managers
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector2.zero, Quaternion.identity);
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "EnemyManager"), Vector2.zero, Quaternion.identity);
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "SabotageController"), Vector2.zero, Quaternion.identity);

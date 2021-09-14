@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This script manages the Menu gameobjects
 public class MenuManager : MonoBehaviour
 {
     //making this class a singleton

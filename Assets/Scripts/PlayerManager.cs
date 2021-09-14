@@ -9,19 +9,26 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 {
     PhotonView PV;
     int selectedCharacter = 0;
+
+    //ability
     public MeterScript meterScript;
     public Text Counter;
+
+    //Canvas
     private Canvas canvas;
     private GameObject container;
     
+    //HUD
     public GameObject HUDContainer;
     public Stopwatch Timer;
     public bool isCreated = false;
 
+    //Finish Point
     public FinishPoint finish;
 
     private void Awake()
     {
+        //Get PhotonView and get the selected character
         PV = GetComponent<PhotonView>();
         selectedCharacter = PlayerPrefs.GetInt("selectedCharacter"); 
     }
@@ -29,28 +36,28 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        //create controller for just the playe
         if (PV.IsMine)
         {
             CreateController();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //This functions creates neccessary controllers related to the player
     void CreateController()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();   
 
+        //blue character
         if (selectedCharacter == 0)
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerBlue"), Vector2.zero, Quaternion.identity);
 
+            //Creating HUD
             CreateCountdown(prefab);
+
+            //Creating Meter for ability
             CreateMeter(prefab);
         }
         if (selectedCharacter == 1)
@@ -73,18 +80,24 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     }
 
+    //This function creates the meter for the player
     void CreateMeter(GameObject prefab)
     {
-        MeterScript meter = Instantiate(meterScript, canvas.transform);        
+        //instantiating inside a canvas
+        MeterScript meter = Instantiate(meterScript, canvas.transform);     
+        
+        //settings for the ability for the specific player
         prefab.GetComponent<Collectable>().abilityMeter = meter;
         prefab.GetComponent<Collectable>().abilityMeter.SetMaxAbility(8);
         prefab.GetComponent<Collectable>().abilityMeter.SetAbility(0);
 
+ 
         Text counterclone = Instantiate(Counter, canvas.transform);
         prefab.GetComponent<Collectable>().Counter = counterclone;
         
     }
 
+    //this function create the countdown once the player instantiates into the game
     void CreateCountdown(GameObject prefab)
     {
         //instantiating the countdown
@@ -97,6 +110,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
         //start the timer
         HUD.GetComponent<CountdownController>().StartCoroutine(HUD.GetComponent<CountdownController>().CountdownStart());
+
+        //Create fnish point once countdown ends
         CreateFinishPoint(Timerclone);
     }
 

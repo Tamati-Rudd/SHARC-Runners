@@ -98,7 +98,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
     }
 
-    //host migration if hose leaves the room
+    //host migration if host leaves the room
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
         //set the button active to the new host
@@ -154,6 +154,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     }
 
+    //once players join a room, their username needs to be istantiated for everyone
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Instantiate(PlayerListItemPrefab, PlayerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);

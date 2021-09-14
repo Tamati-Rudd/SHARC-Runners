@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-//This class describes and runs a stasis trap sabotage - which freezes players in place for a few seconds
+//This class describes and runs a Stasis Trap sabotage - which freezes players in place for a few seconds
 public class StasisTrap : MonoBehaviour
 {
-    //PunRPCs cannot be run in the Unity Test Framework,
-    //So must use this to instead test with code lines that would mimic the disable RPC for the target
+    //PunRPCs cannot be run in the Unity Test Framework, so must use this to instead test with code lines that would mimic the disable RPC for the target
     public bool unitTesting = false; 
 
     //This method applies the sabotage to all players EXCEPT the source
@@ -37,6 +36,7 @@ public class StasisTrap : MonoBehaviour
                 }
             }      
         }
+
         return success;
     }
 }
