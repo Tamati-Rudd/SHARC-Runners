@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
+//NOTE: For the Finish Point to function correctly, the next built scene after the GameScene MUST be the PostGame scene
 
-//NOTE: For this scene to function correctly, the next built scene after the game scene MUST be the game ended scene
-
+//This script manages the functionality of the game's Finish Point
 public class FinishPoint : MonoBehaviour
 {
     PhotonView winnerPV;
@@ -18,10 +18,12 @@ public class FinishPoint : MonoBehaviour
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
+    //Handle collision with the Finish Point
     void OnTriggerEnter2D(Collider2D collision)
-    {  
+    {
+        //If the colliding object has the Player tag
         if (collision.tag == "Player" && timer != null)
-        { //If the colliding object has the Player tag
+        { 
             //Get the winner's time
             timer.StopStopwatch();
             string time = timer.getTime();
@@ -30,7 +32,7 @@ public class FinishPoint : MonoBehaviour
             winnerPV = collision.GetComponent<PhotonView>();
             winnerName = winnerPV.Owner.NickName;
 
-            //Load the post game screen for all players  
+            //End the race
             winnerPV.RPC("EndRaceRPC", RpcTarget.AllBuffered, winnerName, time);
         }
     }
