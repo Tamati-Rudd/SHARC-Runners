@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float wallSlideSpeed = 0.3f;
     public float wallDistance = 0.5f;
     bool isWallSliding = false;
-    RaycastHit2D wallCheckhit;
+    RaycastHit2D wallCheckhit; //drawing raycast to check for a wall
     float jumpTime;
     bool isOnWall;
 
@@ -119,25 +119,108 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 rb.constraints = RigidbodyConstraints2D.None;
                 PV.transform.rotation = Quaternion.identity;
                 rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                //rb.constraints = RigidbodyConstraints2D.FreezePosition;
                 return;
             }
 
         }
 
-        //move spawned character
-        if (isDisabled == false)
+        MovePlayer();
+
+        PlayerJumps();
+
+        FlipPlayer();
+
+        WallJump();
+
+        SetPlayerAnimation();
+
+        PlayerAbility();
+
+    }
+
+    private void PlayerAbility()
+    {
+        if (Input.GetButtonDown("Fire2"))
         {
-            //Movement left & right
-            var moveInput = Input.GetAxisRaw("Horizontal");
-            rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
+            activateSpeed = collectableMeter.SetSpeed();
+            if (activateSpeed)
+                SpeedAbility();
+        }
+        if (activateSpeed)
+        {
+            speedTimer += Time.deltaTime;
+
+            if (speedTimer >= 3)
+            {
+                movementSpeed = 13.5f;
+                speedTimer = 0;
+                activateSpeed = false;
+            }
+        }
+    }
+
+    private void SetPlayerAnimation()
+    {
+        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal"))); //running animation
+        anim.SetBool("isGrounded", isGrounded); //jumping animation
+        anim.SetBool("isOnWall", isWallSliding); //wall jump animation
+        if (facingRight)
+        {
+            anim.SetBool("facingRight", facingRight); //wall jump facing right
+        }
+        else if (!facingRight)
+        {
+            anim.SetBool("facingLeft", !facingRight); // wall jump facing left
+        }
+    }
+
+    private void FlipPlayer()
+    {
+        if (rb.velocity.x < 0 && facingRight && isDisabled == false) //flip player to the right direction
+        {
+            Flip();
+        }
+        else if (rb.velocity.x > 0 && !facingRight && isDisabled == false) //flip player to the left direction
+        {
+            Flip();
+        }
+    }
+
+    private void WallJump()
+    {
+        if (facingRight)
+        {
+            wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, whatIsGround); //does raycasting to detect the wall
+        }
+        else
+        {
+            wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, whatIsGround);
         }
 
+
+        if (wallCheckhit && !isGrounded && Input.GetAxisRaw("Horizontal") != 0 && isOnWall)
+        {
+            isWallSliding = true;
+            jumpTime = Time.time + wallJumpTime;
+            isOnWall = false;
+        }
+        else if (jumpTime < Time.time)
+        {
+            isWallSliding = false;
+            isOnWall = false;
+        }
+
+        if (isWallSliding)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, wallSlideSpeed, float.MaxValue));
+        }
+    }
+
+    private void PlayerJumps()
+    {
         //check if player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, .2f, whatIsGround);
-
-        //jumping
-        //Check if player can do double jump
+        //check if the player can do the double jump
         if (isGrounded)
         {
             canDoubleJump = true;
@@ -157,80 +240,16 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 }
             }
         }
+    }
 
-        //flip player facing direction
-        if (rb.velocity.x < 0 && facingRight && isDisabled == false) //flip to the right
+    private void MovePlayer()
+    {
+        if (isDisabled == false)
         {
-            Flip();
+            //Movement left & right
+            var moveInput = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
         }
-        else if (rb.velocity.x > 0 && !facingRight && isDisabled == false) //flip to the left
-        {
-            Flip();
-        }
-
-        //Wall Jump
-        if (facingRight)
-        {
-            wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, whatIsGround);
-        }
-        else
-        {
-            wallCheckhit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, whatIsGround);
-        }
-
-
-        if (wallCheckhit && !isGrounded && Input.GetAxisRaw("Horizontal") != 0 && isOnWall) //if player is on the wall they cannot continously jump
-        {
-            isWallSliding = true;
-            jumpTime = Time.time + wallJumpTime;
-            isOnWall = false;
-        }
-        else if (jumpTime < Time.time)
-        {
-            isWallSliding = false;
-            isOnWall = false;
-        }
-
-        if (isWallSliding) //wall slide
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, wallSlideSpeed, float.MaxValue));
-        }
-
-        //check for animation
-        anim.SetFloat("moveSpeed", Mathf.Abs(Input.GetAxisRaw("Horizontal"))); //Running animation
-        anim.SetBool("isGrounded", isGrounded); //jumping animation
-        anim.SetBool("isOnWall", isWallSliding); //wall jumping animation
-        //Set player wall jump animation
-        if (facingRight)
-        {
-            anim.SetBool("facingRight", facingRight);
-        }
-        else if (!facingRight)
-        {
-            anim.SetBool("facingLeft", !facingRight);
-        }
-
-        //Press the ability button
-        if (Input.GetButtonDown("Fire2"))
-        {
-            activateSpeed = collectableMeter.SetSpeed();//Call set speed to activate boost
-            if (activateSpeed)
-                SpeedAbility();
-        }
-        //If true start the time limit of the ability
-        if (activateSpeed)
-        {
-            speedTimer += Time.deltaTime;
-
-            //this will reset the speed once speedTimer is 3
-            if (speedTimer >= 3)
-            {
-                movementSpeed = 13.5f;
-                speedTimer = 0;
-                activateSpeed = false;
-            }
-        }
-
     }
 
     //Change the speed of the character
@@ -250,7 +269,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
         PV.RPC("FlipRPC", RpcTarget.All);
 
-        bulletpoint.transform.Rotate(0f, 180f, 0); //flip the bullet point whne the player flip
+        bulletpoint.transform.Rotate(0f, 180f, 0); //flip the bullet point when the player flip
 
     }
 
