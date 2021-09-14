@@ -733,18 +733,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13ab28093743d94fb8ad77076b65ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 12
+  PV: {fileID: 0}
+  SmoothingDelay: 5
+  movementSpeed: 13.5
   jumpForce: 15
-  facingRight: 1
-  bulletpoint: {fileID: 2288476823771728730}
-  isDisabled: 1
-  username: {fileID: 7085930365446390220}
   groundCheck: {fileID: 3136680056077188820}
+  facingRight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
+  isDisabled: 1
+  username: {fileID: 7085930365446390220}
   respawnPoint: {fileID: 0}
-  PV: {fileID: 0}
   sabotageIndicator: {fileID: -7021847356454927674}
   disableTimer: 0
   raceStarted: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
   wallDistance: 0.5
-  SmoothingDelay: 5
+  bulletpoint: {fileID: 2288476823771728730}
 --- !u!114 &6924062975845040977
 MonoBehaviour:
   m_ObjectHideFlags: 0
