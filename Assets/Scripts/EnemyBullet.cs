@@ -11,13 +11,13 @@ public class EnemyBullet : MonoBehaviour
     private Transform player;
     private Vector2 target;
 
-    void Start()
+    public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         target = new Vector2( player.position.x, player.position.y);
     }
 
-    void Update()
+    public void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
@@ -28,7 +28,7 @@ public class EnemyBullet : MonoBehaviour
     }
 
     //Method for detecting collision with player and or environment
-    void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") || collision.CompareTag("Ground"))
         {
@@ -37,7 +37,7 @@ public class EnemyBullet : MonoBehaviour
     }
 
     //Method for destroying the enemies bullet
-    void DestroyProjectile()
+    private void DestroyProjectile()
     {
         Destroy(gameObject);
     }
