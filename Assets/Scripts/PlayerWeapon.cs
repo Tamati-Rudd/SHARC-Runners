@@ -20,7 +20,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
         controller = PV.GetComponent<PlayerController>();
     }
 
-    void Update()
+    public void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
@@ -43,7 +43,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
 
     //method for server so players can shoot on multiplayer
     [PunRPC]
-    void ShootRPC()
+    public void ShootRPC()
     {
         anim.SetTrigger("isShooting");
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);

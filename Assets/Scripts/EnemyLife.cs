@@ -27,7 +27,7 @@ public class EnemyLife : MonoBehaviourPunCallbacks
         PV = GetComponent<PhotonView>();
     }
 
-    void Start()
+    public void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;

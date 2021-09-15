@@ -28,12 +28,12 @@ public class EnemyAI : MonoBehaviour
     public GameObject projectile; //For the bullet
     public Animator animator;
 
-    void Start()
+    public void Start()
     {
         fireRate = startingFireRate;
     }
 
-    void Update()
+    private void Update()
     {   
      //  frontPlayerFound = Physics2D.Linecast(sightStart.position, frontLineOfSite.position, 1 << LayerMask.NameToLayer ("Player"));
      //  backPlayerFound = Physics2D.Linecast(sightStart.position, backLineOfSite.position, 1 << LayerMask.NameToLayer ("Player"));
