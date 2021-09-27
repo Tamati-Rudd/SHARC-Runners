@@ -10,10 +10,11 @@ using System;
 
 public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
-    ChatClient chatClient;
+    public ChatClient chatClient;
      
     public TMP_InputField msg;
     public TMP_Text display;
+    string roomName;
     //TMP_Text chatDisplay;
 
 
@@ -27,9 +28,11 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         
     }
+
+    
     public void OnConnected()
     {
-        chatClient.Subscribe(new string[] { PhotonNetwork.CurrentRoom.Name }); //subscribe to chat channel once connected to server
+        chatClient.Subscribe(new string[] { roomName }); //subscribe to chat channel once connected to server
     }
 
     public void OnDisconnected()
@@ -83,6 +86,15 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     // Start is called before the first frame update
     void Start()
     {
+        if(PhotonNetwork.CurrentRoom.Name == null)
+        {
+           roomName = "default";
+        }
+        else
+        {
+            roomName = PhotonNetwork.CurrentRoom.Name;
+        }
+
         //establishing connection with the server
         string user_id = PlayerPrefs.GetString("username");
         chatClient = new ChatClient(this);
@@ -99,7 +111,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             return;
         }
 
-        chatClient.PublishMessage(PhotonNetwork.CurrentRoom.Name, msg.text);
+        chatClient.PublishMessage(roomName, msg.text);
         msg.text = "";
 
 
