@@ -29,7 +29,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
     public void OnConnected()
     {
-        chatClient.Subscribe(new string[] { "channelA" }); //subscribe to chat channel once connected to server
+        chatClient.Subscribe(new string[] { PhotonNetwork.CurrentRoom.Name }); //subscribe to chat channel once connected to server
     }
 
     public void OnDisconnected()
@@ -99,7 +99,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             return;
         }
 
-        chatClient.PublishMessage("channelA", msg.text);
+        chatClient.PublishMessage(PhotonNetwork.CurrentRoom.Name, msg.text);
         msg.text = "";
 
 
@@ -111,6 +111,11 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         if (chatClient != null) {
             chatClient.Service();
         }
+    }
+
+   public void Disconnect()
+    {
+        if (chatClient != null) { chatClient.Disconnect(); }
     }
 
     void OnApplicationQuit()
