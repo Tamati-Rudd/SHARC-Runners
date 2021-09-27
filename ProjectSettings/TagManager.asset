@@ -17,6 +17,8 @@ TagManager:
   - Sabotage
   - SabotageController
   - HUD
+  - FinishRecord
+  - PlacementManager
   layers:
   - Default
   - TransparentFX

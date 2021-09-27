@@ -303,14 +303,14 @@ public class PlayerController : MonoBehaviour, IPunObservable
     }
 
     //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
-    [PunRPC]
-    void EndRaceRPC(string winnerName, string winnerTime)
-    {
-        WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
-        win.updateWinnerName(winnerName);
-        win.updateWinnerTime(winnerTime);
-        SceneManager.LoadScene("PostGame");
-    }
+    //[PunRPC]
+    //void EndRaceRPC(string winnerName, string winnerTime)
+    //{
+    //    WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
+    //    win.updateWinnerName(winnerName);
+    //    win.updateWinnerTime(winnerTime);
+        
+    //}
 
     private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
     private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
