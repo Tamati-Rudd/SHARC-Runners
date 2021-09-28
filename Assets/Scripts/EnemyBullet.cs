@@ -7,24 +7,18 @@ using UnityEngine;
 **/
 public class EnemyBullet : MonoBehaviour
 {
-    public float speed; 
-    private Transform player;
-    private Vector2 target;
-
+    private float bulletSpeed; 
+    private Rigidbody2D rb; 
     public void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        target = new Vector2( player.position.x, player.position.y);
+        rb = GetComponent<Rigidbody2D>();
+        bulletSpeed = 20f;
+
     }
 
     public void Update()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-        if (transform.position.x == target.x && transform.position.y == target.y)
-        {
-            DestroyProjectile();
-        }
+    {   
+        rb.AddForce(transform.right * bulletSpeed);
     }
 
     //Method for detecting collision with player and or environment
@@ -33,6 +27,10 @@ public class EnemyBullet : MonoBehaviour
         if(collision.CompareTag("Player") || collision.CompareTag("Ground"))
         {
             DestroyProjectile();
+        }
+        else
+        {
+            Invoke("DestroyProjectile", 2f);
         }
     }
 
