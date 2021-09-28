@@ -65,6 +65,7 @@ public class CharacterSelection : MonoBehaviour
         {            
             select_Btn.SetActive(true);
             buy_Btn.SetActive(false);
+            price.gameObject.SetActive(false);
         }
     }
 
