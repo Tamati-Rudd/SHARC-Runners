@@ -36,7 +36,7 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {     
        Move();
-       ShootPlayer();
+      // ShootPlayer();
     }
 
     //Method for moving constantly forward 
@@ -44,7 +44,7 @@ public class EnemyAI : MonoBehaviour
     {
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x, 0) * moveSpeed;
-        InvokeRepeating("Jump", 2f, 3f);
+       // InvokeRepeating("Jump", 2f, 3f);
         Flip();
     }
 
