@@ -4625,7 +4625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 54.26001, y: -23.200073}
+  m_AnchoredPosition: {x: 54.26001, y: -23.200134}
   m_SizeDelta: {x: 108.52, y: 46.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090202360
@@ -5566,7 +5566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 893.0906, y: -499.96878}
+  m_AnchoredPosition: {x: 772.74896, y: -578.03546}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285131343
@@ -5591,7 +5591,7 @@ MonoBehaviour:
   tokenstext: {fileID: 1062156994}
   price: {fileID: 348857230}
   notEnough: {fileID: 1368137269}
-  notEnoughBG: {fileID: 403540586}
+  notEnoughBG: {fileID: 1521410547}
   tokens: 0
 --- !u!1 &1306630444
 GameObject:
@@ -5903,10 +5903,10 @@ RectTransform:
   m_Father: {fileID: 1090202359}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -50, y: 732}
-  m_SizeDelta: {x: 649.34, y: 21.94}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 903.34, y: -314.83}
+  m_SizeDelta: {x: 649.34, y: 21.939941}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1368137269
 MonoBehaviour:
@@ -6204,7 +6204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1474.9343, y: -499.96878}
+  m_AnchoredPosition: {x: 1274.365, y: -578.03546}
   m_SizeDelta: {x: 165.02, y: 134.26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446044178
@@ -6337,7 +6337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 309.21185, y: -499.96878}
+  m_AnchoredPosition: {x: 269.098, y: -578.03546}
   m_SizeDelta: {x: 169.09, y: 124.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476468740
