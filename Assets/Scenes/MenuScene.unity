@@ -5592,6 +5592,7 @@ MonoBehaviour:
   price: {fileID: 348857230}
   notEnough: {fileID: 1368137269}
   notEnoughBG: {fileID: 1521410547}
+  priceBG: {fileID: 811723846}
   tokens: 0
 --- !u!1 &1306630444
 GameObject:
