@@ -146,17 +146,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
             if (activateSpeed)
                 SpeedAbility();
         }
-        if (activateSpeed)
-        {
-            speedTimer += Time.deltaTime;
-
-            if (speedTimer >= 3)
-            {
-                movementSpeed = 13.5f;
-                speedTimer = 0;
-                activateSpeed = false;
-            }
-        }
     }
 
     private void SetPlayerAnimation()
