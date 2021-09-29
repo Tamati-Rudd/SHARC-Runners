@@ -10,40 +10,33 @@ using System.IO;
 //This script manages the functionality of the game's Finish Point
 public class FinishPoint : MonoBehaviour
 {
-    PhotonView playerPV;
-    public string playerName;
     public Stopwatch timer;
-    PlacementManager placements;
+    public PlacementManager placements;
 
     private void Start()
     {
-        //PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = false;
         placements = GameObject.FindGameObjectWithTag("PlacementManager").GetComponent<PlacementManager>();
     }
 
     //Handle collision with the Finish Point
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //If the colliding object has the Player tag
+        //If the colliding object has the Player tag (prevent anything else from triggering the finish point)
         if (collision.tag == "Player" && timer != null)
-        { 
-            //Get the winner's time
+        {
+            //Get player data
             timer.StopStopwatch();
             string time = timer.getTime();
-
-            //Determine the player's placement
             int playerPlacement = placements.registerFinish();
+            PhotonView playerPV = collision.GetComponent<PhotonView>();
+            string playerName = playerPV.Owner.NickName;
 
-            //Record the winner's name
-            playerPV = collision.GetComponent<PhotonView>();
-            playerName = playerPV.Owner.NickName;
-
+            //Record player data
             GameObject Record = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FinishRecord"), Vector2.zero, Quaternion.identity);
-            if (Record == null)
-                Debug.Log("Record Doesnt Exist!");
             FinishRecord fr = Record.GetComponent<FinishRecord>();
-            if (fr == null)
-                Debug.Log("Fr Doesnt Exist!");
+            PhotonView recordPV = Record.GetComponent<PhotonView>();
+            recordPV.RPC("clearIfNotMine", RpcTarget.AllBuffered); //Delete the record for player who aren't the one who finished
             fr.setName(playerName);
             fr.setTime(time);
             fr.setPlacement(playerPlacement);
@@ -52,7 +45,7 @@ public class FinishPoint : MonoBehaviour
             //winnerPV.RPC("EndRaceRPC", RpcTarget.AllBuffered, winnerName, time);
 
             //Destroy the finished player's object, and move them (and only them!) to the PostGame screen
-            Destroy(collision); //Needs to be changed to work properly
+            //PhotonNetwork.Destroy(PhotonView.Find(playerPV.ViewID));
             SceneManager.LoadScene("PostGame");
         }
     }

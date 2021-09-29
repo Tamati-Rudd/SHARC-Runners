@@ -6,19 +6,23 @@ using Photon.Pun;
 //This class represents a single record of a player finishing the race, holding their name, time and placement
 public class FinishRecord : MonoBehaviour
 {
-    private string name;
-    private string time;
-    private int placement;
-    PhotonView PV;
+    public string name;
+    public string time;
+    public int placement;
+    public PhotonView PV;
 
-    void start()
+    [PunRPC]
+    public void clearIfNotMine()
     {
-        Debug.Log("Making Finish Record");
+        if (PV == null)
+            Debug.Log("Broken");
         if (!PV.IsMine)
         {
             Debug.Log("NOT MINE");
-            Destroy(this);
+            PhotonNetwork.Destroy(PhotonView.Find(PV.ViewID));
         }
+        else
+            Debug.Log("MINE");
     }
 
     //Get method for name
