@@ -15,7 +15,7 @@ MonoBehaviour:
   AppSettings:
     AppIdRealtime: 097833b2-ef51-4ede-810f-c62e1cfbc348
     AppIdFusion: 
-    AppIdChat: 
+    AppIdChat: 7cb1be1b-4303-40f8-88ea-5de24475dd5d
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
@@ -56,5 +56,5 @@ MonoBehaviour:
   - incrementPlayersFinished
   - clearIfNotMine
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1
