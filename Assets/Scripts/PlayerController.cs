@@ -24,10 +24,13 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public TMP_Text username;
     public Transform respawnPoint;
 
+    [Header("Race Status")]
+    public bool raceStarted = false;
+    public bool raceFinished = false;
+
     [Header("Sabotage")]
     public Light2D sabotageIndicator;
     public float disableTimer = 0;
-    public bool raceStarted = false;
 
     [Header("Ability")]
     public float speedTimer;
@@ -134,7 +137,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
         SetPlayerAnimation();
 
-        PlayerAbility();
+        if (!raceFinished)
+            PlayerAbility();
 
     }
 
@@ -302,15 +306,18 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Runs when a race is ended, saving the winner and loading all players into the PostGame scene
-    //[PunRPC]
-    //void EndRaceRPC(string winnerName, string winnerTime)
-    //{
-    //    WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
-    //    win.updateWinnerName(winnerName);
-    //    win.updateWinnerTime(winnerTime);
-        
-    //}
+    //Runs when the player finishes the race, entering them into a spectator state
+    //In a spectator state, a player can still move on the map, but is invisible to other players and cannot interact with certain features (e.g. sabotage/crystal pickup, ability, shooting)
+    [PunRPC]
+    void Finished()
+    {
+        PV.transform.position = new Vector3(PV.transform.position.x, PV.transform.position.y, -100);
+        SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
+        sabController.removePlayerController(this);
+        raceFinished = true;
+        movementSpeed = 20;
+        jumpForce = 30;
+    }
 
     private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
     private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
@@ -345,8 +352,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //Check if the target object is an enemy
         else if (collision.gameObject.tag == "Enemy")
         {
-            //Move player back to the respawn point
-            PV.transform.position = respawnPoint.transform.position;
+            if (!(raceFinished)) //Move player back to the respawn point
+                PV.transform.position = respawnPoint.transform.position;
+            else //Move player back to respawn point while spectating. Done to prevent disruption of the race by spectators
+                PV.transform.position = new Vector3(respawnPoint.transform.position.x, respawnPoint.transform.position.y, -100);
         }
     }
 }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 //This class records how many players have finished in order to assign placements
-public class PlacementManager : MonoBehaviour
+public class PlacementManager : MonoBehaviour 
 {
     public static PlacementManager PlacementInstance;
     public int playerCount;
@@ -28,21 +29,22 @@ public class PlacementManager : MonoBehaviour
         playerCount = players.Length;
     }
 
-    //This method registers that a player finished and returns their placement as an integer
-    public int registerFinish()
-    {
-        PV.RPC("incrementPlayersFinished", RpcTarget.AllBuffered);
-        return playersFinished;
-    }
-
-    //public void registerFinish(string playerName, string time)
-    //{
-    //    //placements.Enqueue(new FinishRecord());
-    //}
-
+    //This method registers a player completing the race
     [PunRPC]
-    public void incrementPlayersFinished()
+    public void registerFinish(string playerName, string playerTime)
     {
-        playersFinished++;
-    }  
+        playersFinished = playersFinished+1;
+        int playerPlacement = playersFinished;
+        placements.Enqueue(new FinishRecord(playerName, playerTime, playerPlacement));
+        
+        if (playersFinished == playerCount)
+        {
+            Debug.Log("SHOULD END RACE!");
+            SceneManager.LoadScene("PostGame");
+        }
+
+        FinishRecord fr = placements.Peek();
+        Debug.Log("Finish Record: " + fr.getName() + " finished place " + fr.getPlacement() + " in " + fr.getTime());
+        Debug.Log("Size of Queue: " + placements.Count);
+    }    
 }

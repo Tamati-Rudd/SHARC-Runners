@@ -9,20 +9,13 @@ public class FinishRecord : MonoBehaviour
     public string name;
     public string time;
     public int placement;
-    public PhotonView PV;
 
-    [PunRPC]
-    public void clearIfNotMine()
+    //Construct a FinishRecord object
+    public FinishRecord(string playerName, string playerTime, int playerPlacement)
     {
-        if (PV == null)
-            Debug.Log("Broken");
-        if (!PV.IsMine)
-        {
-            Debug.Log("NOT MINE");
-            PhotonNetwork.Destroy(PhotonView.Find(PV.ViewID));
-        }
-        else
-            Debug.Log("MINE");
+        setName(playerName);
+        setTime(playerTime);
+        setPlacement(playerPlacement);
     }
 
     //Get method for name

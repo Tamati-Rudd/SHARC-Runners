@@ -79,6 +79,19 @@ public class SabotageController : MonoBehaviour
         return controllers;
     }
 
+    //This method removes a PlayerController from the array of controllers. Run when a player finishes the race
+    public void removePlayerController(PlayerController toRemove)
+    {
+        int index = System.Array.IndexOf(controllers, toRemove);
+        
+        if (index != null)
+        {
+            controllers[index] = null;
+            numControllers--;
+            Debug.Log("Finished Controller Removed From Sabotage List!");
+        }
+    }
+
     //This method randomly selects a sabotage and calls that sabotages applySabotage method
     //The selectedSabotage is returned for unit testing purposes 
     public int sabotage(PlayerController sourcePlayer, int unitTesting)
