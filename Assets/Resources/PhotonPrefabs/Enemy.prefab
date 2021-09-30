@@ -167,18 +167,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
-  stoppingDistance: 0
-  aggro: 10
-  retreatDistance: 0
-  backLineOfSite: {fileID: 3776138673956080864}
-  frontLineOfSite: {fileID: 3776138672493557686}
-  player: {fileID: 0}
   sightStart: {fileID: 3776138673847951360}
   sightEnd: {fileID: 3776138673385343014}
   needsCollision: 1
+  jumpForce: 0
   startingFireRate: 2
   projectile: {fileID: 5141206141640708449, guid: 25228a3464d844c8092b2181b17c591a, type: 3}
   animator: {fileID: 3776138673847951364}
+  rb: {fileID: 0}
 --- !u!114 &3776138673847951365
 MonoBehaviour:
   m_ObjectHideFlags: 0

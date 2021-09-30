@@ -5,30 +5,32 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
+//This class handles a press of the Return to Lobby button in the PostGame screen
 public class ReturnToLobby : MonoBehaviourPunCallbacks
 {
     public Button button;
 
-   void Start()
+    void Start()
     {
         button.onClick.AddListener(ReturnPlayerToLobby);
     }
 
-    
+    //Returns the player to lobby after cleaning up don't destroy GameObjects
     public void ReturnPlayerToLobby()
     {
-       GameObject winnerRecord = GameObject.FindGameObjectWithTag("WinRecord");
-       Destroy(winnerRecord);
-       Destroy(Roommanager.Instance.gameObject);
-       LeaveRoom();
-       //SceneManager.LoadScene(0);
+        GameObject placementManager = GameObject.FindGameObjectWithTag("PlacementManager");
+        Destroy(placementManager);
+        Destroy(Roommanager.Instance.gameObject);
+        LeaveRoom();
     }
 
+    //Leave the room
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
     }
 
+    //When the room is left
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
