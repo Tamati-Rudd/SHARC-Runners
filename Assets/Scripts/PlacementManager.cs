@@ -38,13 +38,6 @@ public class PlacementManager : MonoBehaviour
         placements.Enqueue(new FinishRecord(playerName, playerTime, playerPlacement));
         
         if (playersFinished == playerCount)
-        {
-            Debug.Log("SHOULD END RACE!");
             SceneManager.LoadScene("PostGame");
-        }
-
-        FinishRecord fr = placements.Peek();
-        Debug.Log("Finish Record: " + fr.getName() + " finished place " + fr.getPlacement() + " in " + fr.getTime());
-        Debug.Log("Size of Queue: " + placements.Count);
     }    
 }

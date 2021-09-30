@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 
 //This class represents a single record of a player finishing the race, holding their name, time and placement
+//Replaces the WinnerRecord in the race placement system
 public class FinishRecord : MonoBehaviour
 {
     public string name;
