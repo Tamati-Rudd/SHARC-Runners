@@ -36,7 +36,7 @@ public class PlayerWeapon : MonoBehaviourPunCallbacks
         if (PV.IsMine)
         {
             //Only shoot if the local player isn't disabled
-            if (!(controller.isDisabled))
+            if (!(controller.isDisabled) && !(controller.raceFinished))
                 PV.RPC("ShootRPC", RpcTarget.All);
         }
     }

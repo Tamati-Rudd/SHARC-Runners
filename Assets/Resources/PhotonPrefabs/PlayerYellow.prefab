@@ -181,9 +181,10 @@ MonoBehaviour:
   isDisabled: 1
   username: {fileID: 1223789675630798242}
   respawnPoint: {fileID: 0}
+  raceStarted: 0
+  raceFinished: 0
   sabotageIndicator: {fileID: 7791488138704627368}
   disableTimer: 0
-  raceStarted: 0
   speedTimer: 0
   activateSpeed: 0
   collectableMeter: {fileID: 7804258385925792805}
