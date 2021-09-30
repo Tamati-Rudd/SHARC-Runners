@@ -7,9 +7,9 @@ using Photon.Pun;
 //Replaces the WinnerRecord in the race placement system
 public class FinishRecord : MonoBehaviour
 {
-    public string name;
-    public string time;
-    public int placement;
+    private string name;
+    private string time;
+    private int placement;
 
     //Construct a FinishRecord object
     public FinishRecord(string playerName, string playerTime, int playerPlacement)
