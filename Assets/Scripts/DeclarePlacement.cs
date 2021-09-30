@@ -16,20 +16,20 @@ public class DeclarePlacement : MonoBehaviour
     {
         //Get player data
         //WinnerRecord win = GameObject.FindGameObjectWithTag("WinRecord").GetComponent<WinnerRecord>();
-        FinishRecord fr = GameObject.FindGameObjectWithTag("FinishRecord").GetComponent<FinishRecord>();
-        string playerName = fr.getName();
-        string timeTaken = fr.getTime();
-        int playerPlacement = fr.getPlacement();
-        string ordinal = "";
-        if (playerPlacement == 1)
-            ordinal = "st";
-        else if (playerPlacement == 2)
-            ordinal = "nd";
-        else if (playerPlacement == 3)
-            ordinal = "rd";
-        else
-            ordinal = "th";
-        Debug.Log(playerName + " came in place " + playerPlacement + " in " + timeTaken);
+        //FinishRecord fr = GameObject.FindGameObjectWithTag("FinishRecord").GetComponent<FinishRecord>();
+        //string playerName = fr.getName();
+        //string timeTaken = fr.getTime();
+        //int playerPlacement = fr.getPlacement();
+        //string ordinal = "";
+        //if (playerPlacement == 1)
+        //    ordinal = "st";
+        //else if (playerPlacement == 2)
+        //    ordinal = "nd";
+        //else if (playerPlacement == 3)
+        //    ordinal = "rd";
+        //else
+        //    ordinal = "th";
+        //Debug.Log(playerName + " came in place " + playerPlacement + " in " + timeTaken);
 
         //Get reference to the TextMeshProUGUI components
         Transform placementChild = transform.Find("PlacementText");
@@ -38,7 +38,7 @@ public class DeclarePlacement : MonoBehaviour
         timerText = timeChild.GetComponent<TextMeshProUGUI>();
 
         //Update the text to declare the winner of the race and state their time
-        placementText.text = playerName + " Came " + playerPlacement + ordinal + "!";
-        timerText.text = "Time Taken: " + timeTaken;
+        //placementText.text = playerName + " Came " + playerPlacement + ordinal + "!";
+        //timerText.text = "Time Taken: " + timeTaken;
     }
 }
