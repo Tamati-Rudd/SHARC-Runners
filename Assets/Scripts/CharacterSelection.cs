@@ -47,9 +47,6 @@ public class CharacterSelection : MonoBehaviour
         IsUnlockedRed = PlayerPrefs.GetInt("Red");
         IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
 
-        //retrive the tokens
-        PlayerPrefs.SetInt("Tokens", 500);
-
         //chagne colour of UI element
         sr = notEnoughBG.GetComponent<SpriteRenderer>();
         sr.color = Color.blue;
