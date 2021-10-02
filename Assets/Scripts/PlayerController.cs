@@ -146,10 +146,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         if (Input.GetButtonDown("Fire2"))
         {
-            aController.runAbility(1);//check if the player has collected 8 crystals
-        }
-        
-        
+            aController.runAbility(2);//check if the player has collected 8 crystals
+        }      
     }
 
     private void SetPlayerAnimation()
@@ -252,13 +250,30 @@ public class PlayerController : MonoBehaviour, IPunObservable
     }
 
     //Change the speed of the character
-    public void SpeedAbility()
+    public void pickAbility(int n)
     {
-        collectableMeter.UpdateCoins();
-        movementSpeed = 20;
+        if (n == 1)
+        {
+            collectableMeter.UpdateCoins();
+            movementSpeed = 20;
+            
+        }
+        else if (n == 2)
+        {
+            rb.AddForce(new Vector2(0f, jumpForce));
+            isGrounded = false;
+            canDoubleJump = true;
+            collectableMeter.UpdateCoins();
+        }
+        else if (n == 3)
+        {
+            isGrounded = true;
+        }
+
+        //return true;//Unit Testing
     }
 
-    public void Flip()
+        public void Flip()
     {
 
         facingRight = !facingRight;

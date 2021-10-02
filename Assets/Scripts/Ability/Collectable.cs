@@ -21,19 +21,11 @@ public class Collectable : MonoBehaviour
 
     void Start()
     {
-
         Vector2 meterlocation;
         meterlocation.x = 50;
         meterlocation.y = 50;
 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-
-       // MeterScript meter = Instantiate(abilityMeter, meterlocation, Quaternion.identity);
-       // meter.transform.SetParent(canvas.transform);
-
-        //Text counter = Instantiate(Counter, meterlocation, Quaternion.identity);
-       // counter.transform.SetParent(canvas.transform);
-
 
         resetcoin = 0;
         currentcoin = 0;
@@ -46,9 +38,7 @@ public class Collectable : MonoBehaviour
             
                 int viewID = collision.GetComponent<PhotonView>().ViewID;
 
-                PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);
-
-                //Destroy(collision.gameObject);// destroy the object
+                PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);//destroy the object
 
                 if (currentcoin < 8)//Run statement if the coins is less then 8
                 {
@@ -60,8 +50,6 @@ public class Collectable : MonoBehaviour
                     else
                         SetSpeed();
                 }
-
-            
         }
     }
 
@@ -88,7 +76,7 @@ public class Collectable : MonoBehaviour
     }
 
     public void Increase()
-    {
+    { 
         currentcoin++; //increases the variable's value by 10
     }
 

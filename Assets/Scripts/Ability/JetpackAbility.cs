@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedAbility : MonoBehaviour
+public class JetpackAbility : MonoBehaviour
 {
     public float speedTimer;
     public PlayerController pController;
@@ -25,18 +25,17 @@ public class SpeedAbility : MonoBehaviour
 
             if (speedTimer >= 5)
             {
-                pController.ResetSpeed();
+                pController.pickAbility(3);
                 speedTimer = 0;
                 startTimer = false;
             }
         }
-        
     }
 
     //Change the Player Speed
-    public void activateSpeed(bool t)
+    public void activateJetpack(bool t)
     {
-        pController.pickAbility(1);//speed the playerup
+        pController.pickAbility(2);//Put a jetpack on the player
 
         //ActivateSpeed the timer
         startTimer = t;
