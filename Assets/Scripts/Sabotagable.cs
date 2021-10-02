@@ -6,18 +6,20 @@ using Photon.Pun;
 //This class manages player collision with sabotage crates
 public class Sabotagable : MonoBehaviour
 {
-    public PhotonView PV; 
+    public PhotonView PV;
+    private PlayerController playerController;
 
     //Get the Photon View of the Player this script is attached to
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+        playerController = PV.GetComponent<PlayerController>();
     }
 
     //Handle player collision with a Sabotage crate
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Sabotage")
+        if (collision.tag == "Sabotage" && !(playerController.raceFinished))
         {
             //Remove the sabotage crate
             int viewID = collision.GetComponent<PhotonView>().ViewID; //Get crates viewID

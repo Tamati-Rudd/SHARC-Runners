@@ -52,6 +52,11 @@ MonoBehaviour:
   - applySabotage
   - DisablePlayerRPC
   - EnablePlayerRPC
+  - UpdatePlacementsRPC
+  - incrementPlayersFinished
+  - clearIfNotMine
+  - registerFinish
+  - Finished
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

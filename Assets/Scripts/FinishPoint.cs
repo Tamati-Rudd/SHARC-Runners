@@ -3,37 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-
-//NOTE: For the Finish Point to function correctly, the next built scene after the GameScene MUST be the PostGame scene
+using System.IO;
 
 //This script manages the functionality of the game's Finish Point
 public class FinishPoint : MonoBehaviour
 {
-    PhotonView winnerPV;
-    public string winnerName;
     public Stopwatch timer;
+    public PhotonView placementManagerPV;
 
     private void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        placementManagerPV = GameObject.FindGameObjectWithTag("PlacementManager").GetComponent<PhotonView>();
     }
 
-    //Handle collision with the Finish Point
+    //Finish point collision
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //If the colliding object has the Player tag
+        //Ensure colliding object was a player
         if (collision.tag == "Player" && timer != null)
-        { 
-            //Get the winner's time
-            timer.StopStopwatch();
-            string time = timer.getTime();
+        {
+            PhotonView playerPV = collision.GetComponent<PhotonView>();
+            PlayerController playerController = playerPV.GetComponent<PlayerController>();
 
-            //Record the winner's name
-            winnerPV = collision.GetComponent<PhotonView>();
-            winnerName = winnerPV.Owner.NickName;
+            //Ensure the player hasn't already finished
+            if (!(playerController.raceFinished))
+            {
+                //Get player data
+                timer.StopStopwatch();
+                string time = timer.getTime();
 
-            //End the race
-            winnerPV.RPC("EndRaceRPC", RpcTarget.AllBuffered, winnerName, time);
+                string playerName = playerPV.Owner.NickName;
+
+                placementManagerPV.RPC("registerFinish", RpcTarget.AllBufferedViaServer, playerName, time);
+                playerPV.RPC("Finished", RpcTarget.AllBuffered);
+            }   
         }
     }
 }

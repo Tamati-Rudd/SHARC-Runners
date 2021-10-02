@@ -5,23 +5,40 @@ using UnityEngine;
 public class SpeedAbility : MonoBehaviour
 {
     public float speedTimer;
+    public PlayerController pController;
+    public Collectable collectable;
+    public bool startTimer;
 
-    private void Start()
+    // Start is called before the first frame update
+    public void Start()
     {
         speedTimer = 0;
+        startTimer = false;
     }
-    public void ActivateAbility(PlayerController c)
+
+    public void Update()
     {
-        if (c)
+        if (startTimer)
         {
+            //Start the timer
             speedTimer += Time.deltaTime;
 
-            if (speedTimer >= 3)
+            if (speedTimer >= 5)
             {
-                movementSpeed = 13.5f;
+                pController.ResetSpeed();
                 speedTimer = 0;
-                activateSpeed = false;
+                startTimer = false;
             }
         }
+        
+    }
+
+    //Change the Player Speed
+    public void ActivateSpeed(bool t)
+    {
+        pController.SpeedAbility();//speed the playerup
+
+        //ActivateSpeed the timer
+        startTimer = t;
     }
 }

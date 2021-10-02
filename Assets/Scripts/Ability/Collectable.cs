@@ -16,6 +16,7 @@ public class Collectable : MonoBehaviour
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+        pMovement = PV.GetComponent<PlayerController>();
     }
 
     void Start()
@@ -40,7 +41,7 @@ public class Collectable : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Collectable")
+        if (collision.tag == "Collectable" && !(pMovement.raceFinished))
         {
             
                 int viewID = collision.GetComponent<PhotonView>().ViewID;
