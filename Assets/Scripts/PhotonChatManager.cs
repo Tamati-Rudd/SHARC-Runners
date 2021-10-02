@@ -37,7 +37,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnDisconnected()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Channel Disconnected");
     }
 
     public void OnGetMessages(string channelName, string[] senders, object[] messages)
@@ -55,12 +55,12 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void OnSubscribed(string[] channels, bool[] results)
@@ -70,17 +70,17 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnUnsubscribed(string[] channels)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnUserSubscribed(string channel, string user)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnUserUnsubscribed(string channel, string user)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     // Start is called before the first frame update
@@ -123,6 +123,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         if (chatClient != null) {
             chatClient.Service();
         }
+
+        //if enter key is pressed
+        if (Input.GetKeyUp(KeyCode.Return)) { SendMsg(); }
+        msg.onFocusSelectAll = true;
     }
 
    public void Disconnect()
