@@ -126,7 +126,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
         //if enter key is pressed
         if (Input.GetKeyUp(KeyCode.Return)) { SendMsg(); }
-        msg.onFocusSelectAll = true;
+        msg.ActivateInputField();
     }
 
    public void Disconnect()
