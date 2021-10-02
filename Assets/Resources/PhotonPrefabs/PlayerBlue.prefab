@@ -587,6 +587,8 @@ GameObject:
   - component: {fileID: 4099078126158936964}
   - component: {fileID: 3813553944947868549}
   - component: {fileID: -7021847356454927674}
+  - component: {fileID: 5912633583916425377}
+  - component: {fileID: 2610746089316793459}
   m_Layer: 8
   m_Name: PlayerBlue
   m_TagString: Player
@@ -749,8 +751,7 @@ MonoBehaviour:
   raceFinished: 0
   sabotageIndicator: {fileID: -7021847356454927674}
   disableTimer: 0
-  speedTimer: 0
-  activateSpeed: 0
+  aController: {fileID: 2610746089316793459}
   collectableMeter: {fileID: 2225839799702241355}
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
@@ -1074,3 +1075,34 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &5912633583916425377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782196166129594710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f24a0b001d90594396506c9873bc831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedTimer: 0
+  pController: {fileID: 4035436343610420825}
+  collectable: {fileID: 2225839799702241355}
+  startTimer: 0
+--- !u!114 &2610746089316793459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782196166129594710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3e502c80fc2c24a9e0b15e4f401568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystal: {fileID: 2225839799702241355}
+  valid: 0
+  speed: {fileID: 5912633583916425377}

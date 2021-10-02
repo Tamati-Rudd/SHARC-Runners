@@ -33,8 +33,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public float disableTimer = 0;
 
     [Header("Ability")]
-    public float speedTimer;
-    public bool activateSpeed;
+    public AbilityController aController;
     public Collectable collectableMeter;//Access the collectable script
     private bool hasBulletFlipped = false;
 
@@ -91,8 +90,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
             Destroy(rb);
         }
 
-        speedTimer = 0;
-        activateSpeed = false;
+        //use default movement speed
+        ResetSpeed();
+
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
     }
 
@@ -146,21 +146,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         if (Input.GetButtonDown("Fire2"))
         {
-            activateSpeed = collectableMeter.SetSpeed();
-            if (activateSpeed)
-                SpeedAbility();
+            aController.runAbility(1);//check if the player has collected 8 crystals
         }
-        if (activateSpeed)
-        {
-            speedTimer += Time.deltaTime;
-
-            if (speedTimer >= 3)
-            {
-                movementSpeed = 13.5f;
-                speedTimer = 0;
-                activateSpeed = false;
-            }
-        }
+        
+        
     }
 
     private void SetPlayerAnimation()
@@ -256,12 +245,19 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
     }
 
+    //Default movement speed
+    public void ResetSpeed()
+    {
+        movementSpeed = 13.5f;
+    }
+
     //Change the speed of the character
     public void SpeedAbility()
     {
         collectableMeter.UpdateCoins();
         movementSpeed = 20;
     }
+
     public void Flip()
     {
 
