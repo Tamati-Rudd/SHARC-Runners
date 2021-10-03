@@ -252,6 +252,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     //Change the speed of the character
     public void pickAbility(int n)
     {
+        float jumpVelocity = 15f;
+
         if (n == 1)
         {
             collectableMeter.UpdateCoins();
@@ -260,9 +262,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
         else if (n == 2)
         {
-            rb.AddForce(new Vector2(0f, jumpForce));
-            isGrounded = false;
-            canDoubleJump = true;
+            rb.velocity = Vector2.up * jumpVelocity;
+            //canDoubleJump = true;
             collectableMeter.UpdateCoins();
         }
         else if (n == 3)

@@ -24,12 +24,12 @@ public class AbilityController : MonoBehaviour
             switch (a)
             {
                 //when a is 1 the ability is speed
-                case 1:
+                case 0:
                     speed.activateSpeed(true);
                     break;
 
                 //when a is 2 the ability is jetpack
-                case 2:
+                case 1:
                     jetpack.activateJetpack(true);
                     break;
 
