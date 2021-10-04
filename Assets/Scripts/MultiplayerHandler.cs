@@ -177,12 +177,12 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
             if (readyCounter == playerCount)
             {
-                StartGameBtn.SetActive(true);
+                
 
             }
             else
             {
-                StartGameBtn.SetActive(false);
+                
             }
         
     }
