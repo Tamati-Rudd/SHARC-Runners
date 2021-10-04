@@ -45,7 +45,7 @@ public class EnemyManager : MonoBehaviour
 
     }
 
-    //This function creates the enemy in the scene
+    //This function creates the patrolling enemy in the scene
     void CreateEnemy(Vector2 SpawnPoint)
     {              
         //instantiating the enemy
@@ -57,5 +57,31 @@ public class EnemyManager : MonoBehaviour
             enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
         }
         
+    }
+
+    //This function creates the jumping enemy in the scene
+    void CreateJumpingEnemy(Vector2 SpawnPoint)
+    {
+         //instantiating the enemy
+        GameObject enemyclone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "JumpingEnemy"), SpawnPoint, Quaternion.identity);
+
+        if (enemyclone != null)
+        {
+            //Assiging the crystal so it can be dropped
+            enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
+        }
+    }
+
+    //This function creates the turret enemy in the scene
+    void CreateEnemyTurret(Vector2 SpawnPoint)
+    {
+         //instantiating the enemy
+        GameObject enemyclone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "EnemyTurret"), SpawnPoint, Quaternion.identity);
+
+        if (enemyclone != null)
+        {
+            //Assiging the crystal so it can be dropped
+            enemyclone.GetComponent<EnemyLife>().gemPrefab = gem;
+        }
     }
 }
