@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
 {
     public GameObject enemy;
     public GameObject gem;
-    public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3;
+    public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4;
     public PhotonView PV;
 
 
@@ -34,6 +34,10 @@ public class EnemyManager : MonoBehaviour
         SpawnPoint3.x = (float)60.512;
         SpawnPoint3.y = (float)50.6927;
 
+        SpawnPoint4.x = (float)5.87;
+        SpawnPoint4.y = (float)-0.64;
+
+
         //only the masterclient can spawn enemies for everyone
         if (PV.Owner.IsMasterClient)
         {            
@@ -41,6 +45,9 @@ public class EnemyManager : MonoBehaviour
             CreateEnemy(SpawnPoint1);
             CreateEnemy(SpawnPoint2);
             CreateEnemy(SpawnPoint3);
+           // CreateEnemyTurret(SpawnPoint4);
+            CreateJumpingEnemy(SpawnPoint4);
+
         }
 
     }

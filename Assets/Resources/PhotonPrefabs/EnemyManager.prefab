@@ -50,6 +50,7 @@ MonoBehaviour:
   SpawnPoint1: {x: 0, y: 0}
   SpawnPoint2: {x: 0, y: 0}
   SpawnPoint3: {x: 0, y: 0}
+  SpawnPoint4: {x: 0, y: 0}
   PV: {fileID: 0}
 --- !u!114 &3903409439805898119
 MonoBehaviour:
