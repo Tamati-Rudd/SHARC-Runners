@@ -6,7 +6,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 //This class records how many players have finished in order to assign placements
-public class PlacementManager : MonoBehaviour 
+public class PlacementManager : MonoBehaviourPun
 {
     public static PlacementManager PlacementInstance;
     public int playerCount;
@@ -33,11 +33,13 @@ public class PlacementManager : MonoBehaviour
     [PunRPC]
     public void registerFinish(string playerName, string playerTime)
     {
-        playersFinished = playersFinished+1;
+        playersFinished = playersFinished + 1;
         int playerPlacement = playersFinished;
         placements.Enqueue(new FinishRecord(playerName, playerTime, playerPlacement));
-        
+
         if (playersFinished == playerCount)
             SceneManager.LoadScene("PostGame");
-    }    
+    }
+
+
 }
