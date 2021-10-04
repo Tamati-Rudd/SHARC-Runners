@@ -33,10 +33,10 @@ public class PlacementManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void registerFinish(string playerName, string playerTime)
     {
-        playersFinished = playersFinished+1;
+        playersFinished = playersFinished + 1;
         int playerPlacement = playersFinished;
         placements.Enqueue(new FinishRecord(playerName, playerTime, playerPlacement));
-        
+
         if (playersFinished == playerCount)
             SceneManager.LoadScene("PostGame");
     }

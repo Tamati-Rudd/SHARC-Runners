@@ -36,22 +36,9 @@ public class ShairylTests
         //string user_id = PlayerPrefs.GetString("username");
         var chat = Object.Instantiate(chatholder, Vector2.zero, Quaternion.identity);
         var chatScript = chat.GetComponent<PhotonChatManager>();
- 
 
-        chatScript.chatClient = new ChatClient(chatScript);
+        Assert.AreEqual(true, chatScript.isSubscribed);
 
-        //Establish connection
-        chatScript.chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion,
-            new AuthenticationValues("test"));
-
-        //if connection was successfull
-        if (chatScript.chatClient.CanChat == true)
-        {
-            //attempt to subscribe to a channel
-           var actual = chatScript.chatClient.Subscribe(new string[] { "test" });
-
-            Assert.AreEqual(true, actual);
-        }
         
 
        
@@ -68,6 +55,7 @@ public class ShairylTests
 
         chatScript.chatClient = new ChatClient(chatScript);
 
+        
         //Establish connection
         chatScript.chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion,
             new AuthenticationValues("test"));
