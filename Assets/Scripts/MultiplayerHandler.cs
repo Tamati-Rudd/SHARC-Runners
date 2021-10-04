@@ -35,11 +35,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         else //When the player is returning to the menu scene from the post game scene
         {
             PhotonNetwork.ConnectUsingSettings();
-            //PhotonNetwork.Reconnect();
-            // PhotonNetwork.JoinLobby();
             Debug.Log("Returned to Menu Scene");
-            //WIP: Currently produces Operation setProperties 252 error
-            //PhotonNetwork.LeaveRoom();
         }
     }
 
