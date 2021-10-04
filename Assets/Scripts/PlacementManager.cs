@@ -6,7 +6,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 //This class records how many players have finished in order to assign placements
-public class PlacementManager : MonoBehaviourPun
+public class PlacementManager : MonoBehaviourPunCallbacks
 {
     public static PlacementManager PlacementInstance;
     public int playerCount;
@@ -41,5 +41,25 @@ public class PlacementManager : MonoBehaviourPun
             SceneManager.LoadScene("PostGame");
     }
 
+    //Handle a player leaving the game mid-game
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        string leftName = otherPlayer.NickName;
+        bool leftPlayerFinished = false;
 
+        foreach (FinishRecord fr in placements) {
+            string name = fr.getName();
+            if (leftName.Equals(name))
+                leftPlayerFinished = true;
+        }
+
+        //If the left player hadn't finished, then deduct them from the player count
+        if (!leftPlayerFinished)
+            playerCount = playerCount - 1;
+
+        //Re-check if the game should be ended
+        if (playersFinished == playerCount)
+            SceneManager.LoadScene("PostGame");
+    }
 }

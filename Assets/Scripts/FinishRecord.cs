@@ -5,7 +5,7 @@ using Photon.Pun;
 
 //This class represents a single record of a player finishing the race, holding their name, time and placement
 //Replaces the WinnerRecord in the race placement system
-public class FinishRecord : MonoBehaviour
+public class FinishRecord
 {
     private string name;
     private string time;

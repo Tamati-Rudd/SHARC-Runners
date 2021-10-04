@@ -20,7 +20,9 @@ TagManager:
   - FinishRecord
   - PlacementManager
   - Scoreboard
-  - ScoreboardEntry
+  - FinishedText
+  - Meter
+  - Counter
   layers:
   - Default
   - TransparentFX
