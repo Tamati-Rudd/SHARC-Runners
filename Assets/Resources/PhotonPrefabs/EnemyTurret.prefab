@@ -118,6 +118,10 @@ GameObject:
   - component: {fileID: 8393567825611005661}
   - component: {fileID: 8393567825611005662}
   - component: {fileID: 8393567825611005663}
+  - component: {fileID: 2238134560703305710}
+  - component: {fileID: -716148752223235339}
+  - component: {fileID: -3758212067218713092}
+  - component: {fileID: 5289563601054852695}
   m_Layer: 0
   m_Name: EnemyTurret
   m_TagString: Enemy
@@ -209,3 +213,74 @@ MonoBehaviour:
   firepoint: {fileID: 8393567824943771531}
   enemyBullet: {fileID: 1556973947596698728, guid: e61dd6ed8aeb64aca94dd0a6ed406ee2, type: 3}
   startTimeBetween: 3
+--- !u!114 &2238134560703305710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393567825611005648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8042cb31a6c4eb59714bb6ea75445b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 10
+  PV: {fileID: 0}
+  gemPrefab: {fileID: 0}
+--- !u!114 &-716148752223235339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393567825611005648}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
+--- !u!114 &-3758212067218713092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393567825611005648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -716148752223235339}
+  - {fileID: 5289563601054852695}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5289563601054852695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393567825611005648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
