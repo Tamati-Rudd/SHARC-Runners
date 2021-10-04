@@ -15,6 +15,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public TMP_InputField msg;
     public TMP_Text display;
     string roomName;
+    public bool isSubscribed = false;
+    public bool isConnected = false;
     //TMP_Text chatDisplay;
 
 
@@ -33,6 +35,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public void OnConnected()
     {
         chatClient.Subscribe(new string[] { roomName }); //subscribe to chat channel once connected to server
+        isConnected = true;
     }
 
     public void OnDisconnected()
@@ -66,6 +69,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public void OnSubscribed(string[] channels, bool[] results)
     {
         Debug.Log("Subscribed to a new channel!");
+        isSubscribed = true;
     }
 
     public void OnUnsubscribed(string[] channels)
@@ -86,12 +90,12 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     // Start is called before the first frame update
     void Start()
     {
-        if(PhotonNetwork.CurrentRoom.Name == null)
+        if(PhotonNetwork.CurrentRoom.Name is null)
         {
-           roomName = "default";
+          roomName = "default";
         }
-        else
-        {
+       else
+       {
             roomName = PhotonNetwork.CurrentRoom.Name;
         }
 

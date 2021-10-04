@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 using UnityEngine.UI;
+using Photon.Realtime;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
@@ -96,6 +97,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         prefab.GetComponent<Collectable>().Counter = counterclone;
         
     }
+
+    public void OnPhotonPlayerConnected(Player player)
+    {
+        Debug.Log("Player Connected " + player.NickName);
+    }
+
 
     //this function create the countdown once the player instantiates into the game
     void CreateCountdown(GameObject prefab)

@@ -21,10 +21,15 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     [SerializeField] public Transform PlayerListContent;
     [SerializeField] public GameObject PlayerListItemPrefab;
     [SerializeField] GameObject StartGameBtn;
+    private int readyCounter = 0;
+    private int playerCount = 0;
+    private PhotonView PV;
 
 
     private void Start()
     {
+       
+
         Debug.Log("Connected to Master");
         //automatically load scene for all the clients in room when hosts switches scene
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -35,11 +40,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         else //When the player is returning to the menu scene from the post game scene
         {
             PhotonNetwork.ConnectUsingSettings();
-            //PhotonNetwork.Reconnect();
-            // PhotonNetwork.JoinLobby();
             Debug.Log("Returned to Menu Scene");
-            //WIP: Currently produces Operation setProperties 252 error
-            //PhotonNetwork.LeaveRoom();
         }
     }
 
@@ -76,8 +77,9 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         Debug.Log("Joined room!");
         MenuManager.Instance.OpenMenu("Room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
-
+                
         Player[] players = PhotonNetwork.PlayerList;
+        playerCount = players.Length;
 
         //destroy all the players that existed before joining the room
         foreach (Transform child in PlayerListContent)
@@ -112,9 +114,19 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         
     }
 
+    public void ReadyUp()
+    {
+        PV.RPC("increaseCounter", RpcTarget.AllBuffered);
+    }
+
+
     public void StartGame()
     {
-        MenuManager.Instance.CloseMenu("Room");        
+        MenuManager.Instance.CloseMenu("Room");
+        // makes room close 
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        // makes room invisible to random match making
+        PhotonNetwork.CurrentRoom.IsVisible = false; 
         //all players in lobby load into the level
         PhotonNetwork.LoadLevel(1);
     }
@@ -160,5 +172,26 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         Instantiate(PlayerListItemPrefab, PlayerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
     }
 
+    private void Update()
+    {
 
+            if (readyCounter == playerCount)
+            {
+                
+
+            }
+            else
+            {
+                
+            }
+        
+    }
+
+
+
+    [PunRPC]
+    void increaseCounter()
+    {
+        readyCounter++;
+    }
 }

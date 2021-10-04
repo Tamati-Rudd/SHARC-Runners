@@ -7,34 +7,24 @@ using UnityEngine;
 **/
 public class EnemyBullet : MonoBehaviour
 {
-    private float bulletSpeed; 
-    private Rigidbody2D rb; 
-    public void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        bulletSpeed = 20f;
+    public float bulletSpeed; //The Speed of the enemy bullet
+    Rigidbody2D rb;
 
+    private void Start()
+    {
+       rb = GetComponent<Rigidbody2D>();
+       rb.velocity = -transform.up * bulletSpeed;
+       Destroy(gameObject, 2f);
     }
 
-    public void Update()
-    {   
-        rb.AddForce(transform.right * bulletSpeed);
-    }
-
-    //Method for detecting collision with player and or environment
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") || collision.CompareTag("Ground"))
+        if(collision.CompareTag("Ground"))
         {
             DestroyProjectile();
         }
-        else
-        {
-            Invoke("DestroyProjectile", 2f);
-        }
     }
 
-    //Method for destroying the enemies bullet
     private void DestroyProjectile()
     {
         Destroy(gameObject);

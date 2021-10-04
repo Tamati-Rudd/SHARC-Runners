@@ -12,7 +12,7 @@ using System.IO;
 **/
 public class EnemyLife : MonoBehaviourPunCallbacks
 {
-    private int HP = 10; //Health Point of Enemy
+    public int HP = 10; //Health Point of Enemy
 
     //Materials used for the animation
     private Material matWhite;
@@ -50,22 +50,10 @@ public class EnemyLife : MonoBehaviourPunCallbacks
                 int viewID = this.GetComponent<PhotonView>().ViewID;
 
                 PV.RPC("Kill", RpcTarget.MasterClient, viewID);
-
-               // KillSelf();
             }
-            /*else
-            {
-                //Invoke("ResetMaterial", 1.5f);
-            }*/
+        
         }
     }
-
-    /*private void ResetMaterial()
-    {
-        sr.material = matDefault;
-    }*/
-
-
 
 
     //Method for generating gems
