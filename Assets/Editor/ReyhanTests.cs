@@ -9,20 +9,18 @@ public class ReyhanTests : MonoBehaviour
 {
     private GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/PhotonPrefabs/PlayerBlue.prefab");
     private GameObject crystalPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/PhotonPrefabs/Square.prefab");
-
+    private GameObject counterPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/PhotonPrefabs/Counter.prefab");
+   
     //This test checks if the player is able to collect a crystal 
     [Test]
     public void testCollectedCrystal()
     {
         var player = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
         var playerScript = player.GetComponent<PlayerController>();
-        var crystal = Object.Instantiate(crystalPrefab, Vector2.zero, Quaternion.identity);
         var collectableScript = playerScript.GetComponent<Collectable>();
 
-        collectableScript.OnTriggerEnter2D(crystal.GetComponent<Collider2D>());
-        //playerScript.isDisabled = false;
-
-        var actual = collectableScript;
+        //Get the expected and actual test results
+        var actual = collectableScript.collectCrystal(8);
         var collected = true;
 
         //Verify that the player has collected a crystal
@@ -35,15 +33,21 @@ public class ReyhanTests : MonoBehaviour
     {
         var player = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
         var playerScript = player.GetComponent<PlayerController>();
+        var collectableScript = playerScript.GetComponent<Collectable>();
+        var abilityCScript = playerScript.GetComponent<AbilityController>();
+        var speedScript = playerScript.GetComponent<SpeedAbility>();
 
-        playerScript.isDisabled = false;
-
-        AbilityController aController = new AbilityController();
-
-
-        var actual = aController.runAbility(1);
+        //Simulate that a player has collected a crystal
+        collectableScript.collectCrystal(8);
+ 
+        //pick the speed ability
+        abilityCScript.runAbility(0, true);
+        
+        //Get the expected and actual test results
+        var actual = speedScript.unitTesting2;
         var result = true;
-
+       
+        //Verify that the player has activated there speed ability
         Assert.AreEqual(result, actual);
     }
 
@@ -53,14 +57,22 @@ public class ReyhanTests : MonoBehaviour
     {
         var player = Object.Instantiate(playerPrefab, Vector2.zero, Quaternion.identity);
         var playerScript = player.GetComponent<PlayerController>();
-        var crystal = Object.Instantiate(crystalPrefab, Vector2.zero, Quaternion.identity);
-        var collectableScript = player.GetComponent<Collectable>();
+        var collectableScript = playerScript.GetComponent<Collectable>();
+        var abilityCScript = playerScript.GetComponent<AbilityController>();
+        var speedScript = playerScript.GetComponent<SpeedAbility>();
+        
+        //Simulate that a player has collected a crystal
+        collectableScript.collectCrystal(8);
 
-
-        //var actual = playerScript.pickAbility(1);
-        var result = true;
-
-        //Assert.AreEqual(result, actual);
+        //pick the speed ability
+        abilityCScript.runAbility(0, true);
+        
+        //Get the expected and actual test results
+        var actual = playerScript.movementSpeed;
+        var result = 20;
+        
+        //Verify that the player has movement has been changed
+        Assert.AreEqual(result, actual);
 
     }
 }

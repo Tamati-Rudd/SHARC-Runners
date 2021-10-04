@@ -14,10 +14,11 @@ public class AbilityController : MonoBehaviour
     {
         valid = false;
     }
+
     //Activtes the players ability
-    public bool runAbility(int a)
+    public void runAbility(int a, bool testing)
     {
-        valid = crystal.SetSpeed();//check if the player has collected 8 crystals
+        valid = crystal.SetSpeed(true);//check if the player has collected 8 crystals
 
         if (valid)
         {
@@ -25,7 +26,15 @@ public class AbilityController : MonoBehaviour
             {
                 //when a is 1 the ability is speed
                 case 0:
-                    speed.activateSpeed(true);
+                    if (!testing)
+                    {
+                        speed.activateSpeed(true, false);
+                    }
+                    //unit Testing
+                    else if (testing)
+                    {
+                        speed.activateSpeed(true, true);
+                    }   
                     break;
 
                 //when a is 2 the ability is jetpack
@@ -38,7 +47,6 @@ public class AbilityController : MonoBehaviour
                     break;
             }          
         }
-        return valid;
     }
     
 }

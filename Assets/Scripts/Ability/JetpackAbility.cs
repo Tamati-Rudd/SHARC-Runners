@@ -25,7 +25,7 @@ public class JetpackAbility : MonoBehaviour
 
             if (speedTimer >= 5)
             {
-                pController.pickAbility(3);
+                pController.pickAbility(3, false);
                 speedTimer = 0;
                 startTimer = false;
             }
@@ -35,7 +35,7 @@ public class JetpackAbility : MonoBehaviour
     //Change the Player Speed
     public void activateJetpack(bool t)
     {
-        pController.pickAbility(2);//Put a jetpack on the player
+        pController.pickAbility(2, false);//Put a jetpack on the player
 
         //ActivateSpeed the timer
         startTimer = t;
