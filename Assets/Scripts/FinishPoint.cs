@@ -31,11 +31,35 @@ public class FinishPoint : MonoBehaviour
                 //Get player data
                 timer.StopStopwatch();
                 string time = timer.getTime();
-
                 string playerName = playerPV.Owner.NickName;
 
+                //Update states to reflect a player finish
                 placementManagerPV.RPC("registerFinish", RpcTarget.AllBufferedViaServer, playerName, time);
                 playerPV.RPC("Finished", RpcTarget.AllBuffered);
+
+                GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+                Transform canvasTransform = canvas.transform;
+                foreach (Transform transform in canvasTransform)
+                {
+                    if (transform.tag == "FinishedText")
+                    {
+                        GameObject finishedText = transform.gameObject;
+                        finishedText.SetActive(true);
+                    }
+                    if (transform.tag == "Meter" || transform.tag == "Counter")
+                    {
+                        GameObject gameObject = transform.gameObject;
+                        gameObject.SetActive(false);
+                    }
+                }
+
+                //GameObject finishText = GameObject.FindGameObjectWithTag("FinishedText");
+                
+                //GameObject meter = GameObject.FindGameObjectWithTag("Meter");
+                //meter.SetActive(false);
+                //GameObject counter = GameObject.FindGameObjectWithTag("Counter");
+                //counter.SetActive(false);
+
             }   
         }
     }
