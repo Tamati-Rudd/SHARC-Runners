@@ -51,6 +51,13 @@ MonoBehaviour:
   SpawnPoint2: {x: 0, y: 0}
   SpawnPoint3: {x: 0, y: 0}
   SpawnPoint4: {x: 0, y: 0}
+  SpawnPoint5: {x: 0, y: 0}
+  SpawnPoint6: {x: 0, y: 0}
+  SpawnPoint7: {x: 0, y: 0}
+  SpawnPoint8: {x: 0, y: 0}
+  SpawnPoint9: {x: 0, y: 0}
+  SpawnPoint10: {x: 0, y: 0}
+  SpawnPoint11: {x: 0, y: 0}
   PV: {fileID: 0}
 --- !u!114 &3903409439805898119
 MonoBehaviour:
