@@ -453,6 +453,8 @@ GameObject:
   - component: {fileID: 2283918164330188624}
   - component: {fileID: 1422211372893615953}
   - component: {fileID: 4169666566965523986}
+  - component: {fileID: 2018813965131600122}
+  - component: {fileID: 5819450163494240934}
   m_Layer: 8
   m_Name: PlayerRed
   m_TagString: Player
@@ -615,8 +617,7 @@ MonoBehaviour:
   raceFinished: 0
   sabotageIndicator: {fileID: 4169666566965523986}
   disableTimer: 0
-  speedTimer: 0
-  activateSpeed: 0
+  aController: {fileID: 2018813965131600122}
   collectableMeter: {fileID: 4157674783676150943}
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
@@ -926,7 +927,7 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
+  m_PointLightInnerAngle: 357.74
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 3
@@ -940,6 +941,38 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2018813965131600122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525679800817010050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3e502c80fc2c24a9e0b15e4f401568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystal: {fileID: 4157674783676150943}
+  valid: 0
+  speed: {fileID: 0}
+  jetpack: {fileID: 5819450163494240934}
+--- !u!114 &5819450163494240934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525679800817010050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e579d7a9cdd4574b8b73e1b957a0a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedTimer: 0
+  pController: {fileID: 2256441228313352845}
+  collectable: {fileID: 4157674783676150943}
+  startTimer: 0
 --- !u!1 &8241315911810338124
 GameObject:
   m_ObjectHideFlags: 0
