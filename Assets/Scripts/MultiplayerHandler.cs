@@ -94,10 +94,24 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
             Instantiate(PlayerListItemPrefab, PlayerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
 
-
-
         //if it is the host, set the button to active
-        StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+        if(players.Length == 1)
+        {
+            //If only one player is in the lobby then set start button to active
+            StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+        }
+        else if(readyCounter == players.Length)
+        {
+            //If the amount of ready players is equal to the amount of players in lobby then set start button to active
+            StartGameBtn.SetActive(true);
+            StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+        }
+        else
+        {
+            //If the amount of ready players is not equal to the amount of players in lobby then set the start button to false 
+           StartGameBtn.SetActive(false);
+        }
+        //Just Need to find out how to sync players pressing ready button
     }
 
     //host migration if host leaves the room
@@ -116,7 +130,9 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     public void ReadyUp()
     {
-        PV.RPC("increaseCounter", RpcTarget.AllBuffered);
+        //PV.RPC("increaseCounter", RpcTarget.AllBuffered);
+        readyCounter++;
+        Debug.Log("A Player pressed Ready up");
     }
 
 
@@ -174,17 +190,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-
-            if (readyCounter == playerCount)
-            {
-                
-
-            }
-            else
-            {
-                
-            }
-        
+        ReadyUp();
     }
 
 
