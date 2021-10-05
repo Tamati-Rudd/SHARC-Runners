@@ -48,8 +48,6 @@ MonoBehaviour:
   playerCount: 0
   playersFinished: 0
   PV: {fileID: 5429904329761638056}
-  test: 
-  test2: 
 --- !u!114 &5429904329761638056
 MonoBehaviour:
   m_ObjectHideFlags: 0

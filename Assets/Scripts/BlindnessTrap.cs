@@ -14,8 +14,8 @@ public class BlindnessTrap : MonoBehaviour
             {
                 if (target != source)
                 {
-                    //Blind the target and enable their spotlight
-                    target.PV.RPC("BlindPlayerRPC", RpcTarget.All);
+                    //Activate the sabotage, blinding the player
+                    target.PV.RPC("activateSabotage", RpcTarget.All, 1);
                 }
             }
         }

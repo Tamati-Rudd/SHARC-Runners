@@ -21,8 +21,8 @@ public class StasisTrap : MonoBehaviour
             {
                 if (target != source && !(unitTesting))
                 {
-                    //Disable the target
-                    target.PV.RPC("DisablePlayerRPC", RpcTarget.All);
+                    //Activate the sabotage, disabling the player
+                    target.PV.RPC("activateSabotage", RpcTarget.All, 0);
                 }
                 else if (target != source && unitTesting) 
                 {

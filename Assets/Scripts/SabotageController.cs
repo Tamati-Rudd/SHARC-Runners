@@ -69,8 +69,6 @@ public class SabotageController : MonoBehaviour
         GameObject SabotageClone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "SabotageCrate"), SpawnPoint, Quaternion.identity);
     }
 
-    
-
     //This method adds a new PlayerController to the array of controllers
     //The array is returned for unit testing purposes
     public PlayerController[] addPlayerController(PlayerController newController)
@@ -94,7 +92,6 @@ public class SabotageController : MonoBehaviour
         {
             controllers[index] = null;
             numControllers--;
-            Debug.Log("Finished Controller Removed From Sabotage List!");
         }
     }
 
@@ -102,12 +99,12 @@ public class SabotageController : MonoBehaviour
     //The selectedSabotage is returned for unit testing purposes 
     public int sabotage(PlayerController sourcePlayer, int unitTesting)
     {
-        int selectedSabotage = rand.Next(2, 3); //Range: 1 to 2 (based on the number of possible sabotages)
+        int selectedSabotage = rand.Next(1, 3); //Integer Range: 1 to 2. Currently allows stasis, blindness traps
 
         //Run the selected Sabotage
         if (selectedSabotage == 1 && unitTesting == 0) 
             stasisSabotage.applySabotage(sourcePlayer, controllers);
-        else if (selectedSabotage == 2)
+        if (selectedSabotage == 2 && unitTesting == 0)
             blindnessSabotage.applySabotage(sourcePlayer, controllers);
 
         return selectedSabotage;
