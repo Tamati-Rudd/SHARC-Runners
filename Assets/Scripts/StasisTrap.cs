@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
 
 //This class describes and runs a Stasis Trap sabotage - which freezes players in place for a few seconds

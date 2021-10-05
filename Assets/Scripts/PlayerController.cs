@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     [Header("Sabotage")]
     public Light2D sabotageIndicator;
     public float disableTimer = 0;
+    public Light2D mapLight;
 
     [Header("Ability")]
     public AbilityController aController;
@@ -60,6 +61,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
+
+        //Get Player's map light object
+        Transform floorsTransform = GameObject.Find("Floors").transform;
+        foreach (Transform transform in floorsTransform)
+        {
+            if (transform.tag == "MapLight")
+                mapLight = transform.gameObject.GetComponent<Light2D>();
+        }
+
 
         //For observing the player's movement and sending it across the photon network
         foreach (Component observedComponent in this.PV.ObservedComponents)
@@ -286,6 +296,24 @@ public class PlayerController : MonoBehaviour, IPunObservable
     void EnablePlayerRPC()
     {
         isDisabled = false;
+        sabotageIndicator.enabled = false;
+    }
+
+    [PunRPC]
+    void BlindPlayerRPC()
+    {
+        if (PV.IsMine)
+            mapLight.pointLightOuterRadius = 0;
+        sabotageIndicator.intensity = 2;
+        sabotageIndicator.pointLightOuterRadius = 3.5f;
+        sabotageIndicator.color = new Color(1, 1, 1, 1);
+        sabotageIndicator.enabled = true;
+    }
+
+    [PunRPC]
+    void UnblindPlayerRPC()
+    {
+
         sabotageIndicator.enabled = false;
     }
 

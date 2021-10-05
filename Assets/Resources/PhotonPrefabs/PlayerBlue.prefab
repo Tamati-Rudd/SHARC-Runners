@@ -751,6 +751,7 @@ MonoBehaviour:
   raceFinished: 0
   sabotageIndicator: {fileID: -7021847356454927674}
   disableTimer: 0
+  mapLight: {fileID: 0}
   aController: {fileID: 2610746089316793459}
   collectableMeter: {fileID: 2225839799702241355}
   wallJumpTime: 0.2
