@@ -20,7 +20,7 @@ public class ShairylTests
         CharacterSelection script = go.GetComponent<CharacterSelection>();
 
         //simulating buying a character
-        script.changeBuyBtn(true);
+        script.ChangeBuyBtn(true);
 
         bool expected = true;
 
