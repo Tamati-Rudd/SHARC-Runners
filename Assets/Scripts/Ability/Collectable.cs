@@ -6,7 +6,7 @@ using Photon.Pun;
 public class Collectable : MonoBehaviour
 {
     public MeterScript abilityMeter;
-    private int currentcoin;
+    public int currentcoin;
     private int resetcoin = 0;
     private PlayerController pMovement;
     public Text Counter;//Access the text 
@@ -21,19 +21,11 @@ public class Collectable : MonoBehaviour
 
     void Start()
     {
-
         Vector2 meterlocation;
         meterlocation.x = 50;
         meterlocation.y = 50;
 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-
-       // MeterScript meter = Instantiate(abilityMeter, meterlocation, Quaternion.identity);
-       // meter.transform.SetParent(canvas.transform);
-
-        //Text counter = Instantiate(Counter, meterlocation, Quaternion.identity);
-       // counter.transform.SetParent(canvas.transform);
-
 
         resetcoin = 0;
         currentcoin = 0;
@@ -46,9 +38,7 @@ public class Collectable : MonoBehaviour
             
                 int viewID = collision.GetComponent<PhotonView>().ViewID;
 
-                PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);
-
-                //Destroy(collision.gameObject);// destroy the object
+                PV.RPC("DestroyCrystal", RpcTarget.MasterClient, viewID);//destroy the object
 
                 if (currentcoin < 8)//Run statement if the coins is less then 8
                 {
@@ -58,16 +48,18 @@ public class Collectable : MonoBehaviour
                     if (currentcoin <= 7)//Run statement if the coins is less then 8
                         Counter.text = currentcoin + "/8";//Print this text
                     else
-                        SetSpeed();
+                        SetSpeed(false);
                 }
-
-            
         }
     }
 
-    public bool SetSpeed()
+    public bool SetSpeed(bool testing)
     {
-        if (currentcoin >= 8)
+        if (currentcoin >= 8 && testing)
+        {
+            return true;
+        }
+        else if(currentcoin >= 8 )
         {
             Counter.text = " ";//print nothing
             return true;
@@ -76,7 +68,8 @@ public class Collectable : MonoBehaviour
         {
             return false;
         }
-       
+        
+
     }
 
     //This resets the coins meter 
@@ -88,7 +81,7 @@ public class Collectable : MonoBehaviour
     }
 
     public void Increase()
-    {
+    { 
         currentcoin++; //increases the variable's value by 10
     }
 
@@ -98,8 +91,32 @@ public class Collectable : MonoBehaviour
         while (PhotonView.Find(viewID) != null)
         {
             PhotonNetwork.Destroy(PhotonView.Find(viewID));
-        }
-                    
+        }          
+    }
+
+    //Unit Testing
+    public bool collectCrystal(int n)
+    {
+        //Reset the current crystal
+        currentcoin = 0;
         
+        //create a loop variable
+        int loop = 0;
+
+        //mimic if the playerr has collected a crystal
+        for (; loop < n; loop++)
+        {
+            Increase();
+        }
+
+        //if the player has collected 8 or more than crystals
+        if (loop <= 8)
+        {
+            return true;
+        }
+
+        //if the player didnt collect any crystals
+        else
+            return false;
     }
 }

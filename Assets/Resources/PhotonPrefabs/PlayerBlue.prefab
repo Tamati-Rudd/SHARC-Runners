@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
+  currentcoin: 0
   Counter: {fileID: 0}
   PV: {fileID: 0}
 --- !u!114 &-2359611623288429853
@@ -1092,6 +1093,7 @@ MonoBehaviour:
   pController: {fileID: 4035436343610420825}
   collectable: {fileID: 2225839799702241355}
   startTimer: 0
+  unitTesting2: 0
 --- !u!114 &2610746089316793459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,3 +1109,4 @@ MonoBehaviour:
   crystal: {fileID: 2225839799702241355}
   valid: 0
   speed: {fileID: 5912633583916425377}
+  jetpack: {fileID: 0}
