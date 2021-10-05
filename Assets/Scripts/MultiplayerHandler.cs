@@ -190,7 +190,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        ReadyUp();
+       // ReadyUp();
     }
 
 
