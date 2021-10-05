@@ -29,8 +29,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public bool raceFinished = false;
 
     [Header("Sabotage")]
+    public Sabotagable sabotageCheck;
     public Light2D sabotageIndicator;
-    public float disableTimer = 0;
+    public float[] sabotageTimers;
+    public Light2D mapLight;
 
     [Header("Ability")]
     public AbilityController aController;
@@ -60,6 +62,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
+
+        //Get Player's map light object
+        Transform floorsTransform = GameObject.Find("Floors").transform;
+        foreach (Transform transform in floorsTransform)
+        {
+            if (transform.tag == "MapLight")
+                mapLight = transform.gameObject.GetComponent<Light2D>();
+        }
+
 
         //For observing the player's movement and sending it across the photon network
         foreach (Component observedComponent in this.PV.ObservedComponents)
@@ -94,6 +105,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
         ResetSpeed();
 
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+
+        sabotageTimers = new float[3];
+        sabotageTimers[0] = 0;
+        sabotageTimers[1] = 0;
+        sabotageTimers[2] = 0;
     }
 
     // Update is called once per frame
@@ -106,25 +122,17 @@ public class PlayerController : MonoBehaviour, IPunObservable
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * this.SmoothingDelay);
             return;
         }
-        else if (isDisabled && raceStarted)
+        else if (raceStarted && !raceFinished) //Check for sabotages
         {
-            disableTimer += Time.deltaTime;
-            if (disableTimer >= 3) //enable the player and allow the rest of update to happen
-            {
-                PV.RPC("EnablePlayerRPC", RpcTarget.All);
-                rb.constraints = RigidbodyConstraints2D.None;
-                PV.transform.rotation = Quaternion.identity;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                disableTimer = 0;
-            }
-            else //return, disallowing the update
+            float timeSinceLastUpdate = Time.deltaTime;
+            bool allowUpdate = sabotageCheck.checkSabotages(timeSinceLastUpdate);
+            if (!allowUpdate)
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 PV.transform.rotation = Quaternion.identity;
                 rb.constraints = RigidbodyConstraints2D.FreezeAll;
                 return;
-            }
-
+            }        
         }
 
         MovePlayer();
@@ -147,7 +155,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (Input.GetButtonDown("Fire2"))
         {
             aController.runAbility(0, false);//check if the player has collected 8 crystals
-        }      
+        }
     }
 
     private void SetPlayerAnimation()
@@ -257,7 +265,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         //Speed ability activated
         if (n == 1)
         {
-            if(!testing)
+            if (!testing)
                 collectableMeter.UpdateCoins();
 
             movementSpeed = 20;
@@ -276,12 +284,12 @@ public class PlayerController : MonoBehaviour, IPunObservable
         }
     }
 
-        public void Flip()
+    public void Flip()
     {
 
         facingRight = !facingRight;
         //flip the player localscale by multiplying -1
-        this.transform.localScale = new Vector3(transform.localScale.x * -1, 
+        this.transform.localScale = new Vector3(transform.localScale.x * -1,
        transform.localScale.y,
        transform.localScale.z);
 
@@ -291,20 +299,63 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    //Disables the player
-    [PunRPC]
-    void DisablePlayerRPC()
+    //Re-enables a player - runs when a Stasis Trap sabotage ends
+    public void enablePlayer()
     {
-        isDisabled = true;
-        sabotageIndicator.enabled = true;
+        rb.constraints = RigidbodyConstraints2D.None;
+        PV.transform.rotation = Quaternion.identity;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isDisabled = false;
     }
 
-    //Re-enables the player
+    //Activate a Sabotage: hinder the player, and set or add to the duration of that sabotage
     [PunRPC]
-    void EnablePlayerRPC()
+    void activateSabotage(int sabotageToActivate)
     {
-        isDisabled = false;
-        sabotageIndicator.enabled = false;
+        if (PV.IsMine)
+        {
+            switch(sabotageToActivate)
+            {
+                case 0: //Stasis Trap
+                    isDisabled = true;
+                    sabotageTimers[0] = 3;
+                    break;
+                case 1: //Blindness Trap
+                    mapLight.pointLightOuterRadius = 0;
+                    sabotageTimers[1] += 15;
+                    break;
+                case 2: //TO DO: Projectile Trap
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    //This RPC sets a player's sabotage indicator, based on a lightToUse parameter determined for each player, each frame
+    [PunRPC]
+    void setSabotageIndicator(int lightToUse)
+    {
+        switch (lightToUse)
+        {
+            case 0: //Stasis Trap - intense red glow
+                sabotageIndicator.intensity = 10;
+                sabotageIndicator.pointLightOuterRadius = 3f;
+                sabotageIndicator.color = Color.red;
+                sabotageIndicator.enabled = true;
+                break;
+            case 1: //Blindness Trap - white spotlight
+                sabotageIndicator.intensity = 2;
+                sabotageIndicator.pointLightOuterRadius = 3.5f;
+                sabotageIndicator.color = Color.white;
+                sabotageIndicator.enabled = true;
+                break;
+            case 2: //TO DO: Projectile Trap - likely orange
+                break;
+            default:
+                sabotageIndicator.enabled = false;
+                break;
+        }
     }
 
     [PunRPC]
@@ -328,6 +379,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         PV.transform.position = new Vector3(PV.transform.position.x, PV.transform.position.y, -100);
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.removePlayerController(this);
+        sabotageCheck.deactivateSabotage(-1);
         raceFinished = true;
         movementSpeed = 20;
         jumpForce = 30;

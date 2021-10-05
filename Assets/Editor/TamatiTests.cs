@@ -29,7 +29,7 @@ public class TamatiTests
     }
 
     //Verify that a sabotage has been selected for application to players
-    //Only one sabotage is planned for sprint 1, but more may be added in the future
+    //Only one sabotage was planned for sprint 1, this test was updated in sprint 2 to test the range of sabotages
     [Test]
     public void TestSabotage()
     {
@@ -41,10 +41,11 @@ public class TamatiTests
 
         //Get the expected and actual test results
         var actual = sabotage.sabotage(controller, 1);
-        var expected = 1; //1 represents StasisTrap
+        var expectedRange = 3; 
 
-        //Verify the stasis trap sabotage has been applied correctly
-        Assert.AreEqual(expected, actual);
+        //Verify that a sabotage in the correct range has been selected (range: 1 to 3 for sprint 2)
+        Assert.IsTrue(actual > 0);
+        Assert.IsTrue(actual <= expectedRange);
     }
 
     //Verify that the stasis sabotage has been applied to a target player
