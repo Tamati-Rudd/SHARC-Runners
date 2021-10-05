@@ -60,6 +60,11 @@ MonoBehaviour:
   - handlePlayerLeft
   - increaseCounter
   - TurretShootRPC
+  - BlindPlayerRPC
+  - UnblindPlayerRPC
+  - DeactivateSabotage
+  - setSabotageIndicator
+  - activateSabotage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

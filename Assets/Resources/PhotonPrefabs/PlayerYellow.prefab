@@ -183,10 +183,11 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   raceStarted: 0
   raceFinished: 0
+  sabotageCheck: {fileID: 3309432817285793421}
   sabotageIndicator: {fileID: 7791488138704627368}
   disableTimer: 0
-  speedTimer: 0
-  activateSpeed: 0
+  mapLight: {fileID: 0}
+  aController: {fileID: 0}
   collectableMeter: {fileID: 7804258385925792805}
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
@@ -266,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityMeter: {fileID: 0}
+  currentcoin: 0
   Counter: {fileID: 0}
   PV: {fileID: 0}
 --- !u!114 &3309432817285793421

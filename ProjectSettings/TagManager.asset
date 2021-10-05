@@ -23,6 +23,7 @@ TagManager:
   - FinishedText
   - Meter
   - Counter
+  - MapLight
   layers:
   - Default
   - TransparentFX
