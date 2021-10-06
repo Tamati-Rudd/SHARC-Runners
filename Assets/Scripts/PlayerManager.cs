@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        //create controller for just the playe
+        //create controller for just the player
         if (PV.IsMine)
         {
             CreateController();
@@ -73,6 +73,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             //Spawn the Player
             GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerYellow"), Vector2.zero, Quaternion.identity);
+
+            CreateCountdown(prefab);
+            CreateMeter(prefab);
+        }
+        if (selectedCharacter == 3)
+        {
+            //Spawn the Player
+            GameObject prefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerGreen"), Vector2.zero, Quaternion.identity);
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
