@@ -16,7 +16,7 @@ public class CharacterSelection : MonoBehaviour
 
     //stores whether a character is locked or not
     //true: 1, false: 0
-    int IsUnlockedRed;    
+    int IsUnlockedRed;
     int IsUnlockedYellow;
 
     //Text UI elements
@@ -39,7 +39,10 @@ public class CharacterSelection : MonoBehaviour
     public int tokens;
     SpriteRenderer sr;
 
-
+    //Character Prices
+    int RedPrice = 200;
+    int YellowPrice = 200;
+    
     //Unit Testing
     public bool IsChanged = false;
     public bool denied = false;
@@ -59,7 +62,7 @@ public class CharacterSelection : MonoBehaviour
         tokenstext.text = "Your Tokens: " + tokens.ToString();
     }
 
-    private void Update()
+    void Update()
     {
         //Checking the current character selected and checking whether it is unlocked or not
         switch (SelectedCharacter)
@@ -111,11 +114,7 @@ public class CharacterSelection : MonoBehaviour
                     price.gameObject.SetActive(false);
                     priceBG.gameObject.SetActive(false);
                     break;
-                }
-                
-
-
-
+                }                       
 
         }
 
@@ -186,7 +185,7 @@ public class CharacterSelection : MonoBehaviour
                 if (IsUnlockedRed == 0)
                 {
                     //if red
-                    Deduct(200);
+                    Deduct(RedPrice);
 
                     //change button from buy to select
                     ChangeBuyBtn(true);
@@ -203,7 +202,7 @@ public class CharacterSelection : MonoBehaviour
                 if (IsUnlockedYellow == 0)
                 {
                     //if yellow
-                    Deduct(200);
+                    Deduct(YellowPrice);
 
                     ChangeBuyBtn(true);
 
