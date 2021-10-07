@@ -443,18 +443,10 @@ GameObject:
   - component: {fileID: 4527170070871879804}
   - component: {fileID: 7760254576980945783}
   - component: {fileID: 432677244521784388}
-  - component: {fileID: 355628061226415726}
-  - component: {fileID: 1972585654616130323}
-  - component: {fileID: 2453348739352090748}
-  - component: {fileID: 7183021047276681940}
   - component: {fileID: 2534826909339369539}
-  - component: {fileID: 959013575544055208}
   - component: {fileID: 291915911937450931}
   - component: {fileID: 577508813301504946}
   - component: {fileID: 2477733129908591345}
-  - component: {fileID: 7989995710805457046}
-  - component: {fileID: 1789324965013726276}
-  - component: {fileID: 880557850120506730}
   - component: {fileID: -1431675406566985874}
   m_Layer: 8
   m_Name: TutorialPlayerBlue
@@ -590,109 +582,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &355628061226415726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b13ab28093743d94fb8ad77076b65ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PV: {fileID: 0}
-  SmoothingDelay: 5
-  movementSpeed: 13.5
-  jumpForce: 15
-  groundCheck: {fileID: 1686729775548098275}
-  facingRight: 1
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 128
-  isDisabled: 1
-  username: {fileID: 6825634255075285499}
-  raceStarted: 0
-  raceFinished: 0
-  sabotageCheck: {fileID: 7183021047276681940}
-  sabotageIndicator: {fileID: 2477733129908591345}
-  sabotageTimers: []
-  mapLight: {fileID: 0}
-  aController: {fileID: 1789324965013726276}
-  jetSpeed: 15
-  jumpAbility: 0
-  selectedCharacter: 0
-  collectableMeter: {fileID: 2453348739352090748}
-  wallJumpTime: 0.2
-  wallSlideSpeed: 0.3
-  wallDistance: 0.5
-  bulletpoint: {fileID: 2534826909816509293}
---- !u!114 &1972585654616130323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 1
-    SynchronizeType: 2
-    Name: moveSpeed
-  - Type: 4
-    SynchronizeType: 2
-    Name: isGrounded
-  - Type: 9
-    SynchronizeType: 2
-    Name: isShooting
-  - Type: 4
-    SynchronizeType: 2
-    Name: isOnWall
-  - Type: 4
-    SynchronizeType: 2
-    Name: facingRight
-  - Type: 4
-    SynchronizeType: 2
-    Name: facingLeft
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
---- !u!114 &2453348739352090748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b295b952d8b6aa449eaef920ca1c816, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityMeter: {fileID: 0}
-  currentcoin: 0
-  Counter: {fileID: 0}
-  PV: {fileID: 0}
---- !u!114 &7183021047276681940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd7be8cd29f1504badc36f18a0b034c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PV: {fileID: 0}
 --- !u!114 &2534826909339369539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,22 +599,6 @@ MonoBehaviour:
   PV: {fileID: 0}
   controller: {fileID: 0}
   anim: {fileID: 432677244521784388}
---- !u!114 &959013575544055208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 1
-  m_UseLocal: 0
 --- !u!114 &291915911937450931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,55 +795,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &7989995710805457046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f24a0b001d90594396506c9873bc831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedTimer: 0
-  pController: {fileID: 355628061226415726}
-  collectable: {fileID: 2453348739352090748}
-  startTimer: 0
-  unitTesting2: 0
---- !u!114 &1789324965013726276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c3e502c80fc2c24a9e0b15e4f401568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystal: {fileID: 2453348739352090748}
-  valid: 0
-  speed: {fileID: 7989995710805457046}
-  jetpack: {fileID: 0}
-  nShift: {fileID: 0}
-  collectableMeter: {fileID: 0}
---- !u!114 &880557850120506730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e207080db815f8f4ca6dba25800fed45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkPointRespawn: {x: 0, y: 0, z: 0}
-  isCheckPoint: 0
 --- !u!114 &-1431675406566985874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,6 +807,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3ddeb8fcff1419d8daa34bb9ca829c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 13.5
+  jumpForce: 15
+  groundCheck: {fileID: 0}
+  facingRight: 1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  wallJumpTime: 0.2
+  wallSlideSpeed: 0.3
+  wallDistance: 0.5
+  bulletpoint: {fileID: 0}
 --- !u!1 &7629103994968514991
 GameObject:
   m_ObjectHideFlags: 0
