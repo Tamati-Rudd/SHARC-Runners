@@ -9,7 +9,6 @@ public class AbilityController : MonoBehaviour
     public bool valid;
     public SpeedAbility speed;
     public JetpackAbility jetpack;
-    public ProjectileAbility pAbility;
     public NodeShiftingAbility nShift;
     public Collectable collectableMeter;//Access the collectable script
 
@@ -54,19 +53,10 @@ public class AbilityController : MonoBehaviour
                     }
                     break;
 
-                //when a is 2 the ability is projectile
-                case 2:
-                    if (!testing)
-                    {
-                        pAbility.ActivateProjectile(true);
-                    }
-                    break;
-
                 case 3:
                     nShift.teleport();
                     collectableMeter.UpdateCoins();
                     break;
-
                 default:
                     Console.WriteLine("No Number is found");
                     break;
