@@ -281,11 +281,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 jumpAbility = true;//enable the ability
                 break;
 
-            case 3:
-                //enable abilitiy
-                break;
-
-            case 4://disable the ability
+            case 3://disable the ability
                 jumpAbility = false;
                 break;
 

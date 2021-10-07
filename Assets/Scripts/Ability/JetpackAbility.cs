@@ -25,7 +25,7 @@ public class JetpackAbility : MonoBehaviour
 
             if (speedTimer >= 9)
             {
-                pController.PickAbility(4, false);
+                pController.PickAbility(3, false);
                 speedTimer = 0;
                 startTimer = false;
             }
