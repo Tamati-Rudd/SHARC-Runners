@@ -448,6 +448,8 @@ GameObject:
   - component: {fileID: 577508813301504946}
   - component: {fileID: 2477733129908591345}
   - component: {fileID: -1431675406566985874}
+  - component: {fileID: 2376364814691688784}
+  - component: {fileID: 2977184411681114170}
   m_Layer: 8
   m_Name: TutorialPlayerBlue
   m_TagString: Player
@@ -589,7 +591,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08a7f66dfa35a48cc9b8ae1067b2f5a1, type: 3}
   m_Name: 
@@ -606,7 +608,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6273553868942584161}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3afa3590b08fa643a5b8f280a307dad, type: 3}
   m_Name: 
@@ -818,6 +820,34 @@ MonoBehaviour:
   wallSlideSpeed: 0.3
   wallDistance: 0.5
   bulletpoint: {fileID: 0}
+--- !u!114 &2376364814691688784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273553868942584161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee864ee214413444b81b18721308a658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  controller: {fileID: 0}
+  anim: {fileID: 0}
+--- !u!114 &2977184411681114170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273553868942584161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fc86024922b492b96138080059ceff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7629103994968514991
 GameObject:
   m_ObjectHideFlags: 0
