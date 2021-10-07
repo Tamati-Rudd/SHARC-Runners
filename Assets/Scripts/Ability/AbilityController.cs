@@ -9,8 +9,6 @@ public class AbilityController : MonoBehaviour
     public bool valid;
     public SpeedAbility speed;
     public JetpackAbility jetpack;
-<<<<<<< Updated upstream
-=======
     public ProjectileAbility pAbility;
     public NodeShiftingAbility nShift;
     public Collectable collectableMeter;//Access the collectable script
@@ -20,7 +18,6 @@ public class AbilityController : MonoBehaviour
         nShift = GetComponent<NodeShiftingAbility>();
         collectableMeter = GetComponent<Collectable>();
     }
->>>>>>> Stashed changes
 
     public void Start()
     {
@@ -57,8 +54,6 @@ public class AbilityController : MonoBehaviour
                     }
                     break;
 
-<<<<<<< Updated upstream
-=======
                 //when a is 2 the ability is projectile
                 case 2:
                     if (!testing)
@@ -72,7 +67,6 @@ public class AbilityController : MonoBehaviour
                     collectableMeter.UpdateCoins();
                     break;
 
->>>>>>> Stashed changes
                 default:
                     Console.WriteLine("No Number is found");
                     break;
