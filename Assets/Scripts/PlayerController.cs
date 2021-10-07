@@ -5,7 +5,7 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
-
+using System;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     [Header("Ability")]
     public AbilityController aController;
+    public float jetSpeed = 15f;
+    public bool jumpAbility;
+    public int selectedCharacter;
     public Collectable collectableMeter;//Access the collectable script
     private bool hasBulletFlipped = false;
 
@@ -57,11 +60,14 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private Rigidbody2D rb;
     public GameObject bulletpoint;
 
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.addPlayerController(this);
+
+        selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
 
         //Get Player's map light object
         Transform floorsTransform = GameObject.Find("Floors").transform;
@@ -150,11 +156,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     }
 
-    private void PlayerAbility()
+    public void PlayerAbility()
     {
         if (Input.GetButtonDown("Fire2"))
         {
-            aController.runAbility(0, false);//check if the player has collected 8 crystals
+            aController.RunAbility(selectedCharacter, false);//check if the player has collected 8 crystals
         }
     }
 
@@ -232,11 +238,16 @@ public class PlayerController : MonoBehaviour, IPunObservable
             }
             else
             {
-                if (canDoubleJump)
+                if (jumpAbility)//enable the jump ability
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jetSpeed);
+                }
+                else if (canDoubleJump)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                     canDoubleJump = false;
                 }
+                
             }
         }
     }
@@ -258,30 +269,33 @@ public class PlayerController : MonoBehaviour, IPunObservable
     }
 
     //Change the speed of the character
-    public void pickAbility(int n, bool testing)
+    public void PickAbility(int n, bool testing)
     {
-        float jumpVelocity = 15f;
-
-        //Speed ability activated
-        if (n == 1)
+        switch (n)
         {
-            if (!testing)
-                collectableMeter.UpdateCoins();
+            case 1://Speed ability activated
+                movementSpeed = 20;
+                break;
 
-            movementSpeed = 20;
+            case 2://Jetpack Ability
+                jumpAbility = true;//enable the ability
+                break;
+
+            case 3:
+                //enable abilitiy
+                break;
+
+            case 4://disable the ability
+                jumpAbility = false;
+                break;
+
+            default:
+                Console.WriteLine("No ability is found");
+                break;
         }
 
-        //Jetpack ability
-        else if (n == 2)
-        {
-            rb.velocity = Vector2.up * jumpVelocity;
-            //canDoubleJump = true;
-            collectableMeter.UpdateCoins();
-        }
-        else if (n == 3)
-        {
-            isGrounded = true;
-        }
+         if (!testing)
+            collectableMeter.UpdateCoins();//Reset the ability meter
     }
 
     public void Flip()

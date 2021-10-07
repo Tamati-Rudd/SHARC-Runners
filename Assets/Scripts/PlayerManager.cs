@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     //ability
     public MeterScript meterScript;
     public Text Counter;
+    public PlayerController pController;
 
     //Canvas
     private Canvas canvas;
@@ -60,6 +61,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             //Creating Meter for ability
             CreateMeter(prefab);
+
         }
         if (selectedCharacter == 1)
         {
@@ -68,6 +70,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
+
         }
         if (selectedCharacter == 2)
         {
@@ -76,6 +79,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
             CreateCountdown(prefab);
             CreateMeter(prefab);
+
         }
 
 
