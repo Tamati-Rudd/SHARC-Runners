@@ -20,6 +20,7 @@ public class NodeShiftingAbility : MonoBehaviour
     private int recentNode = 0;
     private PlayerController playerController;
 
+    private ArrayList tempTracker = new ArrayList();
     private ArrayList recentCollision = new ArrayList();
 
 
@@ -94,20 +95,24 @@ public class NodeShiftingAbility : MonoBehaviour
     public void teleport()
     {
         Debug.Log("Recent: " + recentNode);
-        try
-        {
-            //keep track of the future node
-            int nextNode = recentNode + 1;
+        //keep track of the future node
+        int nextNode = recentNode + 1;
+        Vector2 location = nodeLocation[nextNode];
 
-            Vector2 location = nodeLocation[nextNode];
-
-            //change position
-            playerController.transform.position = location;
-        }
-        catch (Exception ex)
+        if (!tempTracker.Contains(location))
         {
-            Debug.Log(ex);
+            try
+            {
+                //change position
+                playerController.transform.position = location;
+                tempTracker.Add(location);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex);
+            }
         }
+
 
     }
 
