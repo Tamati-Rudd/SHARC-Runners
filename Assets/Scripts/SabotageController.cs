@@ -7,13 +7,25 @@ using System.IO;
 //This class controls Sabotages - negative effects that are applied to all other players when a player collects a Sabotage pickup
 public class SabotageController : MonoBehaviour
 {
-    public static SabotageController Instance;
-    PhotonView PV;
-    PlayerController[] controllers = new PlayerController[20]; //Array size 20 as our maximum CCU is 20
-    int numControllers = 0;
+    public static SabotageController SabotageInstance;
+    public PhotonView PV;
+    private PlayerController[] controllers = new PlayerController[20]; //Array size 20 as our maximum CCU is 20
+    private int numControllers = 0;
     System.Random rand = new System.Random();
-    StasisTrap stasisSabotage;
+    public StasisTrap stasisSabotage;
+    public BlindnessTrap blindnessSabotage;
     public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4, SpawnPoint5, SpawnPoint6;
+
+    //Ensure there is only one sabotage controller instance in the game
+    void Awake()
+    {
+        if (SabotageInstance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        SabotageInstance = this;
+    }
 
     //Determine Sabotage crate spawn positions and spawn them
     private void Start()
@@ -57,14 +69,6 @@ public class SabotageController : MonoBehaviour
         GameObject SabotageClone = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "SabotageCrate"), SpawnPoint, Quaternion.identity);
     }
 
-    //Get reference to all Sabotage scripts (for sprint 1, this is only the StasisTrap)
-    void Awake()
-    {
-        PV = GetComponent<PhotonView>();
-        Transform stasisChild = transform.Find("StasisTrap");
-        stasisSabotage = stasisChild.GetComponent<StasisTrap>();
-    }
-
     //This method adds a new PlayerController to the array of controllers
     //The array is returned for unit testing purposes
     public PlayerController[] addPlayerController(PlayerController newController)
@@ -88,7 +92,6 @@ public class SabotageController : MonoBehaviour
         {
             controllers[index] = null;
             numControllers--;
-            Debug.Log("Finished Controller Removed From Sabotage List!");
         }
     }
 
@@ -96,13 +99,13 @@ public class SabotageController : MonoBehaviour
     //The selectedSabotage is returned for unit testing purposes 
     public int sabotage(PlayerController sourcePlayer, int unitTesting)
     {
-        int selectedSabotage = rand.Next(1, 2); //Range: 1 to 1 (based on the number of possible sabotages)
+        int selectedSabotage = rand.Next(1, 3); //Integer Range: 1 to 2. Currently allows stasis, blindness traps
 
         //Run the selected Sabotage
         if (selectedSabotage == 1 && unitTesting == 0) 
-        { //When unit testing, do not run a sabotage with this test (there is a separate test for this)
             stasisSabotage.applySabotage(sourcePlayer, controllers);
-        }
+        if (selectedSabotage == 2 && unitTesting == 0)
+            blindnessSabotage.applySabotage(sourcePlayer, controllers);
 
         return selectedSabotage;
     }

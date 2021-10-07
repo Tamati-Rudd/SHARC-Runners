@@ -20,7 +20,7 @@ public class ReyhanTests : MonoBehaviour
         var collectableScript = playerScript.GetComponent<Collectable>();
 
         //Get the expected and actual test results
-        var actual = collectableScript.collectCrystal(8);
+        var actual = collectableScript.CollectCrystal(8);
         var collected = true;
 
         //Verify that the player has collected a crystal
@@ -38,10 +38,10 @@ public class ReyhanTests : MonoBehaviour
         var speedScript = playerScript.GetComponent<SpeedAbility>();
 
         //Simulate that a player has collected a crystal
-        collectableScript.collectCrystal(8);
+        collectableScript.CollectCrystal(8);
  
         //pick the speed ability
-        abilityCScript.runAbility(0, true);
+        abilityCScript.RunAbility(0, true);
         
         //Get the expected and actual test results
         var actual = speedScript.unitTesting2;
@@ -62,10 +62,10 @@ public class ReyhanTests : MonoBehaviour
         var speedScript = playerScript.GetComponent<SpeedAbility>();
         
         //Simulate that a player has collected a crystal
-        collectableScript.collectCrystal(8);
+        collectableScript.CollectCrystal(8);
 
         //pick the speed ability
-        abilityCScript.runAbility(0, true);
+        abilityCScript.RunAbility(0, true);
         
         //Get the expected and actual test results
         var actual = playerScript.movementSpeed;

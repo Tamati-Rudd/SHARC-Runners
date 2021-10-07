@@ -95,7 +95,7 @@ public class Collectable : MonoBehaviour
     }
 
     //Unit Testing
-    public bool collectCrystal(int n)
+    public bool CollectCrystal(int n)
     {
         //Reset the current crystal
         currentcoin = 0;

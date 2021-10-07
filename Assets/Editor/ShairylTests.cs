@@ -7,72 +7,76 @@ using Photon.Pun;
 using Photon.Chat;
 
 public class ShairylTests
-{
-    private GameObject chatholder = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/PhotonPrefabs/ChatHandler.prefab");
+{ 
    
-    //This Test checks to see if a connection to a server can be established
-    //Needed for the chat system to work
+    //This Test checks to see if a the buy/select button changes when something is bought
+    //Needed so when the player buys a character, he can use it in game
     [Test]
-    public void testConnection()
+    public void testButtonChange()
     {
-        //string user_id = PlayerPrefs.GetString("username");
-        var chat = Object.Instantiate(chatholder, Vector2.zero, Quaternion.identity);
-        var chatScript = chat.GetComponent<PhotonChatManager>();
+        //setting up the characterSelection script
+        var go = new GameObject();
+        go.AddComponent<CharacterSelection>();
+        CharacterSelection script = go.GetComponent<CharacterSelection>();
 
-        chatScript.chatClient = new ChatClient(chatScript);
+        //simulating buying a character
+        script.ChangeBuyBtn(true);
 
-        //attempt to establish connection
-        bool actual =  chatScript.chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion,
-            new AuthenticationValues("test"));
+        bool expected = true;
 
-    
-        //connection should be successful
-        Assert.AreEqual(true, actual);
+        bool actual = script.IsChanged;
+
+        Assert.AreEqual(expected, actual);
+
     }
 
+    //This Test checks to see if the tokens are deducted once a character is bought
+    //Needed so when the player buys a character, they cannot abuse the game and buy as many as they want
+
     [Test]
-    public void testSubscribing()
+    public void testMoneyDeduction()
     {
-        //string user_id = PlayerPrefs.GetString("username");
-        var chat = Object.Instantiate(chatholder, Vector2.zero, Quaternion.identity);
-        var chatScript = chat.GetComponent<PhotonChatManager>();
+        //setting up the characterSelection script
+        var go = new GameObject();
+        go.AddComponent<CharacterSelection>();
+        CharacterSelection script = go.GetComponent<CharacterSelection>();
 
-        Assert.AreEqual(true, chatScript.isSubscribed);
+        //setting up base tokens for testing
+        PlayerPrefs.SetInt("Tokens", 200);        
 
-        
+        script.Deduct(200);
 
-       
-       
+        //-200 because the Deduct function also sets the Playerpref
+        int expected = -200;
+
+        int actual = PlayerPrefs.GetInt("Tokens");
+
+        Assert.AreEqual(expected, actual);
+
     }
 
 
+    //This Test checks to see if the player is blocked from buying a character if he doesn't have the required tokens
+    //Needed so when the player tries to buy a character, they should have the required funds to do so
     [Test]
-    public void testPublishingMsg()
+    public void testBuyDenial()
     {
-        //string user_id = PlayerPrefs.GetString("username");
-        var chat = Object.Instantiate(chatholder, Vector2.zero, Quaternion.identity);
-        var chatScript = chat.GetComponent<PhotonChatManager>();
+        //setting up the characterSelection script
+        var go = new GameObject();
+        go.AddComponent<CharacterSelection>();
+        CharacterSelection script = go.GetComponent<CharacterSelection>();
 
-        chatScript.chatClient = new ChatClient(chatScript);
+        //setting insufficient tokens
+        PlayerPrefs.SetInt("Tokens", 0);
 
-        
-        //Establish connection
-        chatScript.chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion,
-            new AuthenticationValues("test"));
+        //simulate buying
+        script.buy();
 
-        chatScript.OnConnected();
+        bool expected = true;
 
+        bool actual = script.denied;
 
-        if (chatScript.chatClient.CanChat == true)
-        {
-            //attempt to send message to server
-            bool actual = chatScript.chatClient.PublishMessage("TestChannel", "Test Message"); ;
-            Assert.AreEqual(true, actual);
-        }
-
-        //attempt to send message
-       
-       
+        Assert.AreEqual(expected, actual);
     }
 
 

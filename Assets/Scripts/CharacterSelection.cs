@@ -6,16 +6,17 @@ using UnityEngine;
 //This Script manages the character selection in the menu
 public class CharacterSelection : MonoBehaviour
 {
-    //store all the characters in an array
-    public GameObject[] characters;
-    public int selectedCharacter = 0;
+    //store all the characters in an array   
+    public GameObject[] characters; //red: 1, yellow: 2 on the array
+    public int SelectedCharacter = 0;
 
     //Storing Buttons
     public GameObject select_Btn;
     public GameObject buy_Btn;
 
     //stores whether a character is locked or not
-    int IsUnlockedRed;    
+    //true: 1, false: 0
+    int IsUnlockedRed;
     int IsUnlockedYellow;
 
     //Text UI elements
@@ -24,7 +25,6 @@ public class CharacterSelection : MonoBehaviour
 
     [SerializeField]
     TMP_Text price;
-
 
     [SerializeField]
     TMP_Text notEnough;
@@ -35,11 +35,17 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField]
     GameObject priceBG;
 
+    //Storing tokens in a local variable
     public int tokens;
     SpriteRenderer sr;
 
-    //red: 1, yellow: 2 on the array
-    //true: 1, false: 0
+    //Character Prices
+    int RedPrice = 200;
+    int YellowPrice = 200;
+    
+    //Unit Testing
+    public bool IsChanged = false;
+    public bool denied = false;
 
     private void Start()
     {
@@ -54,70 +60,100 @@ public class CharacterSelection : MonoBehaviour
         //present token
         tokens = PlayerPrefs.GetInt("Tokens");
         tokenstext.text = "Your Tokens: " + tokens.ToString();
-
-
     }
 
-    private void Update()
+    void Update()
     {
-
-        //if the selected is locked or not
-        if ( (selectedCharacter == 2 && IsUnlockedYellow == 0) || (selectedCharacter == 1 && IsUnlockedRed == 0) )
+        //Checking the current character selected and checking whether it is unlocked or not
+        switch (SelectedCharacter)
         {
-            IsUnlockedRed = PlayerPrefs.GetInt("Red");
-            IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+            //If red is selected
+            case 0:
+                price.gameObject.SetActive(false);
+                priceBG.gameObject.SetActive(false);
+                break;
 
-            //Set UI elements to active
-            select_Btn.SetActive(false);
-            buy_Btn.SetActive(true);
-            price.gameObject.SetActive(true);
-            priceBG.gameObject.SetActive(true);
+            case 1:
+
+                if (IsUnlockedRed == 0)
+                {
+                    //IsUnlockedRed = PlayerPrefs.GetInt("Red");
+                   // IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+
+                    //Set UI elements to active
+                    ChangeBuyBtn(false);
+                    price.gameObject.SetActive(true);
+                    priceBG.gameObject.SetActive(true);
+                    break;
+                }
+                else
+                {
+                    ChangeBuyBtn(true);
+                    price.gameObject.SetActive(false);
+                    priceBG.gameObject.SetActive(false);
+                    break;
+                }
+                
+
+            //If yellow is selected
+            case 2:
+                if (IsUnlockedYellow == 0)
+                {
+                  //  IsUnlockedRed = PlayerPrefs.GetInt("Red");
+                  //  IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+
+                    //Set UI elements to active
+                    ChangeBuyBtn(false);
+                    price.gameObject.SetActive(true);
+                    priceBG.gameObject.SetActive(true);
+                    break;
+                }
+                else
+                {
+                    ChangeBuyBtn(true);
+                    price.gameObject.SetActive(false);
+                    priceBG.gameObject.SetActive(false);
+                    break;
+                }                       
+
         }
-        else
-        {
-            //Set UI elements to false
-            select_Btn.SetActive(true);
-            buy_Btn.SetActive(false);
-            price.gameObject.SetActive(false);
-            priceBG.gameObject.SetActive(false);
-        }
+
     }
-
-
+    
     //use this fuction when the next button is pressed
     public void NextCharacter()
     {
         //algorithm for cycling through the array and presenting the character
-        characters[selectedCharacter].SetActive(false);
+        characters[SelectedCharacter].SetActive(false);
 
         //Setting UI elements
         tokenstext.text = "Your Tokens: " + tokens.ToString();
         sr.color = Color.blue;
 
-        selectedCharacter = (selectedCharacter + 1) % characters.Length;
+        //update the selected character
+        SelectedCharacter = (SelectedCharacter + 1) % characters.Length;
 
-
-
-        characters[selectedCharacter].SetActive(true);
+        characters[SelectedCharacter].SetActive(true);
        
    }
 
     public void PreviousCharacter()
     {
         //algorithm for cycling through the array and presenting the character
-        characters[selectedCharacter].SetActive(false);
+        characters[SelectedCharacter].SetActive(false);
 
         //Setting UI elements
         tokenstext.text = "Your Tokens: " + tokens.ToString();
         sr.color = Color.blue;
 
-        selectedCharacter = selectedCharacter - 1;
+        //update the selected character
+        SelectedCharacter = SelectedCharacter - 1;
         
-        if(selectedCharacter < 0)
+        if(SelectedCharacter < 0)
         {
-            selectedCharacter += characters.Length;
+            SelectedCharacter += characters.Length;
         }
-        characters[selectedCharacter].SetActive(true);
+        characters[SelectedCharacter].SetActive(true);
     }
 
     public void buy()
@@ -125,48 +161,109 @@ public class CharacterSelection : MonoBehaviour
         //if the player doesn't have enough tokens
         if(tokens < 200)
         {
-            tokenstext.text = "Not Enough!";            
-            
-            sr.color = Color.red;
+            if(tokenstext != null)
+            {
+                tokenstext.text = "Not Enough!";   
+                sr.color = Color.red;
+            }
+
+            denied = true;
+
             return;
         }
 
-        //take the price away and save it
-        tokens -= 200;
-        PlayerPrefs.SetInt("Tokens", tokens);      
-                
-        tokenstext.text = "Your Tokens: " + tokens.ToString();
+        IsUnlockedRed = PlayerPrefs.GetInt("Red");
+        IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
 
-        //buying process
-        if ((selectedCharacter == 1 && IsUnlockedRed == 0) )
+        //Checking the current character selected and checking whether it is unlocked or not
+        switch (SelectedCharacter)
         {
-            //if red
-            Debug.Log("Red Bought!");
-            select_Btn.SetActive(true);
-            buy_Btn.SetActive(false);
 
-            PlayerPrefs.SetInt("Red", 1);
-            IsUnlockedRed = PlayerPrefs.GetInt("Red");
+            //If red is selected
+            case 1:
+
+                if (IsUnlockedRed == 0)
+                {
+                    //if red
+                    Deduct(RedPrice);
+
+                    //change button from buy to select
+                    ChangeBuyBtn(true);
+
+                    PlayerPrefs.SetInt("Red", 1);
+                    IsUnlockedRed = PlayerPrefs.GetInt("Red");
+                    
+                }
+
+                break;
+
+            //If yellow is selected
+            case 2:
+                if (IsUnlockedYellow == 0)
+                {
+                    //if yellow
+                    Deduct(YellowPrice);
+
+                    ChangeBuyBtn(true);
+
+                    PlayerPrefs.SetInt("Yellow", 1);
+                    IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+                    
+                }
+                break;
         }
-        else if((selectedCharacter == 2 && IsUnlockedYellow == 0))
-        {
-            //if yellow
-            Debug.Log("Yellow Bought!");
-            select_Btn.SetActive(true);
-            buy_Btn.SetActive(false);
-
-            PlayerPrefs.SetInt("Yellow", 1);
-            IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
-        }
-
     }
 
     //Storing the player's selection using PlayerPrefs
     public void StartGame()
     {
-        PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
-        int test = PlayerPrefs.GetInt("selectedCharacter");
-        Debug.Log("Your selected Character is: " + test);
+        PlayerPrefs.SetInt("selectedCharacter", SelectedCharacter);
 
     }
+
+    //This function changes the buy button from select to buy or vice-versa
+    public void ChangeBuyBtn(bool isBought)
+    {
+        //check if the character is bought
+        if (isBought)
+        {
+            if(select_Btn != null && buy_Btn != null)
+            {
+                //make the select button visible while the latter false
+                select_Btn.SetActive(true);
+                buy_Btn.SetActive(false);
+            }
+            IsChanged = true;
+        }
+
+        //check if the character is not bought
+        else if(!isBought)
+        {
+            if (select_Btn != null && buy_Btn != null)
+            {
+                //make the select button visible while the latter false
+                select_Btn.SetActive(false);
+                buy_Btn.SetActive(true);
+            }
+            IsChanged = true;
+        }
+    }
+
+    //This function deducts amount from the tokens in the system
+    public void Deduct(int amount)
+    {        
+        //take the price away and save it
+        tokens = tokens - amount;
+        PlayerPrefs.SetInt("Tokens", tokens);
+
+        //Shwo the updated token on the screen
+        if (tokenstext != null)
+        {
+            tokenstext.text = "Your Tokens: " + tokens.ToString();
+        }
+
+    }
+
 }
+
+

@@ -16,7 +16,7 @@ public class AbilityController : MonoBehaviour
     }
 
     //Activtes the players ability
-    public void runAbility(int a, bool testing)
+    public void RunAbility(int a, bool testing)
     {
         valid = crystal.SetSpeed(true);//check if the player has collected 8 crystals
 
@@ -28,18 +28,21 @@ public class AbilityController : MonoBehaviour
                 case 0:
                     if (!testing)
                     {
-                        speed.activateSpeed(true, false);
+                        speed.ActivateSpeed(true, false);
                     }
                     //unit Testing
                     else if (testing)
                     {
-                        speed.activateSpeed(true, true);
+                        speed.ActivateSpeed(true, true);
                     }   
                     break;
 
-                //when a is 2 the ability is jetpack
+                //when a is 1 the ability is jetpack
                 case 1:
-                    jetpack.activateJetpack(true);
+                    if (!testing)
+                    {
+                        jetpack.ActivateJetpack(true);
+                    }
                     break;
 
                 default:

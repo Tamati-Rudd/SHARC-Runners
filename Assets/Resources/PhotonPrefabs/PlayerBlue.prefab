@@ -749,8 +749,10 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   raceStarted: 0
   raceFinished: 0
+  sabotageCheck: {fileID: -2359611623288429853}
   sabotageIndicator: {fileID: -7021847356454927674}
-  disableTimer: 0
+  sabotageTimers: []
+  mapLight: {fileID: 0}
   aController: {fileID: 2610746089316793459}
   collectableMeter: {fileID: 2225839799702241355}
   wallJumpTime: 0.2

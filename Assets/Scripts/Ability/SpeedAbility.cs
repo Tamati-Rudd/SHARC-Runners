@@ -34,16 +34,16 @@ public class SpeedAbility : MonoBehaviour
     }
 
     //Change the Player Speed
-    public void activateSpeed(bool t, bool testing)
+    public void ActivateSpeed(bool t, bool testing)
     {
         //Unit Testing purposes
         //If the player has activated there ability
         if (t && testing)
-            abilityTest();
+            AbilityTest();
 
         else if(t)
         {
-            pController.pickAbility(1, false);//speed the playerup
+            pController.PickAbility(1, false);//speed the playerup
 
             //ActivateSpeed the timer
             startTimer = t;
@@ -51,9 +51,9 @@ public class SpeedAbility : MonoBehaviour
     }
 
     //Unit Testing
-    public void abilityTest()
+    public void AbilityTest()
     {
-        pController.pickAbility(1, true);//speed the playerup
+        pController.PickAbility(1, true);//speed the playerup
         unitTesting2 =  true;
     }
 }

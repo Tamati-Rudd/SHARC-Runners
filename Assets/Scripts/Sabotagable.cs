@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-//This class manages player collision with sabotage crates
+//This class manages player collision with sabotage crates and controls how long a player is sabotaged for
 public class Sabotagable : MonoBehaviour
 {
     public PhotonView PV;
@@ -14,6 +14,68 @@ public class Sabotagable : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         playerController = PV.GetComponent<PlayerController>();
+    }
+
+    //This method checks for and controls the duration of sabotages applied to the player
+    //Returns a boolean indicating whether the player's update method should be allowed to continue
+    public bool checkSabotages(float timeSinceLastUpdate)
+    {
+        bool allowUpdate = true;
+        int lightToUse = -1;
+
+        if (playerController.sabotageTimers[1] > 0) //Check for blindness trap sabotage
+        {
+            playerController.sabotageTimers[1] -= timeSinceLastUpdate;
+            if (playerController.sabotageTimers[1] <= 0)
+                deactivateSabotage(1);
+            else
+                lightToUse = 1;
+        }
+
+        if (playerController.sabotageTimers[2] > 0) //Check for projectile trap sabotage
+        {
+            //TO DO: Implement this if statement alongside the projectile trap sabotage
+        }
+
+        if (playerController.sabotageTimers[0] > 0) //Check for stasis trap sabotage
+        {
+            playerController.sabotageTimers[0] -= timeSinceLastUpdate;
+            if (playerController.sabotageTimers[0] <= 0)
+                deactivateSabotage(0);
+            else
+            {
+                lightToUse = 0;
+                allowUpdate = false;
+            }
+        }
+
+        playerController.PV.RPC("setSabotageIndicator", RpcTarget.All, lightToUse);
+        return allowUpdate;
+    }
+
+    //This method deactivates at least one sabotage for a player
+    public void deactivateSabotage(int toDeactivate)
+    {
+        switch (toDeactivate)
+        {
+            case 0: //Stasis Trap
+                playerController.enablePlayer();
+                playerController.sabotageTimers[0] = 0;
+                break;
+            case 1: //Blindness Trap
+                playerController.mapLight.pointLightOuterRadius = 200;
+                playerController.sabotageTimers[1] = 0;
+                break;
+            case 2: //TO DO: Projectile Trap
+                break;
+            default: //A Player Finished the Race - Deactivate all Active Sabotages
+                playerController.enablePlayer();
+                playerController.mapLight.pointLightOuterRadius = 200;
+                playerController.sabotageTimers[0] = 0;
+                playerController.sabotageTimers[1] = 0;
+                playerController.PV.RPC("setSabotageIndicator", RpcTarget.All, -1);
+                break;
+        }
     }
 
     //Handle player collision with a Sabotage crate
