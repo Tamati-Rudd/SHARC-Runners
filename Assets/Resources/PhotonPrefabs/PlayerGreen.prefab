@@ -693,13 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bd9e541eb7c2246ac83cfa0b5f2d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnPoint: {x: 0, y: 0}
-  SpawnPoint1: {x: 0, y: 0}
-  SpawnPoint2: {x: 0, y: 0}
-  SpawnPoint3: {x: 0, y: 0}
-  SpawnPoint4: {x: 0, y: 0}
-  SpawnPoint5: {x: 0, y: 0}
-  nodes: []
+  nodePrefab: {fileID: 2954243976769508998, guid: a2679c4a0b4b803459aa6a52257b9a4b, type: 3}
 --- !u!1 &5545348670246138743
 GameObject:
   m_ObjectHideFlags: 0
