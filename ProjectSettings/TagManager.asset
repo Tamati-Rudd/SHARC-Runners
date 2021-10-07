@@ -24,6 +24,8 @@ TagManager:
   - Meter
   - Counter
   - MapLight
+  - Node
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

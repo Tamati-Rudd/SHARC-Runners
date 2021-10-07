@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: -7021847356454927674}
   - component: {fileID: 5912633583916425377}
   - component: {fileID: 2610746089316793459}
+  - component: {fileID: 3519440634300290397}
   m_Layer: 8
   m_Name: PlayerBlue
   m_TagString: Player
@@ -746,7 +747,6 @@ MonoBehaviour:
     m_Bits: 128
   isDisabled: 1
   username: {fileID: 7085930365446390220}
-  respawnPoint: {fileID: 0}
   raceStarted: 0
   raceFinished: 0
   sabotageCheck: {fileID: -2359611623288429853}
@@ -754,6 +754,9 @@ MonoBehaviour:
   sabotageTimers: []
   mapLight: {fileID: 0}
   aController: {fileID: 2610746089316793459}
+  jetSpeed: 15
+  jumpAbility: 0
+  selectedCharacter: 0
   collectableMeter: {fileID: 2225839799702241355}
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
@@ -1111,3 +1114,17 @@ MonoBehaviour:
   valid: 0
   speed: {fileID: 5912633583916425377}
   jetpack: {fileID: 0}
+--- !u!114 &3519440634300290397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782196166129594710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e207080db815f8f4ca6dba25800fed45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPointRespawn: {x: 0, y: 0, z: 0}
+  isCheckPoint: 0

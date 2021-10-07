@@ -18,6 +18,7 @@ public class CharacterSelection : MonoBehaviour
     //true: 1, false: 0
     int IsUnlockedRed;
     int IsUnlockedYellow;
+    int IsUnlockedGreen;
 
     //Text UI elements
     [SerializeField]
@@ -52,6 +53,7 @@ public class CharacterSelection : MonoBehaviour
         //retrieve locked/unlocked info
         IsUnlockedRed = PlayerPrefs.GetInt("Red");
         IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+        IsUnlockedGreen = PlayerPrefs.GetInt("Green");
 
         //chagne colour of UI element
         sr = notEnoughBG.GetComponent<SpriteRenderer>();
@@ -114,7 +116,27 @@ public class CharacterSelection : MonoBehaviour
                     price.gameObject.SetActive(false);
                     priceBG.gameObject.SetActive(false);
                     break;
-                }                       
+                }
+
+            case 3:
+                if (IsUnlockedGreen == 0)
+                {
+                    //  IsUnlockedRed = PlayerPrefs.GetInt("Red");
+                    //  IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+
+                    //Set UI elements to active
+                    ChangeBuyBtn(false);
+                    price.gameObject.SetActive(true);
+                    priceBG.gameObject.SetActive(true);
+                    break;
+                }
+                else
+                {
+                    ChangeBuyBtn(true);
+                    price.gameObject.SetActive(false);
+                    priceBG.gameObject.SetActive(false);
+                    break;
+                }
 
         }
 
@@ -174,6 +196,7 @@ public class CharacterSelection : MonoBehaviour
 
         IsUnlockedRed = PlayerPrefs.GetInt("Red");
         IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
+        IsUnlockedGreen = PlayerPrefs.GetInt("Green");
 
         //Checking the current character selected and checking whether it is unlocked or not
         switch (SelectedCharacter)
@@ -209,6 +232,19 @@ public class CharacterSelection : MonoBehaviour
                     PlayerPrefs.SetInt("Yellow", 1);
                     IsUnlockedYellow = PlayerPrefs.GetInt("Yellow");
                     
+                }
+                break;
+            case 3:
+                if (IsUnlockedGreen == 0)
+                {
+                    //if yellow
+                    Deduct(YellowPrice);
+
+                    ChangeBuyBtn(true);
+
+                    PlayerPrefs.SetInt("Green", 1);
+                    IsUnlockedGreen = PlayerPrefs.GetInt("Green");
+
                 }
                 break;
         }
