@@ -25,6 +25,7 @@ TagManager:
   - Counter
   - MapLight
   - Node
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
