@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 7522069674224278531}
   - component: {fileID: 2640605879099838047}
   - component: {fileID: -3866556273897324489}
+  - component: {fileID: 7899456176627153118}
   m_Layer: 8
   m_Name: PlayerGreen
   m_TagString: Player
@@ -317,7 +318,6 @@ MonoBehaviour:
     m_Bits: 128
   isDisabled: 1
   username: {fileID: 3558139097090521569}
-  respawnPoint: {fileID: 0}
   raceStarted: 0
   raceFinished: 0
   sabotageCheck: {fileID: 898394514385197774}
@@ -325,6 +325,9 @@ MonoBehaviour:
   sabotageTimers: []
   mapLight: {fileID: 0}
   aController: {fileID: 7522069674224278531}
+  jetSpeed: 15
+  jumpAbility: 0
+  selectedCharacter: 0
   collectableMeter: {fileID: 5608249508337662054}
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
@@ -665,6 +668,8 @@ MonoBehaviour:
   valid: 0
   speed: {fileID: 0}
   jetpack: {fileID: 2640605879099838047}
+  nShift: {fileID: 0}
+  collectableMeter: {fileID: 0}
 --- !u!114 &2640605879099838047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +699,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 2954243976769508998, guid: a2679c4a0b4b803459aa6a52257b9a4b, type: 3}
+--- !u!114 &7899456176627153118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4091712236146116987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e207080db815f8f4ca6dba25800fed45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPointRespawn: {x: 0, y: 0, z: 0}
+  isCheckPoint: 0
 --- !u!1 &5545348670246138743
 GameObject:
   m_ObjectHideFlags: 0
