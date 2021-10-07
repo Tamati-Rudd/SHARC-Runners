@@ -10,10 +10,12 @@ public class AbilityController : MonoBehaviour
     public SpeedAbility speed;
     public JetpackAbility jetpack;
     public NodeShiftingAbility nShift;
+    public Collectable collectableMeter;//Access the collectable script
 
     private void Awake()
     {
         nShift = GetComponent<NodeShiftingAbility>();
+        collectableMeter = GetComponent<Collectable>();
     }
 
     public void Start()
@@ -50,6 +52,7 @@ public class AbilityController : MonoBehaviour
 
                 case 2:
                     nShift.teleport();
+                    collectableMeter.UpdateCoins();
                     break;
                 default:
                     Console.WriteLine("No Number is found");

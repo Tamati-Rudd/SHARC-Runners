@@ -8,12 +8,20 @@ using System;
 
 public class NodeShiftingAbility : MonoBehaviour
 {
+    //Setting Up Variables
+
+    //Stores the node locations
     Dictionary<int, Vector2> nodeLocation = new Dictionary<int, Vector2>();
+
+    //Spawnpoints for the nodes
     private Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4, SpawnPoint5;
     private GameObject[] nodes;
     public GameObject nodePrefab;
     private int recentNode = 0;
     private PlayerController playerController;
+
+    private ArrayList recentCollision = new ArrayList();
+
 
     private void Awake()
     {
@@ -25,11 +33,12 @@ public class NodeShiftingAbility : MonoBehaviour
         InstantiateNodes();
     }
 
-
+    //This method adds the node points/teleport points depending upon the map
     void InstantiateNodes()
     {
         int sceneNo = SceneManager.GetActiveScene().buildIndex;
 
+        //check which game map we are in
         if (sceneNo == 1)
         {
             SpawnPoint.x = 106.66f;
@@ -48,8 +57,9 @@ public class NodeShiftingAbility : MonoBehaviour
             SpawnPoint4.y = 62.33f;
 
 
-
+            //set up the node points
             Instantiate(nodePrefab, SpawnPoint, Quaternion.identity);
+            //add points to dictionary
             nodeLocation.Add(1, SpawnPoint);
 
             Instantiate(nodePrefab, SpawnPoint1, Quaternion.identity);
@@ -68,27 +78,34 @@ public class NodeShiftingAbility : MonoBehaviour
 
     }
 
+    //This method keep track of the next node point
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Node")
+        recentCollision.Add(collision.transform.position);
+
+        if (collision.tag == "Node" && !recentCollision.Contains(collision.transform.position))
         {
             recentNode++;
+            Debug.Log(recentNode);
         }
     }
 
+    //This method changes the location of the player to the next node available
     public void teleport()
     {
         try
         {
+            //keep track of the future node
             int nextNode = recentNode + 1;
 
             Vector2 location = nodeLocation[nextNode];
 
+            //change position
             playerController.transform.position = location;
         }
         catch (Exception ex)
         {
-            return;
+            Debug.Log(ex);
         }
 
     }
