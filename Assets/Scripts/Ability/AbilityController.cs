@@ -53,6 +53,14 @@ public class AbilityController : MonoBehaviour
                     }
                     break;
 
+                //when a is 2 the ability is jetpack
+                case 2:
+                    if (!testing)
+                    {
+                        jetpack.ActivateJetpack(true);
+                    }
+                    break;
+
                 case 3:
                     nShift.teleport();
                     collectableMeter.UpdateCoins();
