@@ -9,6 +9,12 @@ public class AbilityController : MonoBehaviour
     public bool valid;
     public SpeedAbility speed;
     public JetpackAbility jetpack;
+    public NodeShiftingAbility nShift;
+
+    private void Awake()
+    {
+        nShift = GetComponent<NodeShiftingAbility>();
+    }
 
     public void Start()
     {
@@ -42,6 +48,9 @@ public class AbilityController : MonoBehaviour
                     jetpack.activateJetpack(true);
                     break;
 
+                case 2:
+                    nShift.teleport();
+                    break;
                 default:
                     Console.WriteLine("No Number is found");
                     break;
