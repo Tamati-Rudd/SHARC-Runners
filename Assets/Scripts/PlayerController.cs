@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public LayerMask whatIsGround;
     public bool isDisabled = true;
     public TMP_Text username;
-    public Transform respawnPoint;
 
     [Header("Race Status")]
     public bool raceStarted = false;
@@ -109,8 +108,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
         //use default movement speed
         ResetSpeed();
-
-        respawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
 
         sabotageTimers = new float[3];
         sabotageTimers[0] = 0;
@@ -428,14 +425,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         if (collision.gameObject.tag == "Wall")
         {
             isOnWall = true;
-        }
-        //Check if the target object is an enemy
-        else if (collision.gameObject.tag == "Enemy")
-        {
-            if (!(raceFinished)) //Move player back to the respawn point
-                PV.transform.position = respawnPoint.transform.position;
-            else //Move player back to respawn point while spectating. Done to prevent disruption of the race by spectators
-                PV.transform.position = new Vector3(respawnPoint.transform.position.x, respawnPoint.transform.position.y, -100);
-        }
+        }     
     }
 }
