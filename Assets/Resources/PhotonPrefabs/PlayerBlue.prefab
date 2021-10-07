@@ -1114,6 +1114,8 @@ MonoBehaviour:
   valid: 0
   speed: {fileID: 5912633583916425377}
   jetpack: {fileID: 0}
+  nShift: {fileID: 0}
+  collectableMeter: {fileID: 0}
 --- !u!114 &3519440634300290397
 MonoBehaviour:
   m_ObjectHideFlags: 0

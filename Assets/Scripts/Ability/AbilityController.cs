@@ -53,7 +53,7 @@ public class AbilityController : MonoBehaviour
                     }
                     break;
 
-                case 2:
+                case 3:
                     nShift.teleport();
                     collectableMeter.UpdateCoins();
                     break;
