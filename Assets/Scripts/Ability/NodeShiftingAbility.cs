@@ -63,7 +63,7 @@ public class NodeShiftingAbility : MonoBehaviour
             nodeLocation.Add(1, SpawnPoint);
 
             Instantiate(nodePrefab, SpawnPoint1, Quaternion.identity);
-            nodeLocation.Add(2, SpawnPoint2);
+            nodeLocation.Add(2, SpawnPoint1);
 
             Instantiate(nodePrefab, SpawnPoint2, Quaternion.identity);
             nodeLocation.Add(3, SpawnPoint2);
@@ -80,11 +80,11 @@ public class NodeShiftingAbility : MonoBehaviour
 
     //This method keep track of the next node point
     public void OnTriggerEnter2D(Collider2D collision)
-    {
-        recentCollision.Add(collision.transform.position);
+    {       
 
-        if (collision.tag == "Node" && !recentCollision.Contains(collision.transform.position))
+        if (collision.tag == "Node" && !recentCollision.Contains(collision.GetInstanceID().ToString()))
         {
+            recentCollision.Add(collision.GetInstanceID().ToString());
             recentNode++;
             Debug.Log(recentNode);
         }
@@ -93,6 +93,7 @@ public class NodeShiftingAbility : MonoBehaviour
     //This method changes the location of the player to the next node available
     public void teleport()
     {
+        Debug.Log("Recent: " + recentNode);
         try
         {
             //keep track of the future node
