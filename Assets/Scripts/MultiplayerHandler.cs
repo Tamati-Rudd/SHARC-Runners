@@ -21,7 +21,8 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     [SerializeField] public Transform PlayerListContent;
     [SerializeField] public GameObject PlayerListItemPrefab;
     [SerializeField] GameObject StartGameBtn;
-    private int readyCounter = 0;
+    [SerializeField] GameObject ReadyBtn;
+    private int readyCounter = 1;
     private int playerCount = 0;
     private PhotonView PV;
     Player[] players;
@@ -67,6 +68,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //Create Room
     public void CreateRoom()
     {
+        readyCounter = 1;
         if (string.IsNullOrEmpty(roomNameInputField.text))
         {
             return;
@@ -79,9 +81,15 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //if create room was successful, OnJoinedRoom will be called
     public override void OnJoinedRoom()
     {
+        StartGameBtn.SetActive(false);
+
         if (!PhotonNetwork.IsMasterClient)
         {
             PV.RPC("disableStart", RpcTarget.MasterClient);
+        }
+        else
+        {
+            ReadyBtn.SetActive(false);
         }
 
         Debug.Log("Joined room!");
@@ -103,15 +111,17 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
             Instantiate(PlayerListItemPrefab, PlayerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
-        
+
         //if it is the host, set the button to active
-        if(players.Length == 1)
+        if (players.Length == 1)
         {
             //If only one player is in the lobby then set start button to active
             StartGameBtn.SetActive(true);
         }
 
-        
+
+
+
     }
 
     //host migration if host leaves the room
@@ -144,8 +154,11 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-
+        ReadyBtn.SetActive(true);
+        readyCounter = 1;
+        PV.RPC("decreaseCounter", RpcTarget.MasterClient);
         MenuManager.Instance.OpenMenu("Loading");
+       
     }
 
     public override void OnLeftRoom()
@@ -187,8 +200,8 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     public void ReadyUp()
     {
-        PV.RPC("increaseCounter", RpcTarget.MasterClient);
-        readyCounter++;
+        ReadyBtn.SetActive(false);
+        PV.RPC("increaseCounter", RpcTarget.MasterClient); 
         
     }
 
@@ -197,8 +210,29 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     void increaseCounter()
     {
         readyCounter++;
+        players = PhotonNetwork.PlayerList;
 
-        if (readyCounter != players.Length)
+        Debug.Log("Ready Counter: " + readyCounter);
+        Debug.Log("Player in lobby: " + players.Length);
+
+        if (readyCounter == players.Length)
+        {
+            //If the amount of ready players is equal to the amount of players in lobby then set start button to active
+            StartGameBtn.SetActive(true);
+            //StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+        }
+        else
+        {
+            StartGameBtn.SetActive(false);
+        }
+    }
+
+    [PunRPC]
+    void decreaseCounter()
+    {
+        readyCounter--;
+        players = PhotonNetwork.PlayerList;
+        if (readyCounter == players.Length)
         {
             //If the amount of ready players is equal to the amount of players in lobby then set start button to active
             StartGameBtn.SetActive(false);

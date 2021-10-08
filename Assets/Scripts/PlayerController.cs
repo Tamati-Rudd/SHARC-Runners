@@ -64,8 +64,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
-        if(!sabController == null)
-            sabController.addPlayerController(this);
+        sabController.addPlayerController(this);
 
         selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
 
