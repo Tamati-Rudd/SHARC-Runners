@@ -1,18 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+//Contains the script for tutorial ability controller
 public class TutorialAbility : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Collectable crystal;
+    public bool valid;
+    public SpeedAbility speed;
+    public JetpackAbility jetpack;
+    public NodeShiftingAbility nShift;
+    public Collectable collectableMeter;//Access the collectable script
+
+    private void Awake()
     {
-        
+        nShift = GetComponent<NodeShiftingAbility>();
+        collectableMeter = GetComponent<Collectable>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Start()
     {
-        
+        valid = false;
+    }
+
+    //Activtes the players ability
+    public void RunAbility(int a, bool testing)
+    {
+        valid = crystal.SetSpeed(true);//check if the player has collected 8 crystals
+
+        if (valid)
+        {
+            switch (a)
+            {
+                //when a is 1 the ability is speed
+                case 0:
+                    if (!testing)
+                    {
+                        speed.ActivateSpeed(true, false);
+                    }
+                    //unit Testing
+                    else if (testing)
+                    {
+                        speed.ActivateSpeed(true, true);
+                    }   
+                    break;
+
+                //when a is 1 the ability is jetpack
+                case 1:
+                    if (!testing)
+                    {
+                        jetpack.ActivateJetpack(true);
+                    }
+                    break;
+
+                case 3:
+                    nShift.teleport();
+                    collectableMeter.UpdateCoins();
+                    break;
+            }          
+        }
     }
 }
