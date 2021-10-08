@@ -28958,26 +28958,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2005328595 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6273553868942584161, guid: 47bdcd91c397442148eb53a084a3a1dc, type: 3}
-  m_PrefabInstance: {fileID: 1110094174}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2005328596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005328595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2368de7cf2ca34aa4829f66e72e14086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityMeter: {fileID: 0}
-  currentcoin: 0
-  Counter: {fileID: 0}
 --- !u!120 &2005328598 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 577508813301504946, guid: 47bdcd91c397442148eb53a084a3a1dc, type: 3}
@@ -28998,24 +28978,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7810095301535288309, guid: 47bdcd91c397442148eb53a084a3a1dc, type: 3}
   m_PrefabInstance: {fileID: 1110094174}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2005328606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005328595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c905408f6b8fe4417b65f6f72a6a8293, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystal: {fileID: 0}
-  valid: 0
-  speed: {fileID: 0}
-  jetpack: {fileID: 0}
-  nShift: {fileID: 0}
-  collectableMeter: {fileID: 0}
 --- !u!1 &2007605384
 GameObject:
   m_ObjectHideFlags: 0
