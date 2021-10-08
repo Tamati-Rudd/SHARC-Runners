@@ -214,12 +214,12 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         if (readyCounter == players.Length)
         {
             //If the amount of ready players is equal to the amount of players in lobby then set start button to active
-            StartGameBtn.SetActive(false);
+            StartGameBtn.SetActive(true);
             //StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
         }
         else
         {
-            StartGameBtn.SetActive(true);
+            StartGameBtn.SetActive(false);
         }
     }
 
