@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class ProjectileAbility : MonoBehaviour
 {
-    public PlayerController pController;
     public Collectable collectable;
-    public float speed = 3;
-    public bool thrown;
-    public Vector3 Launch;
-
-    // Start is called before the first frame update
+    public int disableAbility;
+    public ProjectileObject projectilePrefab;
+    public Transform LaunchOffset;
+ 
     public void Start()
     {
-        var direction = -transform.right + Vector3.up;
-
-        GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
-
-        Destroy(gameObject, 10);// Destroy automaticlly after 10 seconds
+        disableAbility = 0;
     }
-
-    //Change the Player Speed
-    public void ActivateProjectile(bool t)
+    public void Update()
     {
         
+    }
+    //Change the Player Speed
+    public void ActivateProjectile()
+    {
+        //the player can only throw one projectile
+        if(disableAbility == 0)
+        {
+            Instantiate(projectilePrefab, LaunchOffset.position, LaunchOffset.rotation);
+            disableAbility++;
+        }
+        //if the player presses r again then the player will teleport 
+        else
+        {
+            //Teleport to new location
+            collectable.UpdateCoins();//Reset the ability meter
+        }
+
     }
 }

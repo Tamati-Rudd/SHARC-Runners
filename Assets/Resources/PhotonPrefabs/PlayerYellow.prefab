@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 5062601499150772203}
   - component: {fileID: 7791488138704627368}
   - component: {fileID: -8601040798131987043}
+  - component: {fileID: 5688981655500622700}
+  - component: {fileID: 5064564064822836972}
   m_Layer: 8
   m_Name: PlayerYellow
   m_TagString: Player
@@ -187,7 +189,7 @@ MonoBehaviour:
   sabotageIndicator: {fileID: 7791488138704627368}
   sabotageTimers: []
   mapLight: {fileID: 0}
-  aController: {fileID: 0}
+  aController: {fileID: 5688981655500622700}
   jetSpeed: 15
   jumpAbility: 0
   selectedCharacter: 0
@@ -529,6 +531,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkPointRespawn: {x: 0, y: 0, z: 0}
   isCheckPoint: 0
+--- !u!114 &5688981655500622700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824630786286556472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3e502c80fc2c24a9e0b15e4f401568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystal: {fileID: 7804258385925792805}
+  valid: 0
+  speed: {fileID: 0}
+  jetpack: {fileID: 0}
+  nShift: {fileID: 0}
+  collectableMeter: {fileID: 7804258385925792805}
+  pAbility: {fileID: 5064564064822836972}
+--- !u!114 &5064564064822836972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824630786286556472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe2336d3986c9e4b930d7e9f43a5d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectable: {fileID: 7804258385925792805}
+  disableAbility: 0
+  projectilePrefab: {fileID: 3240501656158341181, guid: 7e22d1cb8799f45429ff209a35420922, type: 3}
+  LaunchOffset: {fileID: 7885736624069635895}
 --- !u!1 &2855921669583609334
 GameObject:
   m_ObjectHideFlags: 0
