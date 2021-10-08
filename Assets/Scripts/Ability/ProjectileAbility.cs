@@ -8,20 +8,35 @@ public class ProjectileAbility : MonoBehaviour
     public int disableAbility;
     public ProjectileObject projectilePrefab;
     public Transform LaunchOffset;
- 
+    public PlayerController pController;
+
     public void Start()
     {
         disableAbility = 0;
     }
-    public void Update()
-    {
-        
-    }
+    
     //Change the Player Speed
     public void ActivateProjectile()
     {
-        Instantiate(projectilePrefab, LaunchOffset.position, LaunchOffset.rotation);
-       
+        //the player can only throw one projectile
+        if (disableAbility == 0)
+        {
+            Instantiate(projectilePrefab, LaunchOffset.position, LaunchOffset.rotation);
+            disableAbility++;
+        }
+        //if the player presses r again then the player will teleport 
+        else
+        {
+            Teleport();//Teleport to new location
+            collectable.UpdateCoins();//Reset the ability meter
+            disableAbility = 0;
+        }
+
+    }
+
+    //Teleport
+    public void Teleport()
+    {
 
     }
 }
