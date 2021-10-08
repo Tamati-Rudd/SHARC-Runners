@@ -700,6 +700,7 @@ MonoBehaviour:
   PlayerListContent: {fileID: 421384267}
   PlayerListItemPrefab: {fileID: 5321383457502524406, guid: c91f9b2ebe2441c4daf67403ff0be8c3, type: 3}
   StartGameBtn: {fileID: 401543839}
+  ReadyBtn: {fileID: 2126841884}
 --- !u!114 &206670901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2634,7 +2635,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.023000002, y: 0.6557011}
   m_AnchorMax: {x: 0.9444128, y: 0.9607664}
-  m_AnchoredPosition: {x: -63.500244, y: 22.5}
+  m_AnchoredPosition: {x: -63.50049, y: 22.5}
   m_SizeDelta: {x: -1046.5801, y: 82.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595298139
