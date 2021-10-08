@@ -1,112 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TutorialCollectable : MonoBehaviour
 {
-    public MeterScript abilityMeter;
-    public int currentcoin;
-    private int resetcoin = 0;
-    private tutorialPlayer pMovement;
-    public Text Counter;//Access the text 
-    private Canvas canvas;
-
-    private void Awake()
+    
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
-        pMovement = GetComponent<tutorialPlayer>();
-    }
-
-    void Start()
-    {
-        Vector2 meterlocation;
-        meterlocation.x = 50;
-        meterlocation.y = 50;
-
-        //canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-
-        resetcoin = 0;
-        currentcoin = 0;
-
-    }
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Collectable")
+        //Check if target object is a collectable
+        if (collision.CompareTag("Collectable"))
         {
-
-                if (currentcoin < 8)//Run statement if the coins is less then 8
-                {
-                    Increase();
-                    abilityMeter.SetAbility(currentcoin);//updates the meter bar
-
-                    if (currentcoin <= 7)//Run statement if the coins is less then 8
-                        Counter.text = currentcoin + "/8";//Print this text
-                    else
-                        SetSpeed(false);
-                }
+            Destroy(collision1.gameObject);
         }
-    }
-
-    public bool SetSpeed(bool testing)
-    {
-        if (currentcoin >= 8 && testing)
-        {
-            return true;
-        }
-        else if(currentcoin >= 8 )
-        {
-            Counter.text = " ";//print nothing
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-        
-
-    }
-
-    //This resets the coins meter 
-    public void UpdateCoins()
-    {
-        abilityMeter.SetAbility(resetcoin);
-        currentcoin = resetcoin;
-        Counter.text = currentcoin + "/8";
-    }
-
-    public void Increase()
-    { 
-        currentcoin++; //increases the variable's value by 10
-    }
-
-    public void DestroyCrystal()
-    {
-        Destroy(gameObject);
-    }
-
-    //Unit Testing
-    public bool CollectCrystal(int n)
-    {
-        //Reset the current crystal
-        currentcoin = 0;
-        
-        //create a loop variable
-        int loop = 0;
-
-        //mimic if the playerr has collected a crystal
-        for (; loop < n; loop++)
-        {
-            Increase();
-        }
-
-        //if the player has collected 8 or more than crystals
-        if (loop <= 8)
-        {
-            return true;
-        }
-
-        //if the player didnt collect any crystals
-        else
-            return false;
-    }
+    }*/
 }
