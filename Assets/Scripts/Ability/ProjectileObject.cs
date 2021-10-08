@@ -13,7 +13,7 @@ public class ProjectileObject : MonoBehaviour {
     {
         if (facing)
         {
-            var direction = transform.right + Vector3.up;// The angle for throwing
+            var direction = transform.right + Vector3.up + Vector3.forward;// The angle for throwing
             GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
         }
         transform.Translate(LaunchOffset);
