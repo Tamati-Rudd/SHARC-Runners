@@ -71,6 +71,7 @@ public class CharacterSelection : MonoBehaviour
         {
             //If red is selected
             case 0:
+                ChangeBuyBtn(true);
                 price.gameObject.SetActive(false);
                 priceBG.gameObject.SetActive(false);
                 break;

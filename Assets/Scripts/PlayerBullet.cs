@@ -19,7 +19,7 @@ public class PlayerBullet : MonoBehaviour
     //Collision method for the bullet colliding with other game objects
     private void OnTriggerEnter2D(Collider2D hitInfo) 
     {
-        if(hitInfo.gameObject.CompareTag("Ground") || hitInfo.gameObject.CompareTag("Enemy"))
+        if(hitInfo.gameObject.CompareTag("Ground") || hitInfo.gameObject.CompareTag("Enemy") || hitInfo.gameObject.CompareTag("Wall"))
         {
             DestroySelf();
         }

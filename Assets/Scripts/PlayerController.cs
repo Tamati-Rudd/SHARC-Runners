@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
-        sabController.addPlayerController(this);
+        if(!sabController == null)
+            sabController.addPlayerController(this);
 
         selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
 
@@ -386,7 +387,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
         PV.transform.position = new Vector3(PV.transform.position.x, PV.transform.position.y, -100);
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
         sabController.removePlayerController(this);
-        sabotageCheck.deactivateSabotage(-1);
+        if (PV.IsMine)
+            sabotageCheck.deactivateSabotage(-1);
         raceFinished = true;
         movementSpeed = 20;
         jumpForce = 30;

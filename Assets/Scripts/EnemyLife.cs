@@ -70,9 +70,5 @@ public class EnemyLife : MonoBehaviourPunCallbacks
     {
 
         PhotonNetwork.Destroy(PhotonView.Find(viewID).gameObject);
-
-
-
-
     }
 }

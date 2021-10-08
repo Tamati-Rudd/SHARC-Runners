@@ -20,6 +20,7 @@ public class NodeShiftingAbility : MonoBehaviour
     private int recentNode = 0;
     private PlayerController playerController;
 
+    private ArrayList tempTracker = new ArrayList();
     private ArrayList recentCollision = new ArrayList();
 
 
@@ -63,7 +64,7 @@ public class NodeShiftingAbility : MonoBehaviour
             nodeLocation.Add(1, SpawnPoint);
 
             Instantiate(nodePrefab, SpawnPoint1, Quaternion.identity);
-            nodeLocation.Add(2, SpawnPoint2);
+            nodeLocation.Add(2, SpawnPoint1);
 
             Instantiate(nodePrefab, SpawnPoint2, Quaternion.identity);
             nodeLocation.Add(3, SpawnPoint2);
@@ -80,11 +81,11 @@ public class NodeShiftingAbility : MonoBehaviour
 
     //This method keep track of the next node point
     public void OnTriggerEnter2D(Collider2D collision)
-    {
-        recentCollision.Add(collision.transform.position);
+    {       
 
-        if (collision.tag == "Node" && !recentCollision.Contains(collision.transform.position))
+        if (collision.tag == "Node" && !recentCollision.Contains(collision.GetInstanceID().ToString()))
         {
+            recentCollision.Add(collision.GetInstanceID().ToString());
             recentNode++;
             Debug.Log(recentNode);
         }
@@ -93,20 +94,25 @@ public class NodeShiftingAbility : MonoBehaviour
     //This method changes the location of the player to the next node available
     public void teleport()
     {
-        try
-        {
-            //keep track of the future node
-            int nextNode = recentNode + 1;
+        Debug.Log("Recent: " + recentNode);
+        //keep track of the future node
+        int nextNode = recentNode + 1;
+        Vector2 location = nodeLocation[nextNode];
 
-            Vector2 location = nodeLocation[nextNode];
-
-            //change position
-            playerController.transform.position = location;
-        }
-        catch (Exception ex)
+        if (!tempTracker.Contains(location))
         {
-            Debug.Log(ex);
+            try
+            {
+                //change position
+                playerController.transform.position = location;
+                tempTracker.Add(location);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex);
+            }
         }
+
 
     }
 
