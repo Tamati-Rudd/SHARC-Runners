@@ -65,6 +65,7 @@ MonoBehaviour:
   - DeactivateSabotage
   - setSabotageIndicator
   - activateSabotage
+  - disableStart
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
