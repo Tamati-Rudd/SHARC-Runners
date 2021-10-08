@@ -154,6 +154,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
         ReadyBtn.SetActive(true);
+        readyCounter = 1;
         PV.RPC("decreaseCounter", RpcTarget.MasterClient);
         MenuManager.Instance.OpenMenu("Loading");
        
@@ -199,7 +200,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     public void ReadyUp()
     {
         ReadyBtn.SetActive(false);
-        PV.RPC("increaseCounter", RpcTarget.MasterClient);       
+        PV.RPC("increaseCounter", RpcTarget.MasterClient); 
         
     }
 
@@ -208,8 +209,10 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     void increaseCounter()
     {
         readyCounter++;
+        players = PhotonNetwork.PlayerList;
 
-        Debug.Log(readyCounter);
+        Debug.Log("Ready Counter: " + readyCounter);
+        Debug.Log("Player in lobby: " + players.Length);
 
         if (readyCounter == players.Length)
         {
@@ -227,7 +230,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     void decreaseCounter()
     {
         readyCounter--;
-
+        players = PhotonNetwork.PlayerList;
         if (readyCounter == players.Length)
         {
             //If the amount of ready players is equal to the amount of players in lobby then set start button to active
