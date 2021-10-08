@@ -6,14 +6,8 @@ using Photon.Pun;
 //This script contains how the tutorial texts are displayed on screen
 public class TutorialManager : MonoBehaviour
 {
-    private void Update()
-    {
-        
-    }
-
     public void loadLevel()
     {
         SceneManager.LoadScene(3);
-        PhotonNetwork.OfflineMode = true;
     }
 }
