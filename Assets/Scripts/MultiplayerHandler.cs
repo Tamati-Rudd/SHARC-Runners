@@ -68,6 +68,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     //Create Room
     public void CreateRoom()
     {
+        readyCounter = 1;
         if (string.IsNullOrEmpty(roomNameInputField.text))
         {
             return;
