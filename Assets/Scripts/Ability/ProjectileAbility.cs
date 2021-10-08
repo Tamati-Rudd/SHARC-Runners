@@ -31,6 +31,7 @@ public class ProjectileAbility : MonoBehaviour
         {
             //Teleport to new location
             collectable.UpdateCoins();//Reset the ability meter
+            disableAbility = 0;
         }
 
     }
