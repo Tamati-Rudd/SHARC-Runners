@@ -24,8 +24,12 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     private int readyCounter = 0;
     private int playerCount = 0;
     private PhotonView PV;
+    Player[] players;
 
-
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
     private void Start()
     {
        
@@ -69,16 +73,22 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         }
         PhotonNetwork.CreateRoom(roomNameInputField.text);
         MenuManager.Instance.OpenMenu("Loading");
-    }
+
+   }
 
     //if create room was successful, OnJoinedRoom will be called
     public override void OnJoinedRoom()
     {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            PV.RPC("disableStart", RpcTarget.MasterClient);
+        }
+
         Debug.Log("Joined room!");
         MenuManager.Instance.OpenMenu("Room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
                 
-        Player[] players = PhotonNetwork.PlayerList;
+        players = PhotonNetwork.PlayerList;
         playerCount = players.Length;
 
         //destroy all the players that existed before joining the room
@@ -93,25 +103,15 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
             Instantiate(PlayerListItemPrefab, PlayerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
-
+        
         //if it is the host, set the button to active
         if(players.Length == 1)
         {
             //If only one player is in the lobby then set start button to active
-            StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
-        }
-        else if(readyCounter == players.Length)
-        {
-            //If the amount of ready players is equal to the amount of players in lobby then set start button to active
             StartGameBtn.SetActive(true);
-            StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
         }
-        else
-        {
-            //If the amount of ready players is not equal to the amount of players in lobby then set the start button to false 
-           StartGameBtn.SetActive(false);
-        }
-        //Just Need to find out how to sync players pressing ready button
+
+        
     }
 
     //host migration if host leaves the room
@@ -127,14 +127,6 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         //errorText.text = "Room Creation Failed" + message;
         
     }
-
-    public void ReadyUp()
-    {
-        //PV.RPC("increaseCounter", RpcTarget.AllBuffered);
-        readyCounter++;
-        Debug.Log("A Player pressed Ready up");
-    }
-
 
     public void StartGame()
     {
@@ -190,14 +182,37 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-       // ReadyUp();
+       //ReadyUp();
     }
 
+    public void ReadyUp()
+    {
+        PV.RPC("increaseCounter", RpcTarget.MasterClient);
+        readyCounter++;
+        
+    }
 
 
     [PunRPC]
     void increaseCounter()
     {
         readyCounter++;
+
+        if (readyCounter != players.Length)
+        {
+            //If the amount of ready players is equal to the amount of players in lobby then set start button to active
+            StartGameBtn.SetActive(false);
+            //StartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+        }
+        else
+        {
+            StartGameBtn.SetActive(true);
+        }
+    }
+
+    [PunRPC]
+    void disableStart()
+    {
+        StartGameBtn.SetActive(false);
     }
 }
