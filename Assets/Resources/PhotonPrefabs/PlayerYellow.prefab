@@ -566,6 +566,8 @@ MonoBehaviour:
   disableAbility: 0
   projectilePrefab: {fileID: 3240501656158341181, guid: 7e22d1cb8799f45429ff209a35420922, type: 3}
   LaunchOffset: {fileID: 7885736624069635895}
+  pController: {fileID: 0}
+  pObject: {fileID: 0}
 --- !u!1 &2855921669583609334
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,10 +22,14 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     [SerializeField] public GameObject PlayerListItemPrefab;
     [SerializeField] GameObject StartGameBtn;
     [SerializeField] GameObject ReadyBtn;
+    [SerializeField] GameObject Map1Btn;
+    [SerializeField] GameObject Map2Btn;
     private int readyCounter = 1;
     private int playerCount = 0;
     private PhotonView PV;
     Player[] players;
+    private int mapIndex = 1;
+
 
     private void Awake()
     {
@@ -33,7 +37,8 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
-       
+        Map1Btn.SetActive(false);
+        Map2Btn.SetActive(false);
 
         Debug.Log("Connected to Master");
         //automatically load scene for all the clients in room when hosts switches scene
@@ -90,6 +95,8 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         else
         {
             ReadyBtn.SetActive(false);
+            Map1Btn.SetActive(true);
+            Map2Btn.SetActive(true);
         }
 
         Debug.Log("Joined room!");
@@ -117,6 +124,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         {
             //If only one player is in the lobby then set start button to active
             StartGameBtn.SetActive(true);
+
         }
 
 
@@ -137,6 +145,18 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         //errorText.text = "Room Creation Failed" + message;
         
     }
+    public void ChangeMap1()
+    {
+        mapIndex = 1;
+        Debug.Log("Map 1 Selected!");
+    }
+
+    public void ChangeMap2()
+    {
+        mapIndex = 4;
+        Debug.Log("Map 2 Selected!");
+
+    }
 
     public void StartGame()
     {
@@ -146,9 +166,10 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         // makes room invisible to random match making
         PhotonNetwork.CurrentRoom.IsVisible = false; 
         //all players in lobby load into the level
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(mapIndex);
     }
 
+    
 
 
     public void LeaveRoom()

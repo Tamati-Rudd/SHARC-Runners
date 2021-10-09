@@ -10,4 +10,11 @@ public class TutorialManager : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    public void loadMenu()
+    {
+        // SceneManager.LoadScene(0);
+        Application.Quit();
+    }
+    
 }

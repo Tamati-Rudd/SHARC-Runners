@@ -5,6 +5,7 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UI;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
@@ -138,8 +139,21 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     void CreateFinishPoint(Stopwatch Timerclone)
     {
         Vector2 finishPointLocation;
-        finishPointLocation.x = (float)137.5;
-        finishPointLocation.y = (float)-12.35;
+        finishPointLocation.x = 0;
+        finishPointLocation.y = 0;
+        int sceneNo = SceneManager.GetActiveScene().buildIndex;
+
+        if (sceneNo == 1)
+        {
+            finishPointLocation.x = (float)137.5;
+            finishPointLocation.y = (float)-12.35;
+        }
+        else if (sceneNo == 4)
+        {
+            finishPointLocation.x = (float)60.1;
+            finishPointLocation.y = (float)-82.2;
+        }
+
         FinishPoint FinishPointClone = Instantiate(finish, finishPointLocation, Quaternion.identity);
         FinishPointClone.GetComponent<FinishPoint>().timer = Timerclone;
     }
