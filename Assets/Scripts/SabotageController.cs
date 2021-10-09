@@ -56,15 +56,50 @@ public class SabotageController : MonoBehaviour
             SpawnPoint6.x = (float)159.2;
             SpawnPoint6.y = (float)12.4;
         }
+        else if(sceneNo == 4)
+        {
+            SpawnPoint.x = (float)100.01;
+            SpawnPoint.y = (float)5.04;
+
+            SpawnPoint1.x = (float)89.43;
+            SpawnPoint1.y = (float)-34.6;
+
+            SpawnPoint2.x = (float)39.81;
+            SpawnPoint2.y = (float)-44.38;
+
+            SpawnPoint3.x = (float)-23.09;
+            SpawnPoint3.y = (float)-34.4;
+
+            SpawnPoint4.x = (float)-12.9;
+            SpawnPoint4.y = (float)-66.7;
+
+            SpawnPoint5.x = (float)20.5;
+            SpawnPoint5.y = (float)-74.7;
+
+            SpawnPoint6.x = (float)-59;
+            SpawnPoint6.y = (float)-8.4;
+        }
         if (PV.Owner.IsMasterClient)
         {
-            CreateSabotage(SpawnPoint);
-            CreateSabotage(SpawnPoint1);
-            CreateSabotage(SpawnPoint2);
-            CreateSabotage(SpawnPoint3);
-            CreateSabotage(SpawnPoint4);
-            CreateSabotage(SpawnPoint5);
-            CreateSabotage(SpawnPoint6);
+            if(sceneNo == 1) { 
+                CreateSabotage(SpawnPoint);
+                CreateSabotage(SpawnPoint1);
+                CreateSabotage(SpawnPoint2);
+                CreateSabotage(SpawnPoint3);
+                CreateSabotage(SpawnPoint4);
+                CreateSabotage(SpawnPoint5);
+                CreateSabotage(SpawnPoint6);
+            }
+            else if(sceneNo == 4)
+            {
+                CreateSabotage(SpawnPoint);
+                CreateSabotage(SpawnPoint1);
+                CreateSabotage(SpawnPoint2);
+                CreateSabotage(SpawnPoint3);
+                CreateSabotage(SpawnPoint4);
+                CreateSabotage(SpawnPoint5);
+                CreateSabotage(SpawnPoint6);
+            }
         }
     }
 
