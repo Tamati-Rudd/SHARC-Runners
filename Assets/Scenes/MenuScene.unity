@@ -6945,7 +6945,11 @@ MonoBehaviour:
   - {fileID: 344792801}
   - {fileID: 908076150}
   - {fileID: 1258126767}
-  textCollection: []
+  textCollection:
+  - {fileID: 2142517469}
+  - {fileID: 309533687}
+  - {fileID: 1817167308}
+  - {fileID: 1513057381}
   SelectedCharacter: 0
   select_Btn: {fileID: 2010262891}
   buy_Btn: {fileID: 588981594}
