@@ -9,10 +9,12 @@ public class ProjectileAbility : MonoBehaviour
     public ProjectileObject projectilePrefab;
     public Transform LaunchOffset;
     public PlayerController pController;
-
+    public ProjectileObject pObject;
     public void Start()
     {
         disableAbility = 0;
+        pController = GetComponent<PlayerController>();
+        pObject = GetComponent<ProjectileObject>();
     }
     
     //Change the Player Speed
@@ -28,15 +30,18 @@ public class ProjectileAbility : MonoBehaviour
         else
         {
             Teleport();//Teleport to new location
+            //pObject.DestroyObject();//Destroy the object
             collectable.UpdateCoins();//Reset the ability meter
             disableAbility = 0;
         }
-
     }
 
     //Teleport
     public void Teleport()
     {
-
+        //Get the gameobject location
+        Vector2 location = GameObject.FindGameObjectWithTag("ProjectileAbility").transform.position;
+        
+        pController.transform.position = location;//Teleport the player to the projectile
     }
 }

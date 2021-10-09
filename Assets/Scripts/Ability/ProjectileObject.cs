@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileObject : MonoBehaviour { 
+public class ProjectileObject : MonoBehaviour
+{
 
     public Vector3 LaunchOffset;
     public bool facing;
     public float speed = 4;
-
+    public float time = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +29,10 @@ public class ProjectileObject : MonoBehaviour {
         {
             transform.position += -transform.right * speed * Time.deltaTime;
         }
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);// Destroy automatically after 10 seconds
     }
 }
