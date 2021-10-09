@@ -63,23 +63,78 @@ public class EnemyManager : MonoBehaviour
 
             SpawnPoint11.x = (float)120.402;
             SpawnPoint11.y = (float)40.47;
-        } 
+        } else if(sceneNo == 4)
+        {
+            //spawnpoints for the enemy
+            SpawnPoint.x = (float)94.3; //Dne
+            SpawnPoint.y = (float)-50.84;
+
+            SpawnPoint1.x = (float)76.8; //Done
+            SpawnPoint1.y = (float)-18.6;
+
+            SpawnPoint2.x = (float)32.1;//changed
+            SpawnPoint2.y = (float)-64.4;
+
+            SpawnPoint3.x = (float)22;//Changed
+            SpawnPoint3.y = (float)-61.5;
+
+            SpawnPoint4.x = (float)54.98; //Done
+            SpawnPoint4.y = (float)11.91;
+
+            SpawnPoint5.x = (float)-2.143608;//changed //patrolling enemy
+            SpawnPoint5.y = (float)-85.99;
+
+            SpawnPoint6.x = (float)65.39418;//Changed
+            SpawnPoint6.y = (float)-26.7;
+
+            SpawnPoint7.x = (float)46.39194;//Changed
+            SpawnPoint7.y = (float)-17.72367;
+
+            SpawnPoint8.x = (float)99.96; //Done
+            SpawnPoint8.y = (float)3.65;
+
+            SpawnPoint9.x = (float)27.89611;//Changed
+            SpawnPoint9.y = (float)-7.251762;
+
+            SpawnPoint10.x = (float)7.632291;//Changed
+            SpawnPoint10.y = (float)-6.979765;
+
+            SpawnPoint11.x = (float)14.57497;//changed
+            SpawnPoint11.y = (float)-60.97709;
+        }
 
         //only the masterclient can spawn enemies for everyone
-        if (PV.Owner.IsMasterClient)
-        {            
-            CreateEnemy(SpawnPoint);
-            CreateEnemy(SpawnPoint1);
-            CreateEnemy(SpawnPoint2);
-            CreateEnemy(SpawnPoint3);
-            CreateEnemyTurret(SpawnPoint4);
-            CreateEnemyTurret(SpawnPoint5);
-            CreateEnemyTurret(SpawnPoint6);
-            CreateEnemyTurret(SpawnPoint7);
-            CreateJumpingEnemy(SpawnPoint8);
-            CreateJumpingEnemy(SpawnPoint9);
-            CreateJumpingEnemy(SpawnPoint10);
-            CreateJumpingEnemy(SpawnPoint11);
+        if (PV.Owner.IsMasterClient) 
+        {
+            if (sceneNo == 1)
+            {
+                CreateEnemy(SpawnPoint);
+                CreateEnemy(SpawnPoint1);
+                CreateEnemy(SpawnPoint2);
+                CreateEnemy(SpawnPoint3);
+                CreateEnemyTurret(SpawnPoint4);
+                CreateEnemyTurret(SpawnPoint5);
+                CreateEnemyTurret(SpawnPoint6);
+                CreateEnemyTurret(SpawnPoint7);
+                CreateJumpingEnemy(SpawnPoint8);
+                CreateJumpingEnemy(SpawnPoint9);
+                CreateJumpingEnemy(SpawnPoint10);
+                CreateJumpingEnemy(SpawnPoint11);
+            } else if(sceneNo == 4)
+            {
+                CreateEnemy(SpawnPoint);
+                CreateEnemy(SpawnPoint1);
+                CreateEnemyTurret(SpawnPoint2);
+                CreateEnemyTurret(SpawnPoint3);
+                CreateEnemyTurret(SpawnPoint4);
+                CreateEnemy(SpawnPoint5);
+                CreateEnemyTurret(SpawnPoint6);
+                CreateEnemyTurret(SpawnPoint7);
+                CreateJumpingEnemy(SpawnPoint8);
+                CreateEnemyTurret(SpawnPoint9);
+                CreateEnemyTurret(SpawnPoint10);
+                CreateEnemyTurret(SpawnPoint11);
+            }
         }
 
     }

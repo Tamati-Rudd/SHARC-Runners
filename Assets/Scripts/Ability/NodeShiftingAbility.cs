@@ -75,6 +75,41 @@ public class NodeShiftingAbility : MonoBehaviour
             Instantiate(nodePrefab, SpawnPoint4, Quaternion.identity);
             nodeLocation.Add(5, SpawnPoint4);
 
+        } else if (sceneNo == 4)
+        {
+            SpawnPoint.x = 113.786f;
+            SpawnPoint.y = -30.15f;
+
+            SpawnPoint1.x = -0.6f;
+            SpawnPoint1.y = -23.5f;
+
+            SpawnPoint2.x = -9.2f;
+            SpawnPoint2.y = -35.7f;
+
+            SpawnPoint3.x = -66.1f;
+            SpawnPoint3.y = -61.1f;
+
+            SpawnPoint4.x = 26.9f;
+            SpawnPoint4.y = -85.2f;
+
+
+            //set up the node points
+            Instantiate(nodePrefab, SpawnPoint, Quaternion.identity);
+            //add points to dictionary
+            nodeLocation.Add(1, SpawnPoint);
+
+            Instantiate(nodePrefab, SpawnPoint1, Quaternion.identity);
+            nodeLocation.Add(2, SpawnPoint1);
+
+            Instantiate(nodePrefab, SpawnPoint2, Quaternion.identity);
+            nodeLocation.Add(3, SpawnPoint2);
+
+            Instantiate(nodePrefab, SpawnPoint3, Quaternion.identity);
+            nodeLocation.Add(4, SpawnPoint3);
+
+            Instantiate(nodePrefab, SpawnPoint4, Quaternion.identity);
+            nodeLocation.Add(5, SpawnPoint4);
+
         }
 
     }
