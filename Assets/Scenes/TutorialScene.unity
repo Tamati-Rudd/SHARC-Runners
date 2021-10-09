@@ -2118,7 +2118,6 @@ GameObject:
   - component: {fileID: 159797389}
   - component: {fileID: 159797391}
   - component: {fileID: 159797390}
-  - component: {fileID: 159797392}
   m_Layer: 7
   m_Name: UpperPlatforms (5)
   m_TagString: Untagged
@@ -2134,7 +2133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159797388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.83, y: 36.28, z: 0}
+  m_LocalPosition: {x: 4.83, y: 36.289, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1082955759}
@@ -2218,32 +2217,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &159797392
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159797388}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 1.28}
-    newSize: {x: 2.56, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.56, y: 1.28}
-  m_EdgeRadius: 0
 --- !u!1 &212240141
 GameObject:
   m_ObjectHideFlags: 0
@@ -28196,11 +28169,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8281121801336609715, guid: 145f418e06ffa4faab94151d3a47abd3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1357784
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 8281121801336609715, guid: 145f418e06ffa4faab94151d3a47abd3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7001667
+      value: 37.4
       objectReference: {fileID: 0}
     - target: {fileID: 8281121801336609715, guid: 145f418e06ffa4faab94151d3a47abd3, type: 3}
       propertyPath: m_LocalPosition.z

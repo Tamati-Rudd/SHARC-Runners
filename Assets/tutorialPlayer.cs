@@ -30,6 +30,8 @@ public class tutorialPlayer : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject bulletpoint;
 
+    private int counter;//Counter for ability
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +39,7 @@ public class tutorialPlayer : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         sr = GetComponent<SpriteRenderer>();
         sj = GetComponent<SpringJoint2D>();
+        counter = 0;
     }
 
     void Update()
@@ -51,6 +54,7 @@ public class tutorialPlayer : MonoBehaviour
 
         SetPlayerAnimation();
 
+        ActivateAbility();
     }
 
     private void PlayerJumps()
@@ -161,6 +165,24 @@ public class tutorialPlayer : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
         {
             isOnWall = true;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Check if target object is a collectable
+        if (collision.CompareTag("Collectable"))
+        {
+            counter++;
+            Destroy(collision.gameObject);
+            Debug.Log("counter: " + counter);
+        }
+    }
+
+    private void ActivateAbility()
+    {
+        if (counter >= 8 && Input.GetButtonDown("Fire2"))
+        {
+            movementSpeed = 20;
         }
     }
 }
