@@ -11,6 +11,7 @@ public class AbilityController : MonoBehaviour
     public JetpackAbility jetpack;
     public NodeShiftingAbility nShift;
     public Collectable collectableMeter;//Access the collectable script
+    public ProjectileAbility pAbility;
 
     private void Awake()
     {
@@ -53,10 +54,19 @@ public class AbilityController : MonoBehaviour
                     }
                     break;
 
+                //when a is 2 the ability is projectile teleport
+                case 2:
+                    if (!testing)
+                    {
+                        pAbility.ActivateProjectile();
+                    }
+                    break;
+
                 case 3:
                     nShift.teleport();
                     collectableMeter.UpdateCoins();
                     break;
+
                 default:
                     Console.WriteLine("No Number is found");
                     break;

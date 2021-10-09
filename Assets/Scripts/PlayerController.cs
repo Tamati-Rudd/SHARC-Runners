@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     [Header("Ability")]
     public AbilityController aController;
-    public float jetSpeed = 15f;
+    public float jetSpeed = 30f;
     public bool jumpAbility;
     public int selectedCharacter;
     public Collectable collectableMeter;//Access the collectable script
@@ -278,11 +278,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 jumpAbility = true;//enable the ability
                 break;
 
-            case 3:
-                //enable abilitiy
-                break;
-
-            case 4://disable the ability
+            case 3://disable the ability
                 jumpAbility = false;
                 break;
 
