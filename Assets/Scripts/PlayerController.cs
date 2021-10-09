@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     [Header("Ability")]
     public AbilityController aController;
-    public float jetSpeed = 15f;
+    public float jetSpeed = 30f;
     public bool jumpAbility;
     public int selectedCharacter;
     public Collectable collectableMeter;//Access the collectable script

@@ -24,7 +24,7 @@ public class SpeedAbility : MonoBehaviour
             //Start the timer
             speedTimer += Time.deltaTime;
 
-            if (speedTimer >= 9)
+            if (speedTimer >= 12)
             {
                 pController.ResetSpeed();
                 speedTimer = 0;
