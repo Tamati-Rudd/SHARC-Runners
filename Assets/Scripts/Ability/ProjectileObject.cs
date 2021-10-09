@@ -7,7 +7,7 @@ public class ProjectileObject : MonoBehaviour
 
     public Vector3 LaunchOffset;
     public bool facing;
-    public float speed = 4;
+    public float speed = 1.2f;
     public float time = 0.1f;
     // Start is called before the first frame update
     void Start()
