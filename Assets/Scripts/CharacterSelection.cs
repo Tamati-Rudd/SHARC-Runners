@@ -37,9 +37,6 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField]
     GameObject priceBG;
 
-    [SerializeField]
-    TMP_Text playerInfoText;
-
     //Storing tokens in a local variable
     public int tokens;
     SpriteRenderer sr;
