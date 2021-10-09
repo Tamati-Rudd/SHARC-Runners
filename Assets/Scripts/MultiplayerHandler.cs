@@ -148,13 +148,13 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     public void ChangeMap1()
     {
         mapIndex = 1;
-        Debug.Log("map 1");
+        Debug.Log("Map 1 Selected!");
     }
 
     public void ChangeMap2()
     {
         mapIndex = 4;
-        Debug.Log("map 2");
+        Debug.Log("Map 2 Selected!");
 
     }
 
