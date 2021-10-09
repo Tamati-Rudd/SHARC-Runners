@@ -13,7 +13,8 @@ public class TutorialManager : MonoBehaviour
 
     public void loadMenu()
     {
-         SceneManager.LoadScene(0);
+        // SceneManager.LoadScene(0);
+        Application.Quit();
     }
     
 }
