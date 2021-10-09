@@ -158,7 +158,7 @@ public class tutorialPlayer : MonoBehaviour
             anim.SetBool("facingLeft", !facingRight); // wall jump facing left
         }
     }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Check if target object is a wall
@@ -167,6 +167,7 @@ public class tutorialPlayer : MonoBehaviour
             isOnWall = true;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Check if target object is a collectable
