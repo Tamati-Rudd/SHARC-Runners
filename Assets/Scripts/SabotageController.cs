@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using UnityEngine.SceneManagement;
+
 
 //This class controls Sabotages - negative effects that are applied to all other players when a player collects a Sabotage pickup
 public class SabotageController : MonoBehaviour
@@ -30,27 +32,30 @@ public class SabotageController : MonoBehaviour
     //Determine Sabotage crate spawn positions and spawn them
     private void Start()
     {
-        SpawnPoint.x = (float)66.82;
-        SpawnPoint.y = (float)8.89;
+        int sceneNo = SceneManager.GetActiveScene().buildIndex;
+        if (sceneNo == 1)
+        {
+            SpawnPoint.x = (float)66.82;
+            SpawnPoint.y = (float)8.89;
 
-        SpawnPoint1.x = (float)69.58;
-        SpawnPoint1.y = (float)-2.87;
+            SpawnPoint1.x = (float)69.58;
+            SpawnPoint1.y = (float)-2.87;
 
-        SpawnPoint2.x = (float)82.35;
-        SpawnPoint2.y = (float)21.38;
+            SpawnPoint2.x = (float)82.35;
+            SpawnPoint2.y = (float)21.38;
 
-        SpawnPoint3.x = (float)32.21;
-        SpawnPoint3.y = (float)26.25;
+            SpawnPoint3.x = (float)32.21;
+            SpawnPoint3.y = (float)26.25;
 
-        SpawnPoint4.x = (float)94.66;
-        SpawnPoint4.y = (float)41.31;
+            SpawnPoint4.x = (float)94.66;
+            SpawnPoint4.y = (float)41.31;
 
-        SpawnPoint5.x = (float)92.8;
-        SpawnPoint5.y = (float)66.1;
+            SpawnPoint5.x = (float)92.8;
+            SpawnPoint5.y = (float)66.1;
 
-        SpawnPoint6.x = (float)159.2;
-        SpawnPoint6.y = (float)12.4;
-
+            SpawnPoint6.x = (float)159.2;
+            SpawnPoint6.y = (float)12.4;
+        }
         if (PV.Owner.IsMasterClient)
         {
             CreateSabotage(SpawnPoint);
