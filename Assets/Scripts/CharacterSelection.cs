@@ -8,6 +8,7 @@ public class CharacterSelection : MonoBehaviour
 {
     //store all the characters in an array   
     public GameObject[] characters; //red: 1, yellow: 2 on the array
+    public GameObject[] textCollection; //To change the text
     public int SelectedCharacter = 0;
 
     //Storing Buttons
@@ -35,6 +36,9 @@ public class CharacterSelection : MonoBehaviour
 
     [SerializeField]
     GameObject priceBG;
+
+    [SerializeField]
+    TMP_Text playerInfoText;
 
     //Storing tokens in a local variable
     public int tokens;
@@ -148,6 +152,7 @@ public class CharacterSelection : MonoBehaviour
     {
         //algorithm for cycling through the array and presenting the character
         characters[SelectedCharacter].SetActive(false);
+        textCollection[SelectedCharacter].SetActive(false);
 
         //Setting UI elements
         tokenstext.text = "Your Tokens: " + tokens.ToString();
@@ -157,13 +162,14 @@ public class CharacterSelection : MonoBehaviour
         SelectedCharacter = (SelectedCharacter + 1) % characters.Length;
 
         characters[SelectedCharacter].SetActive(true);
-       
-   }
+        textCollection[SelectedCharacter].SetActive(true);
+    }
 
     public void PreviousCharacter()
     {
         //algorithm for cycling through the array and presenting the character
         characters[SelectedCharacter].SetActive(false);
+        textCollection[SelectedCharacter].SetActive(false);
 
         //Setting UI elements
         tokenstext.text = "Your Tokens: " + tokens.ToString();
@@ -177,6 +183,7 @@ public class CharacterSelection : MonoBehaviour
             SelectedCharacter += characters.Length;
         }
         characters[SelectedCharacter].SetActive(true);
+        textCollection[SelectedCharacter].SetActive(true);
     }
 
     public void buy()
