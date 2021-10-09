@@ -12,7 +12,8 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemy;
     public GameObject gem;
     public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4, SpawnPoint5, 
-    SpawnPoint6, SpawnPoint7, SpawnPoint8, SpawnPoint9, SpawnPoint10, SpawnPoint11 ;
+    SpawnPoint6, SpawnPoint7, SpawnPoint8, SpawnPoint9, SpawnPoint10, SpawnPoint11, SpawnPoint12, SpawnPoint13,
+    SpawnPoint14, SpawnPoint15, SpawnPoint16, SpawnPoint17, SpawnPoint18, SpawnPoint19, SpawnPoint20, SpawnPoint21;
     public PhotonView PV;
 
 
@@ -63,6 +64,33 @@ public class EnemyManager : MonoBehaviour
 
             SpawnPoint11.x = (float)120.402;
             SpawnPoint11.y = (float)40.47;
+
+            SpawnPoint12.x = (float)47.76164;//changed
+            SpawnPoint12.y = (float)68.12277;
+
+            SpawnPoint13.x = (float)74.27283;//changed
+            SpawnPoint13.y = (float)68.38171;
+
+            SpawnPoint14.x = (float)93.2;
+            SpawnPoint14.y = (float)65.4;
+
+            SpawnPoint15.x = (float)104.7;
+            SpawnPoint15.y = (float)65.4;
+
+            SpawnPoint16.x = (float)115.8;
+            SpawnPoint16.y = (float)65.4;
+
+            SpawnPoint17.x = (float)124.2;
+            SpawnPoint17.y = (float)65.4;
+
+            SpawnPoint18.x = (float)149.9819;
+            SpawnPoint18.y = (float)64.59638;
+
+            SpawnPoint19.x = (float)161.2674;
+            SpawnPoint19.y = (float)-15.85811;
+
+            SpawnPoint20.x = (float)155.0042;
+            SpawnPoint20.y = (float)31.62046;      
         } else if(sceneNo == 4)
         {
             //spawnpoints for the enemy
@@ -101,6 +129,33 @@ public class EnemyManager : MonoBehaviour
 
             SpawnPoint11.x = (float)14.57497;//changed
             SpawnPoint11.y = (float)-60.97709;
+
+            SpawnPoint12.x = (float)-54.3;//changed
+            SpawnPoint12.y = (float)-9.7;
+
+            SpawnPoint13.x = (float)-55.02;//changed
+            SpawnPoint13.y = (float)-26.69;
+
+            SpawnPoint14.x = (float)-67.6;
+            SpawnPoint14.y = (float)-7.1;
+
+            SpawnPoint15.x = (float)-70.20993;
+            SpawnPoint15.y = (float)-7.15;
+
+            SpawnPoint16.x = (float)-64.6311;
+            SpawnPoint16.y = (float)-55.96423;
+
+            SpawnPoint17.x = (float)-41.56703;
+            SpawnPoint17.y = (float)-55.96423;
+
+            SpawnPoint18.x = (float)-19.79326;
+            SpawnPoint18.y = (float)-58.06096;
+
+            SpawnPoint19.x = (float)1.94;
+            SpawnPoint19.y = (float)-63.49;
+
+            SpawnPoint20.x = (float)31.43863;
+            SpawnPoint20.y = (float)-76.12081;      
         }
 
         //only the masterclient can spawn enemies for everyone
@@ -112,6 +167,7 @@ public class EnemyManager : MonoBehaviour
                 CreateEnemy(SpawnPoint1);
                 CreateEnemy(SpawnPoint2);
                 CreateEnemy(SpawnPoint3);
+                CreateEnemy(SpawnPoint20);
                 CreateEnemyTurret(SpawnPoint4);
                 CreateEnemyTurret(SpawnPoint5);
                 CreateEnemyTurret(SpawnPoint6);
@@ -120,6 +176,14 @@ public class EnemyManager : MonoBehaviour
                 CreateJumpingEnemy(SpawnPoint9);
                 CreateJumpingEnemy(SpawnPoint10);
                 CreateJumpingEnemy(SpawnPoint11);
+                CreateJumpingEnemy(SpawnPoint20);
+                CreateEnemyTurret(SpawnPoint12);
+                CreateEnemyTurret(SpawnPoint13);
+                CreateEnemyTurret(SpawnPoint14);
+                CreateEnemyTurret(SpawnPoint15);
+                CreateEnemyTurret(SpawnPoint16);
+                CreateEnemyTurret(SpawnPoint17);
+                CreateEnemyTurret(SpawnPoint18);
             } else if(sceneNo == 4)
             {
                 CreateEnemy(SpawnPoint);
@@ -131,9 +195,19 @@ public class EnemyManager : MonoBehaviour
                 CreateEnemyTurret(SpawnPoint6);
                 CreateEnemyTurret(SpawnPoint7);
                 CreateJumpingEnemy(SpawnPoint8);
+                CreateJumpingEnemy(SpawnPoint12);
+                CreateJumpingEnemy(SpawnPoint13);
+                CreateJumpingEnemy(SpawnPoint20);
                 CreateEnemyTurret(SpawnPoint9);
                 CreateEnemyTurret(SpawnPoint10);
                 CreateEnemyTurret(SpawnPoint11);
+                CreateEnemyTurret(SpawnPoint14);
+                CreateEnemyTurret(SpawnPoint15);
+                CreateEnemyTurret(SpawnPoint16);
+                CreateEnemyTurret(SpawnPoint17);
+                CreateEnemyTurret(SpawnPoint18);
+                CreateEnemyTurret(SpawnPoint19);
+                
             }
         }
 
