@@ -10,12 +10,12 @@ public class TutorialFinishLine : MonoBehaviour
         //Check if target object is a collectable
         if (collision.CompareTag("Player"))
         {
-            loadLevel();
+            finish();
         }
     }
    
-    public void loadLevel()
+    public void finish()
     {
-        SceneManager.LoadScene(0);
+         Application.Quit();
     }
 }
