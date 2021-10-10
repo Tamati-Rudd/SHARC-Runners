@@ -278,5 +278,6 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         StartGameBtn.SetActive(false);
         ReadyBtn.SetActive(true);
         readyCounter = 0;
+        Debug.Log("ready button reset, counter: " + readyCounter);
     }
 }
