@@ -33,8 +33,8 @@ public class FinishPoint : MonoBehaviour
                 string time = timer.getTime();
                 string playerName = playerPV.Owner.NickName;
 
-                //Update states to reflect a player finish
-                placementManagerPV.RPC("registerFinish", RpcTarget.AllBufferedViaServer, playerName, time);
+                //Register finish and transition player to spectate mode
+                placementManagerPV.RPC("RegisterFinish", RpcTarget.AllBufferedViaServer, playerName, time);
                 playerPV.RPC("Finished", RpcTarget.AllBuffered);
 
                 GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -52,14 +52,6 @@ public class FinishPoint : MonoBehaviour
                         gameObject.SetActive(false);
                     }
                 }
-
-                //GameObject finishText = GameObject.FindGameObjectWithTag("FinishedText");
-                
-                //GameObject meter = GameObject.FindGameObjectWithTag("Meter");
-                //meter.SetActive(false);
-                //GameObject counter = GameObject.FindGameObjectWithTag("Counter");
-                //counter.SetActive(false);
-
             }   
         }
     }
