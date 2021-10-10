@@ -67,6 +67,10 @@ MonoBehaviour:
   - activateSabotage
   - disableStart
   - decreaseCounter
+  - EndMissileSabotage
+  - Explode
+  - SetSabotageIndicator
+  - ActivateSabotage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

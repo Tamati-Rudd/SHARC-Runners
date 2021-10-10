@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3103864570483215811}
   - component: {fileID: 2499158853558302817}
-  - component: {fileID: 5016846016246516538}
+  - component: {fileID: 2867333220341206284}
   - component: {fileID: 5157415196780721960}
-  - component: {fileID: 7288995800715103306}
-  m_Layer: 0
-  m_Name: Bullet (Sabotage)
-  m_TagString: Untagged
+  - component: {fileID: 2428251561484757595}
+  m_Layer: 10
+  m_Name: Missile
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3389515824999700825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1803161, y: -2.70993, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.1239, y: -2.7395, z: 0}
+  m_LocalScale: {x: 3.4315398, y: 3.356772, z: 2.9663942}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 720}
 --- !u!212 &2499158853558302817
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 1122536545
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 81b5239d550f1ba40afbec0e7a37d75f, type: 3}
-  m_Color: {r: 0.8113208, g: 0.504396, b: 0.057404764, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 541a9dadacd8cde44967cbfb2733e8cd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5016846016246516538
+--- !u!114 &2867333220341206284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,11 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3389515824999700825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e86a02c3d80fa4af09dd947eeb7ad3bd, type: 3}
+  m_Script: {fileID: 11500000, guid: b34ae509376d6d946ad85c264afc9765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  rotateSpeed: 200
   rb: {fileID: 5157415196780721960}
+  target: {fileID: 0}
 --- !u!50 &5157415196780721960
 Rigidbody2D:
   serializedVersion: 4
@@ -121,8 +123,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &7288995800715103306
-CircleCollider2D:
+--- !u!60 &2428251561484757595
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,9 +133,30 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0031465888, y: 0.0031463802}
-  serializedVersion: 2
-  m_Radius: 0.16364095
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.2, y: 0.35}
+    newSize: {x: 0.45, y: 0.45}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.01952614, y: 0.17499998}
+      - {x: -0.064651236, y: 0.08706003}
+      - {x: -0.06490163, y: -0.03765715}
+      - {x: -0.087922454, y: -0.0573549}
+      - {x: -0.09220032, y: -0.14310634}
+      - {x: -0.014077631, y: -0.17500003}
+      - {x: 0.013329666, y: -0.17471516}
+      - {x: 0.09317527, y: -0.14310656}
+      - {x: 0.09268026, y: -0.05136241}
+      - {x: 0.06665344, y: -0.04137542}
+      - {x: 0.06685155, y: 0.090116434}
+      - {x: 0.015876591, y: 0.175}
