@@ -131,22 +131,31 @@ public class NodeShiftingAbility : MonoBehaviour
     {
         Debug.Log("Recent: " + recentNode);
         //keep track of the future node
-        int nextNode = recentNode + 1;
-        Vector2 location = nodeLocation[nextNode];
+        int nextNode = recentNode + 1;       
 
-        if (!tempTracker.Contains(location))
+        try
         {
-            try
+            Vector2 location = nodeLocation[nextNode];
+
+            if (!tempTracker.Contains(location))
             {
-                //change position
-                playerController.transform.position = location;
-                tempTracker.Add(location);
-            }
-            catch (Exception ex)
-            {
-                Debug.Log(ex);
+                try
+                {   //change position
+                    playerController.transform.position = location;
+                    tempTracker.Add(location);
+                }
+                catch (Exception ex)
+                {
+                    //Debug.Log(ex);
+                }
             }
         }
+        catch (Exception ex) {
+
+
+        }
+
+
 
 
     }
