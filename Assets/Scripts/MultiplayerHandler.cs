@@ -178,6 +178,7 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
         ReadyBtn.SetActive(true);
         readyCounter = 1;
         PV.RPC("decreaseCounter", RpcTarget.MasterClient);
+        PV.RPC("ReadyReset", RpcTarget.AllBuffered);
         MenuManager.Instance.OpenMenu("Loading");
        
     }
@@ -269,5 +270,13 @@ public class MultiplayerHandler : MonoBehaviourPunCallbacks
     void disableStart()
     {
         StartGameBtn.SetActive(false);
+    }
+
+    [PunRPC]
+    void ReadyReset()
+    {
+        StartGameBtn.SetActive(false);
+        ReadyBtn.SetActive(false);
+        readyCounter = 0;
     }
 }
