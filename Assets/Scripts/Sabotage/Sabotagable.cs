@@ -18,7 +18,7 @@ public class Sabotagable : MonoBehaviour
 
     //This method checks for and controls the duration of sabotages applied to the player
     //Returns a boolean indicating whether the player's update method should be allowed to continue
-    public bool checkSabotages(float timeSinceLastUpdate)
+    public bool CheckSabotages(float timeSinceLastUpdate)
     {
         bool allowUpdate = true;
         int lightToUse = -1;
@@ -27,21 +27,28 @@ public class Sabotagable : MonoBehaviour
         {
             playerController.sabotageTimers[1] -= timeSinceLastUpdate;
             if (playerController.sabotageTimers[1] <= 0)
-                deactivateSabotage(1);
+                DeactivateSabotage(1);
             else
                 lightToUse = 1;
         }
 
-        if (playerController.sabotageTimers[2] > 0) //Check for projectile trap sabotage
+        if (playerController.sabotageTimers[2] > 0) //Check for missile trap sabotage
         {
-            //TO DO: Implement this if statement alongside the projectile trap sabotage
+            playerController.sabotageTimers[2] -= timeSinceLastUpdate;
+            if (playerController.sabotageTimers[2] <= 0)
+                DeactivateSabotage(2);
+            else
+            {
+                playerController.missile.MoveMissile();
+                lightToUse = 2;
+            }        
         }
 
         if (playerController.sabotageTimers[0] > 0) //Check for stasis trap sabotage
         {
             playerController.sabotageTimers[0] -= timeSinceLastUpdate;
             if (playerController.sabotageTimers[0] <= 0)
-                deactivateSabotage(0);
+                DeactivateSabotage(0);
             else
             {
                 lightToUse = 0;
@@ -49,31 +56,38 @@ public class Sabotagable : MonoBehaviour
             }
         }
 
-        playerController.PV.RPC("setSabotageIndicator", RpcTarget.All, lightToUse);
+        playerController.PV.RPC("SetSabotageIndicator", RpcTarget.All, lightToUse);
         return allowUpdate;
     }
 
     //This method deactivates at least one sabotage for a player
-    public void deactivateSabotage(int toDeactivate)
+    public void DeactivateSabotage(int toDeactivate)
     {
         switch (toDeactivate)
         {
             case 0: //Stasis Trap
-                playerController.enablePlayer();
+                playerController.EnablePlayer();
                 playerController.sabotageTimers[0] = 0;
                 break;
             case 1: //Blindness Trap
                 playerController.mapLight.pointLightOuterRadius = 200;
                 playerController.sabotageTimers[1] = 0;
                 break;
-            case 2: //TO DO: Projectile Trap
+            case 2: //Missile Trap
+                playerController.missile.Explode();
+                playerController.missile = null;
+                playerController.missileObject = null;
+                playerController.sabotageTimers[2] = 0;
                 break;
             default: //A Player Finished the Race - Deactivate all Active Sabotages
-                playerController.enablePlayer();
+                playerController.EnablePlayer();
                 playerController.mapLight.pointLightOuterRadius = 200;
+                if (playerController.missile != null)
+                    playerController.missile.Explode();
                 playerController.sabotageTimers[0] = 0;
                 playerController.sabotageTimers[1] = 0;
-                playerController.PV.RPC("setSabotageIndicator", RpcTarget.All, -1);
+                playerController.sabotageTimers[2] = 0;
+                playerController.PV.RPC("SetSabotageIndicator", RpcTarget.All, -1);
                 break;
         }
     }
@@ -90,7 +104,7 @@ public class Sabotagable : MonoBehaviour
             //Signal the SabotageController to apply a Sabotage
             SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
             PlayerController sourceController = GetComponent<PlayerController>();
-            sabController.sabotage(sourceController, 0);
+            sabController.Sabotage(sourceController, 0);
         }
     }
 

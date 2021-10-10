@@ -11,7 +11,7 @@ public class StasisTrap : MonoBehaviour
 
     //This method applies the sabotage to all players EXCEPT the source
     //Returns a bool for unit testing purposes
-    public bool applySabotage(PlayerController source, PlayerController[] targets)
+    public bool ApplySabotage(PlayerController source, PlayerController[] targets)
     {
         bool success = false;
 
@@ -22,7 +22,7 @@ public class StasisTrap : MonoBehaviour
                 if (target != source && !(unitTesting))
                 {
                     //Activate the sabotage, disabling the player
-                    target.PV.RPC("activateSabotage", RpcTarget.All, 0);
+                    target.PV.RPC("ActivateSabotage", RpcTarget.All, 0);
                 }
                 else if (target != source && unitTesting) 
                 {

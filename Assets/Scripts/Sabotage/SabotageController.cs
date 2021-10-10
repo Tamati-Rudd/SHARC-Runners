@@ -16,6 +16,7 @@ public class SabotageController : MonoBehaviour
     System.Random rand = new System.Random();
     public StasisTrap stasisSabotage;
     public BlindnessTrap blindnessSabotage;
+    public MissileTrap missileSabotage;
     public Vector2 SpawnPoint, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4, SpawnPoint5, SpawnPoint6;
 
     //Ensure there is only one sabotage controller instance in the game
@@ -111,7 +112,7 @@ public class SabotageController : MonoBehaviour
 
     //This method adds a new PlayerController to the array of controllers
     //The array is returned for unit testing purposes
-    public PlayerController[] addPlayerController(PlayerController newController)
+    public PlayerController[] AddPlayerController(PlayerController newController)
     {
         //Add the newController to the controllers array (if there is room)
         if (numControllers < 20)
@@ -124,7 +125,7 @@ public class SabotageController : MonoBehaviour
     }
 
     //This method removes a PlayerController from the array of controllers. Run when a player finishes the race
-    public void removePlayerController(PlayerController toRemove)
+    public void RemovePlayerController(PlayerController toRemove)
     {
         int index = System.Array.IndexOf(controllers, toRemove);
         
@@ -137,15 +138,17 @@ public class SabotageController : MonoBehaviour
 
     //This method randomly selects a sabotage and calls that sabotages applySabotage method
     //The selectedSabotage is returned for unit testing purposes 
-    public int sabotage(PlayerController sourcePlayer, int unitTesting)
+    public int Sabotage(PlayerController sourcePlayer, int unitTesting)
     {
-        int selectedSabotage = rand.Next(1, 3); //Integer Range: 1 to 2. Currently allows stasis, blindness traps
+        int selectedSabotage = rand.Next(1, 4); //Integer Range: 1 to 3. Allows stasis, blindness, missile traps
 
         //Run the selected Sabotage
         if (selectedSabotage == 1 && unitTesting == 0) 
-            stasisSabotage.applySabotage(sourcePlayer, controllers);
+            stasisSabotage.ApplySabotage(sourcePlayer, controllers);
         if (selectedSabotage == 2 && unitTesting == 0)
-            blindnessSabotage.applySabotage(sourcePlayer, controllers);
+            blindnessSabotage.ApplySabotage(sourcePlayer, controllers);
+        if (selectedSabotage == 3 && unitTesting == 0)
+            missileSabotage.ApplySabotage(sourcePlayer, controllers);
 
         return selectedSabotage;
     }

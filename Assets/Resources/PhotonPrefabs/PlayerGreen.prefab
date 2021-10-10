@@ -324,6 +324,9 @@ MonoBehaviour:
   sabotageIndicator: {fileID: 5600832790756686571}
   sabotageTimers: []
   mapLight: {fileID: 0}
+  missileObject: {fileID: 0}
+  missile: {fileID: 0}
+  missilePrefab: {fileID: 3389515824999700825, guid: 3ff8ef629b1f4894480508146349f556, type: 3}
   aController: {fileID: 7522069674224278531}
   jetSpeed: 15
   jumpAbility: 0
@@ -670,6 +673,7 @@ MonoBehaviour:
   jetpack: {fileID: 2640605879099838047}
   nShift: {fileID: 0}
   collectableMeter: {fileID: 0}
+  pAbility: {fileID: 0}
 --- !u!114 &2640605879099838047
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ using Photon.Pun;
 //This class describes and runs a Blindness Trap sabotage - which impairs a players vision of the game map for a duration
 public class BlindnessTrap : MonoBehaviour
 {
-    public void applySabotage(PlayerController source, PlayerController[] targets)
+    //This method applies the sabotage to all players EXCEPT the source
+    public void ApplySabotage(PlayerController source, PlayerController[] targets)
     {
         foreach (PlayerController target in targets)
         {
@@ -15,10 +16,9 @@ public class BlindnessTrap : MonoBehaviour
                 if (target != source)
                 {
                     //Activate the sabotage, blinding the player
-                    target.PV.RPC("activateSabotage", RpcTarget.All, 1);
+                    target.PV.RPC("ActivateSabotage", RpcTarget.All, 1);
                 }
             }
         }
     }
-
 }

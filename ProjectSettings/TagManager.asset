@@ -26,6 +26,8 @@ TagManager:
   - MapLight
   - Node
   - CheckPoint
+  - ProjectileAbility
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -37,8 +39,8 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
-  - 
+  - Missile
+  - Spectators
   - 
   - 
   - 

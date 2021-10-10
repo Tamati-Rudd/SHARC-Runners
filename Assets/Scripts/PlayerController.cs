@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
 using System;
+using System.IO;
 
 public class PlayerController : MonoBehaviour, IPunObservable
 {
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public Light2D sabotageIndicator;
     public float[] sabotageTimers;
     public Light2D mapLight;
+    public GameObject missileObject;
+    public SabotageMissile missile = null;
+    public GameObject missilePrefab;
 
     [Header("Ability")]
     public AbilityController aController;
@@ -64,7 +68,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         PV = GetComponent<PhotonView>();
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
-        sabController.addPlayerController(this);
+        sabController.AddPlayerController(this);
 
         selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
 
@@ -113,6 +117,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         sabotageTimers[0] = 0;
         sabotageTimers[1] = 0;
         sabotageTimers[2] = 0;
+        mapLight = GameObject.FindGameObjectWithTag("MapLight").GetComponent<Light2D>();
     }
 
     // Update is called once per frame
@@ -128,8 +133,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
         else if (raceStarted && !raceFinished) //Check for sabotages
         {
             float timeSinceLastUpdate = Time.deltaTime;
-            bool allowUpdate = sabotageCheck.checkSabotages(timeSinceLastUpdate);
-            if (!allowUpdate)
+            bool allowUpdate = sabotageCheck.CheckSabotages(timeSinceLastUpdate);
+            if (!allowUpdate) //If the player is disabled (stasis sabotage), disallow the rest of Update
             {
                 rb.constraints = RigidbodyConstraints2D.None;
                 PV.transform.rotation = Quaternion.identity;
@@ -307,7 +312,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     }
 
     //Re-enables a player - runs when a Stasis Trap sabotage ends
-    public void enablePlayer()
+    public void EnablePlayer()
     {
         rb.constraints = RigidbodyConstraints2D.None;
         PV.transform.rotation = Quaternion.identity;
@@ -317,7 +322,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     //Activate a Sabotage: hinder the player, and set or add to the duration of that sabotage
     [PunRPC]
-    void activateSabotage(int sabotageToActivate)
+    void ActivateSabotage(int sabotageToActivate)
     {
         if (PV.IsMine)
         {
@@ -331,7 +336,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
                     mapLight.pointLightOuterRadius = 0;
                     sabotageTimers[1] += 15;
                     break;
-                case 2: //TO DO: Projectile Trap
+                case 2: //Missile Trap
+                    if (missile == null) //If there isn't already a missile tracking this player, create one
+                    {
+                        Vector3 spawnPoint = new Vector3(PV.transform.position.x, PV.transform.position.y - 20, 0);
+                        missileObject = Instantiate(missilePrefab, spawnPoint, Quaternion.identity);
+                        missile = missileObject.GetComponent<SabotageMissile>();
+                        missile.SetTarget(this);
+                    }
+                    sabotageTimers[2] += 10;
                     break;
                 default:
                     break;
@@ -341,7 +354,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
 
     //This RPC sets a player's sabotage indicator, based on a lightToUse parameter determined for each player, each frame
     [PunRPC]
-    void setSabotageIndicator(int lightToUse)
+    void SetSabotageIndicator(int lightToUse)
     {
         switch (lightToUse)
         {
@@ -357,7 +370,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
                 sabotageIndicator.color = Color.white;
                 sabotageIndicator.enabled = true;
                 break;
-            case 2: //TO DO: Projectile Trap - likely orange
+            case 2: //Projectile Trap - small yellow glow
+                sabotageIndicator.intensity = 5;
+                sabotageIndicator.pointLightOuterRadius = 2.5f;
+                sabotageIndicator.color = Color.yellow;
+                sabotageIndicator.enabled = true;
                 break;
             default:
                 sabotageIndicator.enabled = false;
@@ -385,10 +402,11 @@ public class PlayerController : MonoBehaviour, IPunObservable
     {
         PV.transform.position = new Vector3(PV.transform.position.x, PV.transform.position.y, -100);
         SabotageController sabController = GameObject.FindGameObjectWithTag("SabotageController").GetComponent<SabotageController>();
-        sabController.removePlayerController(this);
+        sabController.RemovePlayerController(this);
         if (PV.IsMine)
-            sabotageCheck.deactivateSabotage(-1);
+            sabotageCheck.DeactivateSabotage(-1);
         raceFinished = true;
+        gameObject.layer = 11; //Move player to spectate layer
         movementSpeed = 20;
         jumpForce = 30;
     }

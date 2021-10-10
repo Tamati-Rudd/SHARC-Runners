@@ -22,7 +22,7 @@ public class TamatiTests
         var sabotage = sabController.GetComponent<SabotageController>();
 
         //Get the actual test result
-        var actual = sabotage.addPlayerController(controller);
+        var actual = sabotage.AddPlayerController(controller);
 
         //Verify the controller has been added to the array
         Assert.AreEqual(controller, actual[0]);
@@ -40,7 +40,7 @@ public class TamatiTests
         var sabotage = sabController.GetComponent<SabotageController>();
 
         //Get the expected and actual test results
-        var actual = sabotage.sabotage(controller, 1);
+        var actual = sabotage.Sabotage(controller, 1);
         var expectedRange = 3; 
 
         //Verify that a sabotage in the correct range has been selected (range: 1 to 3 for sprint 2)
@@ -60,7 +60,7 @@ public class TamatiTests
         var target = player2.GetComponent<PlayerController>();
         var sabController = Object.Instantiate(sabControllerPrefab, Vector2.zero, Quaternion.identity);
         var sabotage = sabController.GetComponent<SabotageController>();
-        var targetArray = sabotage.addPlayerController(target);
+        var targetArray = sabotage.AddPlayerController(target);
         GameObject stasisChild = sabotage.transform.GetChild(0).gameObject;
         var stasisTrap = stasisChild.GetComponent<StasisTrap>();
         stasisTrap.unitTesting = true;
@@ -70,7 +70,7 @@ public class TamatiTests
         target.isDisabled = false;
 
         //Get the expected and actual test results
-        var actual = stasisTrap.applySabotage(source, targetArray);
+        var actual = stasisTrap.ApplySabotage(source, targetArray);
         var expected = true;
 
         //Verify the stasis trap sabotage has been chosen
