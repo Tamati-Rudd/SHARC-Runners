@@ -18,7 +18,7 @@ public class CheckPoint : MonoBehaviour
     {
         if(collision.tag == "CheckPoint")
         {
-            checkPointRespawn = transform.position;
+            checkPointRespawn = transform.position; // set the checkpoint respawn location to the current player location when passes checkpoints
             isCheckPoint = true;
         }
     }
