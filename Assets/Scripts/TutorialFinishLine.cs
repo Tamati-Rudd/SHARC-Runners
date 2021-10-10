@@ -16,6 +16,6 @@ public class TutorialFinishLine : MonoBehaviour
    
     public void finish()
     {
-         Application.Quit();
+        Application.Quit();
     }
 }
