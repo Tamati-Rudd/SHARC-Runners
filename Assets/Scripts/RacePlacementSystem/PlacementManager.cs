@@ -31,7 +31,7 @@ public class PlacementManager : MonoBehaviourPunCallbacks
 
     //This method registers a player completing the race
     [PunRPC]
-    public void registerFinish(string playerName, string playerTime)
+    public void RegisterFinish(string playerName, string playerTime)
     {
         playersFinished = playersFinished + 1;
         int playerPlacement = playersFinished;
@@ -49,7 +49,7 @@ public class PlacementManager : MonoBehaviourPunCallbacks
         bool leftPlayerFinished = false;
 
         foreach (FinishRecord fr in placements) {
-            string name = fr.getName();
+            string name = fr.GetName();
             if (leftName.Equals(name))
                 leftPlayerFinished = true;
         }

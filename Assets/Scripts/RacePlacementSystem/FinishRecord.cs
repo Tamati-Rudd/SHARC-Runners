@@ -14,43 +14,43 @@ public class FinishRecord
     //Construct a FinishRecord object
     public FinishRecord(string playerName, string playerTime, int playerPlacement)
     {
-        setName(playerName);
-        setTime(playerTime);
-        setPlacement(playerPlacement);
+        SetName(playerName);
+        SetTime(playerTime);
+        SetPlacement(playerPlacement);
     }
 
     //Get method for name
-    public string getName()
+    public string GetName()
     {
         return name;
     }
 
     //Get method for time
-    public string getTime()
+    public string GetTime()
     {
         return time;
     }
 
     //Get method for placement
-    public int getPlacement()
+    public int GetPlacement()
     {
         return placement;
     }
     
     //Set method for name
-    public void setName(string playerName)
+    public void SetName(string playerName)
     {
         name = playerName;
     }
 
     //Set method for time
-    public void setTime(string playerTime)
+    public void SetTime(string playerTime)
     {
         time = playerTime;
     }
 
     //Set method for placement
-    public void setPlacement(int playerPlacement)
+    public void SetPlacement(int playerPlacement)
     {
         placement = playerPlacement;
     }
