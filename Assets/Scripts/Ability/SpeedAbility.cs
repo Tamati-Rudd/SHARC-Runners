@@ -9,10 +9,13 @@ public class SpeedAbility : MonoBehaviour
     public Collectable collectable;
     public bool startTimer;
     public bool unitTesting2;
+    public TrailRenderer tr;
 
     // Start is called before the first frame update
     public void Start()
     {
+        tr = GetComponent<TrailRenderer>();
+        tr.emitting = false;
         speedTimer = 0;
         startTimer = false;
     }
@@ -29,6 +32,7 @@ public class SpeedAbility : MonoBehaviour
                 pController.ResetSpeed();
                 speedTimer = 0;
                 startTimer = false;
+                tr.emitting = false;
             }
         }
     }
@@ -44,6 +48,7 @@ public class SpeedAbility : MonoBehaviour
         else if(t)
         {
             pController.PickAbility(1, false);//speed the playerup
+            tr.emitting = true;
 
             //ActivateSpeed the timer
             startTimer = t;
