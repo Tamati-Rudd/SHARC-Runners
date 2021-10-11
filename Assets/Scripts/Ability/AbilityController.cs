@@ -10,13 +10,12 @@ public class AbilityController : MonoBehaviour
     public SpeedAbility speed;
     public JetpackAbility jetpack;
     public NodeShiftingAbility nShift;
-    public Collectable collectableMeter;//Access the collectable script
     public ProjectileAbility pAbility;
 
     private void Awake()
     {
         nShift = GetComponent<NodeShiftingAbility>();
-        collectableMeter = GetComponent<Collectable>();
+        crystal = GetComponent<Collectable>();
     }
 
     public void Start()
@@ -64,7 +63,7 @@ public class AbilityController : MonoBehaviour
 
                 case 3:
                     nShift.teleport();
-                    collectableMeter.UpdateCoins();
+                    crystal.UpdateCoins();
                     break;
 
                 default:
