@@ -29,9 +29,4 @@ public class ProjectileObject : MonoBehaviour
             transform.position += -transform.right * speed * Time.deltaTime;
         }
     }
-
-    public void DestroyObject()
-    {
-        Destroy(gameObject);// Destroy automatically after 10 seconds
-    }
 }
