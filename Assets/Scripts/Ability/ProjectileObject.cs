@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProjectileObject : MonoBehaviour
 {
-
     public Vector3 LaunchOffset;
     public bool facing;
     public float speed = 1.2f;

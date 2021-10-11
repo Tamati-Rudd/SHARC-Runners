@@ -30,7 +30,6 @@ public class ProjectileAbility : MonoBehaviour
         else
         {
             Teleport();//Teleport to new location
-            //pObject.DestroyObject();//Destroy the object
             collectable.UpdateCoins();//Reset the ability meter
             disableAbility = 0;
         }
