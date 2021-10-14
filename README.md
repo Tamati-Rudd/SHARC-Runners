@@ -11,14 +11,6 @@ Steps:
 4. Make sure to Build the game (Ctrl B OR File -> Build and Run)!
 5. Run it and enjoy!
 
-
-## Running the Game - [Through Build]
-
-Steps: 
-1. Download the project from Github
-2. Navigate to build folder
-3. Open SHARC-Runners.exe
-
 ## Usage
 
 Provided the game is opened, 
