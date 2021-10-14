@@ -2,15 +2,17 @@
 
 SHARC - Runners is a 2D **Multiplayer** Platformer racing game which was designed in Unity.
 
-## Installation - [Through Unity]
+## Running the Game - [Through Unity]
 
 Steps: 
 1. Download the project from Github
 2. Open Unity Hub
 3. Import Project into Unity Hub
-4. Build and Run the game!
+4. Make sure to Build the game (Ctrl B OR File -> Build and Run)!
+5. Run it and enjoy!
 
-## Installation - [Through Build]
+
+## Running the Game - [Through Build]
 
 Steps: 
 1. Download the project from Github
