@@ -11,6 +11,8 @@ Steps:
 4. Make sure to Build the game (Ctrl B OR File -> Build and Run)!
 5. Run it and enjoy!
 
+Make Sure to turn of firewall if stuck on loading screen/not responding
+
 ## Usage
 
 Provided the game is opened, 
